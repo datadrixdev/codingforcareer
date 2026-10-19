@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow internal scratch scripts if exposed
+Disallow: /scratch/
+
+Sitemap: https://datadrix.com/sitemap.xml

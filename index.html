@@ -1,0 +1,2672 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>datadrix — Master Coding, Data Structures & Tech Roadmaps</title>
+  <meta name="description"
+    content="datadrix is the premier interactive learning platform for Python, Apache Airflow, SQL, Java, Data Engineering, and DSA with hands-on Try-It-Yourself playgrounds, cheatsheets, and FAANG career roadmaps.">
+  <meta name="keywords"
+    content="coding tutorials, python tutorial, apache airflow course, data engineering roadmap, sql cheatsheet, dsa interview questions, try it yourself, learn programming">
+  <meta name="author" content="datadrix">
+  <meta name="robots" content="index, follow">
+
+  <!-- Mobile & PWA Configuration -->
+  <meta name="theme-color" content="#0b1120">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="datadrix">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="datadrix">
+  <meta property="og:title" content="datadrix — Master Coding, Data Structures & Tech Roadmaps">
+  <meta property="og:description"
+    content="Premier interactive learning platform featuring 20+ technical courses, Apache Airflow, SQL, Python, DSA, cheatsheets, and FAANG career roadmaps.">
+  <meta property="og:image" content="assets/logo_attractive_black_4x.png">
+  <meta property="og:url" content="https://datadrix.com/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="datadrix — Master Coding & Tech Roadmaps">
+  <meta name="twitter:description"
+    content="Interactive coding tutorials, Apache Airflow, Data Engineering roadmaps, and instant cheatsheets.">
+  <meta name="twitter:image" content="assets/logo_attractive_black_4x.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <!-- Resource Preconnect & DNS Prefetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Google Fonts: Mulish & JetBrains Mono with font-display swap -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Mulish:ital,wght@0,300..1000;1,300..1000&display=swap"
+    rel="stylesheet">
+
+  <!-- Production Minified Stylesheet -->
+  <link rel="stylesheet" href="css/styles.min.css?v=20261020_v36_production">
+  <!-- Critical Overrides: Enforce visibility of subbars, high-contrast code blocks, hide sidebar chapter counts -->
+  <style>
+    :root {
+      --font-sans: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    html, body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+      font-family: 'Mulish', var(--font-sans);
+    }
+
+    .tech-subbar,
+    body[data-view="home"] .tech-subbar,
+    body .tech-subbar {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    .category-tabs-wrapper,
+    body[data-view="home"] .category-tabs-wrapper {
+      display: block !important;
+      visibility: visible !important;
+    }
+    .tech-subbar-container,
+    body[data-view="home"] .tech-subbar-container {
+      display: flex !important;
+      visibility: visible !important;
+    }
+
+    /* Hide count badges on sidebar main headings and subheadings */
+    .chapter-count,
+    .subchapter-badge {
+      display: none !important;
+    }
+
+    /* Enforce light text visibility inside dark code blocks across all themes */
+    .code-block,
+    .code-mockup {
+      background: #0B1120 !important;
+      border: 1px solid #1E293B !important;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .code-block .code-header,
+    .code-mockup .code-header {
+      background: #0F172A !important;
+      color: #94A3B8 !important;
+    }
+    .code-block pre,
+    .code-mockup pre,
+    .article-body .code-block pre,
+    .article-body .code-mockup pre,
+    .article-html .code-block pre,
+    .article-html .code-mockup pre {
+      color: #E2E8F0 !important;
+      background: transparent !important;
+      font-family: var(--font-mono, 'JetBrains Mono', 'Fira Code', monospace) !important;
+      font-size: 0.92rem !important;
+      line-height: 1.65 !important;
+      white-space: pre !important;
+    }
+    .code-block code,
+    .code-mockup code,
+    .article-body .code-block code,
+    .article-body .code-mockup code,
+    .article-html .code-block code,
+    .article-html .code-mockup code {
+      color: #E2E8F0 !important;
+      background: transparent !important;
+      font-family: var(--font-mono, 'JetBrains Mono', 'Fira Code', monospace) !important;
+      font-size: inherit !important;
+      line-height: inherit !important;
+      white-space: pre !important;
+    }
+  </style>
+</head>
+
+<body class="light-mode">
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar" id="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge badge-accent">🚀 NEW 2026 EDITION</span>
+      <span>Interactive Python & DSA Tracks with in-browser live compilers are live!</span>
+      <a href="#playground" class="announcement-link" id="btn-announcement-try">Launch Playground &rarr;</a>
+    </div>
+    <button class="announcement-close" id="btn-close-announcement" aria-label="Close notification">&times;</button>
+  </aside>
+
+  <!-- Global Header Navigation -->
+  <header class="site-header" id="main-header">
+    <div class="header-container">
+      <!-- Left: Logo & Mobile Toggle -->
+      <div class="header-left">
+        <button class="mobile-menu-btn" id="btn-toggle-sidebar" aria-label="Toggle navigation menu">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <a href="#home" class="brand-logo" id="brand-logo-link" aria-label="datadrix home" title="datadrix home">
+          <div class="brand-logo-wrap">
+            <img src="assets/logo_transparent.png" alt="datadrix" class="brand-logo-full brand-logo-light" draggable="false">
+            <img src="assets/logo_white.png" alt="datadrix" class="brand-logo-full brand-logo-dark" draggable="false">
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav" id="main-nav">
+        <button class="nav-item active" data-nav="home" id="nav-home">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
+          <span>Home</span>
+        </button>
+
+        
+
+
+        <button class="nav-item" data-nav="playground" id="nav-playground">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+          <span>Try Editor</span>
+          <span class="badge-mini">Live</span>
+        </button>
+
+        <button class="nav-item" data-nav="quizzes" id="nav-quizzes">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd" />
+          </svg>
+          <span>Practice & Quiz</span>
+        </button>
+
+        <button class="nav-item" data-nav="roadmaps" id="nav-roadmaps">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707l4 4A1 1 0 008 18V5.414L3.707 1.121A1 1 0 003 1a1 1 0 00-.707.293zM14 5.414V18a1 1 0 001.707.707l4-4A1 1 0 0020 14V4a1 1 0 00-.293-.707l-4-4A1 1 0 0014 0a1 1 0 00-1 1v4.414z"
+              clip-rule="evenodd" />
+          </svg>
+          <span>Roadmaps</span>
+        </button>
+
+        <button class="nav-item" data-nav="cheatsheets" id="nav-cheatsheets">
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+          </svg>
+          <span>Cheat Sheets</span>
+        </button>
+      </nav>
+
+      <!-- Right Actions: Search & Theme Toggle -->
+      <div class="header-right">
+        <!-- Quick Search Button -->
+        <button class="search-trigger-btn" id="btn-open-search" aria-label="Search articles and code">
+          <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd" />
+          </svg>
+          <span class="search-label">Search tutorials, DSA, syntax...</span>
+          <kbd class="search-kbd">Ctrl K</kbd>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="icon-btn" id="btn-theme-toggle" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tech Track Quick Pill Bar (W3Schools & GFG signature feature with Categories) -->
+    <div class="tech-subbar" id="tech-subbar" style="display: block !important; visibility: visible !important;">
+      <div class="category-tabs-wrapper" style="display: block !important; visibility: visible !important;">
+        <div class="category-tabs" id="category-tabs-container">
+          <!-- Populated dynamically via JS: All (18), Programming, Data Science & AI, Data Engineering, etc. -->
+        </div>
+      </div>
+      <div class="tech-subbar-container" id="tech-pill-container" style="display: flex !important; visibility: visible !important;">
+        <!-- Rendered dynamically via JS with active states across all 18 courses -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Wrapper -->
+  <main class="app-layout" id="app-root">
+
+    <!-- VIEW 0: TRENDING 2026 HOMEPAGE & INTERACTIVE COURSE TILES (Default) -->
+    <div class="view-container view-home active" id="view-home">
+
+      <!-- Ambient Glow Blobs -->
+      <div class="hero-ambient-blob hero-blob-1" aria-hidden="true"></div>
+      <div class="hero-ambient-blob hero-blob-2" aria-hidden="true"></div>
+
+      <!-- 1. Modern 2026 Hero Section -->
+      <section class="home-hero-section">
+        <div class="home-hero-container">
+          <div class="home-hero-content">
+            <div class="hero-trend-badge">
+              <span class="badge-pulse-dot"></span>
+              <span class="badge-trend-text">Trending 2026 Developer Platform</span>
+              <span class="badge-trend-pill">18+ Tech Tracks</span>
+            </div>
+
+            <h1 class="home-hero-title">
+              Master Code, AI & Data Engineering <br>
+              <span class="gradient-text">Through Real-World Labs</span>
+            </h1>
+
+            <p class="home-hero-lead">
+              Skip passive video watching. Dive straight into curated, zero-fluff curriculums with live browser sandboxes, instant SQL database execution, and interview-grade cheat sheets.
+            </p>
+
+            <div class="home-hero-actions">
+              <button class="btn-hero-primary" id="btn-hero-mysql" style="background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%); box-shadow: 0 4px 14px rgba(2,132,199,0.35); border: none;">
+                <span style="font-size: 1.1rem;">🐬</span>
+                <span>Open MySQL Course (25 Chapters)</span>
+                <svg class="icon-arrow" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+
+              <button class="btn-hero-primary" id="btn-hero-explore">
+                <span>Explore Course Tracks</span>
+                <svg class="icon-arrow" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+
+              <button class="btn-hero-secondary" id="btn-hero-playground">
+                <svg class="icon-bolt" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                </svg>
+                <span>Launch Try Editor</span>
+              </button>
+
+              <button class="btn-hero-ghost" id="btn-hero-quicksearch">
+                <kbd>Ctrl K</kbd> Quick Search
+              </button>
+            </div>
+
+            <!-- Social proof metric tags -->
+            <div class="hero-stats-row">
+              <div class="hero-stat-pill">
+                <strong>18+</strong>
+                <span>Engineering Tracks</span>
+              </div>
+              <div class="hero-stat-pill">
+                <strong>250+</strong>
+                <span>Interactive Tutorials</span>
+              </div>
+              <div class="hero-stat-pill">
+                <strong>100%</strong>
+                <span>In-Browser Sandboxes</span>
+              </div>
+              <div class="hero-stat-pill">
+                <strong>Zero</strong>
+                <span>Setup Required</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right: Live Interactive Code Preview Sandbox Card -->
+          <div class="home-hero-visual">
+            <div class="hero-ide-window">
+              <div class="hero-ide-header">
+                <div class="window-controls">
+                  <span class="control-dot dot-close"></span>
+                  <span class="control-dot dot-minimize"></span>
+                  <span class="control-dot dot-expand"></span>
+                </div>
+                <div class="hero-ide-title">
+                  <span class="lang-tag-python">🐍 Python 3</span>
+                  <span>pipeline_demo.py</span>
+                </div>
+                <button class="btn-hero-run-snippet" id="btn-hero-snippet-run" title="Run sample in sandbox">
+                  <span>▶ Run Demo</span>
+                </button>
+              </div>
+
+              <div class="hero-ide-body">
+                <pre class="hero-code-block"><code><span class="code-comment"># datadrix live in-browser execution</span>
+<span class="code-keyword">import</span> sqlite3, json
+
+<span class="code-keyword">class</span> <span class="code-class">DevTrack</span>:
+    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(self, track=<span class="code-str">"Python 3"</span>):
+        self.track = track
+        self.lessons = 13
+    
+    <span class="code-keyword">def</span> <span class="code-func">status</span>(self):
+        <span class="code-keyword">return</span> f<span class="code-str">"⚡ {self.track}: {self.lessons} Mastery Modules Ready"</span>
+
+app = DevTrack()
+<span class="code-builtin">print</span>(app.status())</code></pre>
+              </div>
+
+              <!-- Live Terminal output strip inside hero card -->
+              <div class="hero-ide-terminal" id="hero-ide-terminal-output">
+                <div class="hero-term-header">
+                  <span class="pulse-green"></span>
+                  <span>Terminal Console (Isolated Sandbox)</span>
+                  <span class="term-time" id="hero-term-ms">7ms</span>
+                </div>
+                <div class="hero-term-content" id="hero-term-text">
+                  &gt; [Compiler] Isolated Python 3.14 sandbox initialized.<br>
+                  &gt; <span class="term-highlight">⚡ Python 3: 13 Mastery Modules Ready</span><br>
+                  &gt; Connected to in-memory database engine.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Course Tiles Section (The centerpiece requested by user) -->
+      <section class="home-courses-section" id="courses-section">
+        <div class="home-section-header">
+          <div class="section-badge">🚀 Explore All Tech Tracks</div>
+          <h2 class="section-main-heading">Industry-Standard Course Curriculum</h2>
+          <p class="section-sub-heading">Choose any track to start learning with zero installation. Every course includes interactive lessons, executable code boxes, and production cheat sheets.</p>
+
+          <!-- Filter categories & search -->
+          <div class="courses-filter-toolbar">
+            <div class="course-category-pills" id="home-category-pills">
+              <!-- Rendered dynamically by JS -->
+            </div>
+            <div class="course-search-box">
+              <svg class="icon-sm" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+              </svg>
+              <input type="text" id="home-course-search" placeholder="Search track by name, tech or skill..." autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Course Tiles Grid -->
+        <div class="course-tiles-grid" id="home-courses-grid">
+          <!-- Injected dynamically by JS with rich cards -->
+        </div>
+      </section>
+
+      <!-- 3. Why Learn on datadrix (Bento Grid) -->
+      <section class="home-bento-section">
+        <div class="home-section-header">
+          <div class="section-badge">⚡ The datadrix Edge</div>
+          <h2 class="section-main-heading">Built Specifically for Modern Engineers</h2>
+          <p class="section-sub-heading">Everything you need to upskill from beginner to senior engineer without switching tabs.</p>
+        </div>
+
+        <div class="bento-grid">
+          <div class="bento-card bento-wide bento-ide">
+            <div class="bento-content">
+              <span class="bento-tag">Interactive Sandbox</span>
+              <h3>Code & Compile Right in Your Browser</h3>
+              <p>Practice Python, Java, C++, C, SQL, and Web HTML/CSS/JS with zero local setup. Features smart indentation, runtime benchmarks, and live stdout streaming.</p>
+              <button class="btn-bento" id="btn-bento-playground">Try In-Browser Editor &rarr;</button>
+            </div>
+            <div class="bento-visual bento-code-peek">
+              <span class="peek-lang">SQL / Python Database</span>
+              <code>SELECT * FROM students WHERE score &gt;= 90;</code>
+            </div>
+          </div>
+
+          <div class="bento-card bento-cheatsheet">
+            <span class="bento-tag">Instant Lookup</span>
+            <h3>Production-Grade Cheat Sheets</h3>
+            <p>Comprehensive syntax matrices for 21 technologies with one-click copy and instant filters.</p>
+            <button class="btn-bento" id="btn-bento-cheatsheets">View 21 Cheat Sheets &rarr;</button>
+          </div>
+
+          <div class="bento-card bento-quizzes">
+            <span class="bento-tag">Active Recall</span>
+            <h3>Practice MCQs & Streak Tracking</h3>
+            <p>Solidify your knowledge with instant evaluation, explanations, and daily developer streaks.</p>
+            <button class="btn-bento" id="btn-bento-quizzes">Start Practice Quiz &rarr;</button>
+          </div>
+
+          <div class="bento-card bento-wide bento-roadmaps">
+            <div class="bento-content">
+              <span class="bento-tag">Career Acceleration</span>
+              <h3>Curated Engineering Roadmaps</h3>
+              <p>Step-by-step career blueprints for Data Engineering, Full-Stack Python, and Generative AI Specialists with curated milestone checklists.</p>
+              <button class="btn-bento" id="btn-bento-roadmaps">Explore Career Paths &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Bottom Call To Action Banner -->
+      <section class="home-cta-banner">
+        <div class="cta-inner">
+          <div class="cta-badge">🌟 Free & Open Access</div>
+          <h2>Ready to Level Up Your Coding Career?</h2>
+          <p>Join thousands of engineers learning Data Engineering, AI, and Full Stack Development.</p>
+          <div class="cta-actions">
+            <button class="btn-cta-primary" id="btn-cta-start-mysql" style="background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);">Start MySQL Course (25 Ch) 🐬</button>
+            <button class="btn-cta-primary" id="btn-cta-start-python">Start Python 3 Tutorial 🐍</button>
+            <button class="btn-cta-secondary" id="btn-cta-browse-all">Browse All 18+ Courses</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    
+
+    <!-- VIEW 1: TUTORIALS & ARTICLE READER -->
+    <div class="view-container view-tutorials" id="view-tutorials">
+
+      <!-- Left Sidebar: Topic Chapters & Modules -->
+      <aside class="sidebar" id="sidebar-nav">
+        <div class="sidebar-header">
+          <div class="sidebar-track-info">
+            <span class="sidebar-track-icon" id="sidebar-track-icon">🐬</span>
+            <div>
+              <h2 class="sidebar-track-title" id="sidebar-track-title">MySQL Tutorial</h2>
+              <span class="sidebar-track-level" id="sidebar-track-subtitle">Relational DB, Queries & Indexing</span>
+            </div>
+          </div>
+          <button class="sidebar-close-btn" id="btn-close-sidebar" aria-label="Close sidebar">&times;</button>
+        </div>
+
+        <div class="sidebar-filter-wrapper">
+          <input type="text" id="sidebar-filter" class="sidebar-filter-input" placeholder="Filter topics...">
+        </div>
+
+        <!-- Dynamic Chapter Navigation List -->
+        <div class="sidebar-chapters" id="sidebar-chapters-list">
+          <div class="chapter-group" data-chapter-index="0">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>1. MySQL Fundamentals</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item active" data-topic-id="mysql-intro">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to MySQL & SQL</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-install-workbench">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">MySQL Installation & Workbench</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-databases-tables">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Databases & Tables</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-syntax-datatypes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">SQL Syntax & Data Types</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-db-create-drop">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Database Creation & Deletion</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="1">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>2. SQL Commands & Constraints</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-sql-commands-subsets">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">DDL, DML, DQL, DCL & TCL</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-create-alter-drop">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">CREATE, ALTER & DROP</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-insert-update-delete">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">INSERT, UPDATE & DELETE</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-primary-foreign-key">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Primary Key & Foreign Key</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-constraints-overview">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Unique, Not Null, Default & Check</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="2">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>3. Data Retrieval</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-select-statement">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">SELECT Statement</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-distinct-aliases">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">DISTINCT & Column Aliases</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-where-clause">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">WHERE Clause</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-operators-retrieval">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Comparison & Logical Operators</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-order-by-limit">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">ORDER BY & LIMIT</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="3">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>4. Filtering & Conditions</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-and-or-not">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">AND, OR & NOT</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-in-between-like">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">IN, BETWEEN & LIKE</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-wildcards-patterns">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Wildcards & Pattern Matching</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-null-checks">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">IS NULL & IS NOT NULL</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-case-expressions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">CASE Expressions</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="4">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>5. SQL Functions</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-aggregate-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Aggregate Functions</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-string-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">String Functions</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-numeric-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Numeric Functions</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-date-time-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Date & Time Functions</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-conversion-null-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Conversion & NULL Functions</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="5">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>6. Grouping & Aggregation</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-group-by-clause">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">GROUP BY Clause</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-having-clause">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">HAVING Clause</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-aggregate-with-groups">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Aggregate Functions with Groups</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-multiple-col-grouping">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Multiple-Column Grouping</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-where-vs-having">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">WHERE vs HAVING</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="6">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>7. Joins</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-joins">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Joins</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-inner-join">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">INNER JOIN</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-left-right-join">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">LEFT JOIN & RIGHT JOIN</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-cross-self-join">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">CROSS JOIN & Self Join</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-multiple-table-joins">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Multiple-Table Joins</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="7">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>8. Subqueries</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-subqueries">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Subqueries</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-single-multi-subqueries">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Single-Row & Multiple-Row Subqueries</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-scalar-correlated-subqueries">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Scalar & Correlated Subqueries</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-subqueries-in-exists-any">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Subqueries with IN, EXISTS & ANY</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-subqueries-vs-joins">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Subqueries vs Joins</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="8">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>9. Set Operations</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-set-operations">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Set Operations</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-union-union-all">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">UNION & UNION ALL</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-combining-queries">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Combining Multiple Queries</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-column-compatibility">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Column Compatibility & Data Types</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-set-operations-vs-joins">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Set Operations vs Joins</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="9">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>10. Conditional & NULL Functions</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-if-ifnull">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">IF() & IFNULL()</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-nullif-coalesce">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">NULLIF() & COALESCE()</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-case-when-cond">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">CASE WHEN Expressions</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-conditional-aggregation">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Conditional Aggregation</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-null-handling-strategies">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">NULL Handling in Queries</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="10">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>11. Date & Time Operations</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-date-time-datatypes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Date & Time Data Types</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-date-format-str-to-date">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">DATE_FORMAT() & STR_TO_DATE()</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-datediff-timestampdiff">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">DATEDIFF() & TIMESTAMPDIFF()</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-date-arithmetic-intervals">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Date Arithmetic & Intervals</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-extracting-date-components">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Extracting Date Components</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="11">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>12. Advanced SQL Operators</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-exists-not-exists">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">EXISTS & NOT EXISTS</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-any-all-some">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">ANY, ALL & SOME</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-interval-regexp">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">INTERVAL & REGEXP</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-bitwise-operators">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Bitwise Operators</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-operator-precedence">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Operator Precedence</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="12">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>13. Common Table Expressions (CTEs)</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-ctes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to CTEs</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-simple-ctes-with">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Simple CTEs with WITH</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-multiple-ctes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Multiple CTEs</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-ctes-vs-subqueries">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">CTEs vs Subqueries</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-recursive-ctes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Recursive CTEs</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="13">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>14. Window Functions</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-window-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Window Functions</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-row-number-rank-dense">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">ROW_NUMBER(), RANK() & DENSE_RANK()</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-lag-lead-analytics">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">LAG() & LEAD()</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-first-last-value">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">FIRST_VALUE() & LAST_VALUE()</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-partition-by-window-frames">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">PARTITION BY & Window Frames</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="14">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>15. Advanced Analytical Queries</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-running-totals-cumulative">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Running Totals & Cumulative Sums</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-moving-averages">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Moving Averages</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-top-n-per-group">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Top N Records per Group</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-yoy-mom-analysis">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Year-over-Year & Month-over-Month Analysis</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-gaps-islands-records">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Gaps, Islands & Consecutive Records</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="15">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>16. Database Design</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-database-design">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Database Design</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-er-diagrams-relationships">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">ER Diagrams & Relationships</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-cardinality-relationships">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">One-to-One, One-to-Many & Many-to-Many</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-normalization-forms">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Normalization: 1NF, 2NF & 3NF</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-denormalization-integrity">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Denormalization & Data Integrity</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="16">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>17. Views & Temporary Tables</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-views">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Views</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-creating-updating-views">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Creating & Updating Views</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-temporary-tables">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Temporary Tables</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-views-vs-temp-tables">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Views vs Temporary Tables</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-views-temp-use-cases">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Common Use Cases</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="17">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>18. Indexing & Query Optimization</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-indexes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Indexes</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-primary-composite-indexes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Primary, Unique & Composite Indexes</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-clustered-secondary-indexes">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Clustered & Secondary Indexes in InnoDB</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-explain-execution-plans">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">EXPLAIN & Execution Plans</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-index-optimization-tuning">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Index Optimization & Query Tuning</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="18">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>19. Stored Procedures & Functions</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-stored-programs">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Stored Programs</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-creating-stored-procedures">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Creating Stored Procedures</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-stored-proc-parameters">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Parameters: IN, OUT & INOUT</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-user-defined-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">User-Defined Functions</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-proc-vars-conditions-loops">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Variables, Conditions & Loops</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="19">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>20. Triggers & Events</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-triggers">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Triggers</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-before-after-triggers">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">BEFORE & AFTER Triggers</span>
+                  </span>
+                  <span class="topic-badge badge-core-basics">core-basics</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-dml-triggers">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Insert, Update & Delete Triggers</span>
+                  </span>
+                  <span class="topic-badge badge-hot-topic">hot-topic</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-event-scheduler">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">MySQL Event Scheduler</span>
+                  </span>
+                  <span class="topic-badge badge-pro-dev">pro-dev</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-trigger-automation-examples">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Practical Automation Examples</span>
+                  </span>
+                  <span class="topic-badge badge-faang-prep">faang-prep</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="20">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>21. Transactions & Concurrency</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-intro-transactions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Introduction to Transactions</span>
+                  </span>
+                  <span class="topic-badge badge-transactions">transactions</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-commit-rollback">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">COMMIT & ROLLBACK</span>
+                  </span>
+                  <span class="topic-badge badge-transactions">transactions</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-acid-properties">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">ACID Properties</span>
+                  </span>
+                  <span class="topic-badge badge-transactions">transactions</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-savepoints-autocommit">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Savepoints & Autocommit</span>
+                  </span>
+                  <span class="topic-badge badge-transactions">transactions</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-isolation-levels-locking">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Isolation Levels & Locking</span>
+                  </span>
+                  <span class="topic-badge badge-transactions">transactions</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="21">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>22. Advanced Database Objects</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-cursors-stored-programs">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Cursors in Stored Programs</span>
+                  </span>
+                  <span class="topic-badge badge-advanced">advanced</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-error-handling-handlers">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Error Handling & Handlers</span>
+                  </span>
+                  <span class="topic-badge badge-advanced">advanced</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-dynamic-sql-prepared-statements">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Dynamic SQL & Prepared Statements</span>
+                  </span>
+                  <span class="topic-badge badge-advanced">advanced</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-json-data-types-functions">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">JSON Data Types & Functions</span>
+                  </span>
+                  <span class="topic-badge badge-advanced">advanced</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-generated-columns">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Generated Columns</span>
+                  </span>
+                  <span class="topic-badge badge-advanced">advanced</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="22">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>23. Security & User Management</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-creating-managing-users">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Creating & Managing Users</span>
+                  </span>
+                  <span class="topic-badge badge-security">security</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-grant-revoke">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">GRANT & REVOKE</span>
+                  </span>
+                  <span class="topic-badge badge-security">security</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-roles-privileges">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Roles & Privileges</span>
+                  </span>
+                  <span class="topic-badge badge-security">security</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-sql-injection-prevention">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">SQL Injection Prevention</span>
+                  </span>
+                  <span class="topic-badge badge-security">security</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-database-backup-restore">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Database Backup & Restore</span>
+                  </span>
+                  <span class="topic-badge badge-security">security</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="23">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>24. Performance & Production Database Management</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-query-profiling-performance-schema">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Query Profiling & Performance Schema</span>
+                  </span>
+                  <span class="topic-badge badge-performance">performance</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-index-analysis-optimization">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Index Analysis & Optimization</span>
+                  </span>
+                  <span class="topic-badge badge-performance">performance</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-deadlocks-lock-troubleshooting">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Deadlocks & Lock Troubleshooting</span>
+                  </span>
+                  <span class="topic-badge badge-performance">performance</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-replication-fundamentals">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Replication Fundamentals</span>
+                  </span>
+                  <span class="topic-badge badge-performance">performance</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-partitioning-scaling-basics">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Partitioning & Scaling Basics</span>
+                  </span>
+                  <span class="topic-badge badge-performance">performance</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="chapter-group collapsed" data-chapter-index="24">
+            <div class="chapter-heading" title="Click to collapse or expand">
+              <span class="chapter-heading-title">
+                <svg class="chapter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <span>25. MySQL with Applications</span>
+              </span>
+            </div>
+            <ul class="topic-list">
+              <li>
+                <div class="topic-item" data-topic-id="mysql-with-python">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">MySQL with Python</span>
+                  </span>
+                  <span class="topic-badge badge-applications">applications</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-with-flask-or-django">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">MySQL with Flask or Django</span>
+                  </span>
+                  <span class="topic-badge badge-applications">applications</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-connection-pooling">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">MySQL Connection Pooling</span>
+                  </span>
+                  <span class="topic-badge badge-applications">applications</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-transactions-application-code">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">Transactions in Application Code</span>
+                  </span>
+                  <span class="topic-badge badge-applications">applications</span>
+                </div>
+              </li>
+              <li>
+                <div class="topic-item" data-topic-id="mysql-crud-application-development">
+                  <span class="topic-title-wrapper">
+                    <span class="topic-sub-bullet"></span>
+                    <span class="topic-title-text">CRUD Application Development</span>
+                  </span>
+                  <span class="topic-badge badge-applications">applications</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Center Main Content Reader -->
+      <article class="content-area" id="content-area">
+        <!-- Breadcrumb & Top Bar -->
+        <div class="content-header">
+          <nav class="breadcrumbs" id="breadcrumbs">
+            <a href="#home">datadrix</a>
+            <span class="sep">/</span>
+            <span id="crumb-track">Python</span>
+            <span class="sep">/</span>
+            <span id="crumb-topic" class="crumb-active">Syntax & Variables</span>
+          </nav>
+
+          <div class="content-actions">
+            <button class="btn-action" id="btn-toggle-bookmark" title="Bookmark topic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span id="bookmark-btn-text">Save</span>
+            </button>
+            <button class="btn-action" id="btn-share-topic" title="Share topic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+              <span>Share</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Rendered Tutorial Article -->
+        <section class="article-body" id="article-body">
+          <div class="article-meta-tags">
+            <span class="article-tag">🏷️ core-basics</span>
+            <span class="article-tag">⏱️ 5 min read</span>
+            <span class="article-tag">🔥 W3Schools & GFG Standard</span>
+          </div>
+          <h1>Introduction to MySQL & SQL</h1>
+          <p class="article-lead">Understand how relational databases store information and how SQL lets you communicate with databases in plain English.</p>
+          <div class="article-html"><section class="topic-section">
+  <h2>1. What is MySQL & SQL? (Simple Explanation)</h2>
+  <p>A database is an organized electronic filing cabinet that securely holds millions of user accounts, orders, and products. SQL (Structured Query Language) is the universal language used to ask the database questions, add new records, or update data.</p>
+  <p><strong>Real-Life Analogy:</strong> A library database: The library building is the Database Server (MySQL), the filing cabinets are the Tables, and the request slips you hand the librarian are the SQL Queries.</p>
+  <div class="callout callout-info">
+    <div class="callout-title">💡 In Simple Words</div>
+    <p>MySQL is the software that holds your data; SQL is the language you type to talk to MySQL.</p>
+  </div>
+</section>
+
+<section class="topic-section">
+  <h2>2. Sample Data Table: <code>system_info</code></h2>
+  <p>Imagine your database currently has the following table:</p>
+  <div style="overflow-x: auto; margin: 16px 0; border: 1px solid var(--border-color); border-radius: 8px;">
+  <table class="tutorial-table">
+    <thead>
+      <tr><th>property_name</th><th>value_description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>database_engine</td><td>MySQL 8.0 Community Server</td></tr><tr><td>storage_type</td><td>InnoDB Relational Engine</td></tr><tr><td>query_language</td><td>SQL (ANSI Standard)</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<section class="topic-section">
+  <h2>3. Clean &amp; Practical SQL Example</h2>
+  <p>Here is the query you run to accomplish the task:</p>
+  <div class="code-snippet-box">
+    <div class="snippet-header">
+      <div class="snippet-lang-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/></svg>
+        <span>MYSQL</span>
+      </div>
+      <div class="snippet-actions">
+        <button class="btn-snippet btn-copy-code" title="Copy SQL to Clipboard">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span>Copy</span>
+        </button>
+        <button class="btn-snippet btn-try-it btn-run-code" title="Launch Interactive Editor">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span>Run in Editor &rarr;</span>
+        </button>
+      </div>
+    </div>
+    <div class="snippet-body">
+      <pre><code class="language-sql">-- Check MySQL server version and current date
+SELECT 
+    VERSION() AS mysql_version,
+    CURRENT_DATE() AS server_date,
+    USER() AS connected_user;</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="topic-section">
+  <h2>4. Query Result (Output Table)</h2>
+  <p>When MySQL executes your query, this is the exact result table returned:</p>
+  <div style="overflow-x: auto; margin: 16px 0; border: 1px solid var(--border-color); border-radius: 8px;">
+  <table class="tutorial-table">
+    <thead>
+      <tr><th>mysql_version</th><th>server_date</th><th>connected_user</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>8.0.36</td><td>2026-10-18</td><td>root@localhost</td></tr>
+    </tbody>
+  </table>
+</div>
+  <p><strong>Step-by-Step Breakdown:</strong></p>
+  <ul style="padding-left: 20px; line-height: 1.7; color: var(--text-secondary, #475569);">
+    <li><strong>SELECT:</strong> The primary command in SQL to retrieve and display information.</li><li><strong>VERSION(), CURRENT_DATE():</strong> Built-in server functions returning system status.</li><li><strong>AS alias_name:</strong> Renames the output column to a clean, readable header.</li>
+  </ul>
+</section>
+
+<section class="topic-section">
+  <div class="callout callout-tip">
+    <div class="callout-title">⚡ Quick Rule to Remember</div>
+    <p>SQL keywords (SELECT, FROM, WHERE) are usually written in UPPERCASE by convention for readability, but MySQL is case-insensitive for keywords.</p>
+  </div>
+  <div class="callout callout-interview">
+    <div class="callout-title">⚠️ Common Beginner Mistake</div>
+    <p>Forgetting the semicolon ';' at the end of each SQL statement in terminal or workbench.</p>
+  </div>
+</section></div>
+        </section>
+
+      <!-- Chapter Bottom Navigation -->
+        <nav class="chapter-nav" id="chapter-nav">
+          <button class="btn-nav btn-prev" id="btn-prev-topic" title="Previous Topic">
+            <div class="nav-btn-header">
+              <svg class="nav-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <span class="nav-dir">Previous Lesson</span>
+            </div>
+            <span class="nav-title" id="prev-topic-title">Previous</span>
+          </button>
+          <button class="btn-nav btn-next" id="btn-next-topic" title="Next Topic">
+            <div class="nav-btn-header">
+              <span class="nav-dir">Next Lesson</span>
+              <svg class="nav-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+            <span class="nav-title" id="next-topic-title">Next</span>
+          </button>
+        </nav>
+
+        <!-- Course Page Footer (Directly below chapter navigation) -->
+        <footer class="site-footer course-page-footer">
+          <div class="footer-top">
+            <div class="footer-col brand-col">
+              <a href="#home" class="brand-logo footer-logo" aria-label="datadrix home" title="datadrix home">
+                <div class="brand-logo-wrap">
+                  <img src="assets/logo_transparent.png" alt="datadrix" class="brand-logo-full brand-logo-light" draggable="false">
+                  <img src="assets/logo_white.png" alt="datadrix" class="brand-logo-full brand-logo-dark" draggable="false">
+                </div>
+              </a>
+              <p class="footer-desc">
+                Empowering modern developers, data engineers, and students with visual, interactive tutorials, interview preparation, and real-time coding sandboxes.
+              </p>
+              <div class="footer-socials">
+                <span class="pill-tech">Interactive Sandboxes</span>
+                <span class="pill-tech">GFG Depth</span>
+                <span class="pill-tech">2026 Edition</span>
+              </div>
+            </div>
+
+            <div class="footer-col">
+              <h4 class="footer-heading">Top Courses</h4>
+              <ul class="footer-links">
+                <li><a href="#tutorials/mysql/intro-mysql-sql">MySQL Relational DB</a></li>
+                <li><a href="#tutorials/python/py-intro-variables">Python 3 Masterclass</a></li>
+                <li><a href="#tutorials/pyspark/pyspark-intro">PySpark & Big Data</a></li>
+                <li><a href="#tutorials/generative-ai/genai-intro">Generative AI & LLMs</a></li>
+                <li><a href="#tutorials/java/java-intro">Enterprise Java</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4 class="footer-heading">Features</h4>
+              <ul class="footer-links">
+                <li><a href="#playground">Try It Yourself Editor</a></li>
+                <li><a href="#quizzes">Skill Quizzes & Streaks</a></li>
+                <li><a href="#roadmaps">Developer Roadmaps</a></li>
+                <li><a href="#cheatsheets">All-in-One Cheat Sheets</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4 class="footer-heading">Platform</h4>
+              <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+                <li><a href="#terms">Terms of Learning</a></li>
+                <li><span class="status-online"><span class="dot-online"></span> All Systems Operational</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>&copy; 2026 <strong>datadrix</strong> — Designed for speed, precision, and visual delight. All rights reserved.</p>
+            <div class="footer-legal-tags">
+              <span>Made with ❤️ for Developers</span>
+              <span>•</span>
+              <span>Fast &amp; Distraction-Free</span>
+            </div>
+          </div>
+        </footer>
+
+        
+      </article>
+
+      
+
+    </div>
+
+    <!-- VIEW 2: INTERACTIVE "TRY IT YOURSELF" IDE / PLAYGROUND -->
+    <div class="view-container view-playground" id="view-playground">
+      <!-- Section Hero: Balanced vertical spacing & clear distinction from top banner -->
+      <header class="section-hero ide-hero">
+        <span class="hero-chip">⚡ Live Sandbox & Multi-Compiler</span>
+        <h1 class="hero-heading">Try-It-Yourself Code Lab</h1>
+        <p class="hero-subtext">Write, execute, and benchmark Python, Java, C, and C++ code directly in your browser
+          with real-time compilation, memory benchmarks, and live terminal output.</p>
+      </header>
+
+      <div class="ide-workspace">
+        <!-- Top Window Bar (CodingForCareer Style) -->
+        <header class="ide-window-bar">
+          <!-- Left: macOS 3 Window Dots & Single Language Dropdown (Python default, then Java, C, C++) -->
+          <div class="ide-window-left">
+            <div class="mac-window-dots" aria-hidden="true">
+              <span class="mac-dot mac-dot-rose"></span>
+              <span class="mac-dot mac-dot-amber"></span>
+              <span class="mac-dot mac-dot-emerald"></span>
+            </div>
+
+            <!-- Single Language Selector Dropdown -->
+            <div class="ide-lang-picker">
+              <svg class="ide-lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <select id="ide-lang-select" class="ide-lang-dropdown" title="Select Programming Language">
+                <option value="python" selected>Python</option>
+                <option value="java">Java</option>
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+              </select>
+            </div>
+
+            <div class="ide-file-tab" id="ide-file-tab">
+              <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                <polyline points="13 2 13 9 20 9"></polyline>
+              </svg>
+              <span id="ide-filename">solution.py</span>
+            </div>
+
+            <span class="ide-sandbox-pill" id="ide-status-pill">
+              <span class="pulse-indicator"></span>
+              <span id="ide-status-pill-text">Live Python 3.14 Sandbox (Active)</span>
+            </span>
+          </div>
+
+          <!-- Right: Font Size, Presets, Reset, Copy & Clear Actions -->
+          <div class="ide-window-actions">
+            <!-- Font Size Picker -->
+            <div class="ide-control-group" title="Editor Font Size">
+              <select id="ide-font-size" class="ide-select-ctrl">
+                <option value="12">12px</option>
+                <option value="13">13px</option>
+                <option value="14" selected>14px</option>
+                <option value="16">16px</option>
+                <option value="18">18px</option>
+              </select>
+            </div>
+
+            <!-- Clear Button -->
+            <button class="ide-btn-icon" id="btn-ide-clear" title="Clear editor to blank">
+              Clear
+            </button>
+
+            <!-- Sample Button -->
+            <button class="ide-btn-icon" id="btn-ide-sample" title="Load starter sample code">
+              Sample
+            </button>
+
+            <!-- Reset Button -->
+            <button class="ide-btn-icon" id="btn-ide-reset" title="Reset to starter code">
+              <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2.5 2v6h6M21.5 22v-6h-6"></path>
+                <path d="M22 11.5A10 10 0 0 0 3.2 7.2L2.5 8M2 12.5a10 10 0 0 0 18.8 4.2l.7-.7"></path>
+              </svg>
+              <span>Reset</span>
+            </button>
+
+            <!-- Copy Button -->
+            <button class="ide-btn-icon" id="btn-ide-copy" title="Copy code to clipboard">
+              <svg class="icon-xs" id="copy-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="btn-copy-label">Copy</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Editor & Live Terminal Split Panes -->
+        <div class="ide-split-panes">
+          <!-- Left Column: Code Editor -->
+          <div class="ide-pane editor-pane">
+            <div class="code-editor-wrapper">
+              <div class="line-numbers" id="editor-line-numbers">1</div>
+              <textarea id="ide-code-textarea" class="ide-textarea" spellcheck="false" autocomplete="off"
+                autocapitalize="off"></textarea>
+            </div>
+
+            <!-- Bottom Editor Action Bar -->
+            <div class="editor-bottom-bar">
+              <div class="editor-bottom-left">
+                <button class="btn-execute-run" id="btn-ide-run">
+                  <svg class="icon-play" id="btn-run-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <span id="btn-run-text">Run Python 3</span>
+                </button>
+                <span class="editor-autoindent-hint">Auto-indent enabled (Ctrl+Enter to run)</span>
+              </div>
+              <div class="editor-bottom-right">
+                <span class="editor-stats-label" id="editor-stats">Lines: 18 • Chars: 382</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Live Terminal Output -->
+          <div class="ide-pane terminal-pane">
+            <div class="terminal-header">
+              <div class="terminal-title">
+                <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="4 17 10 11 4 5"></polyline>
+                  <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span>Terminal Output</span>
+              </div>
+              <div class="terminal-metrics" id="terminal-metrics">
+                <span class="metric-chip metric-runtime" id="term-runtime">14 ms</span>
+                <span class="metric-chip metric-memory" id="term-memory">16.4 MB</span>
+                <span class="metric-badge metric-exit-ok" id="term-exit">Exit 0</span>
+              </div>
+            </div>
+
+            <!-- Live Terminal Output Stream -->
+            <div class="terminal-body" id="ide-console">
+              <div class="term-ready-card" id="term-ready-card">
+                <p class="term-line-primary">&gt; <span id="term-env-ready">Python 3.14 Isolated Sandbox Ready.</span>
+                </p>
+                <p class="term-line-secondary">&gt; <span id="term-env-note">Type any code on the left. Conditions
+                    auto-indent 4 spaces upon pressing Enter.</span></p>
+                <p class="term-line-secondary">&gt; Standard output and errors will stream here in real-time.</p>
+              </div>
+            </div>
+
+            <!-- Live IFrame for Web Sandbox (HTML/CSS/JS) -->
+            <iframe id="ide-preview-frame" class="ide-preview-frame" sandbox="allow-scripts"
+              title="Code Live Output Preview" style="display:none;"></iframe>
+
+            <!-- Terminal Footer Status Bar -->
+            <div class="terminal-footer">
+              <div class="terminal-status-info">
+                <span>Status:</span>
+                <strong id="term-status-lbl" class="status-success">Success</strong>
+              </div>
+              <button class="btn-clear-term" id="btn-clear-console" title="Clear console output">Clear Output</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Feature Pillars (CodingForCareer Style) -->
+      <div class="ide-feature-pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-emerald">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+          </div>
+          <h4>Isolated Sandbox</h4>
+          <p>Zero security risks with safe CPU and memory quota containment.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-blue">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+              <line x1="20" y1="9" x2="23" y2="9"></line>
+              <line x1="20" y1="14" x2="23" y2="14"></line>
+              <line x1="1" y1="9" x2="4" y2="9"></line>
+              <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+          </div>
+          <h4>Multi-Core Compilers</h4>
+          <p>Full sandbox execution support for Python 3, Java 17, C (GCC 12), and C++ 20.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-indigo">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h4>Instant Latency Profiling</h4>
+          <p>Sub-millisecond execution benchmarks & memory footprint metrics.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon-box icon-cyan">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+          </div>
+          <h4>Intelligent Editor</h4>
+          <p>Auto-indentation, Tab control, line counter, and dynamic font resizing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: PRACTICE & QUIZZES -->
+    <div class="view-container view-quizzes" id="view-quizzes">
+      <div class="quiz-center-container">
+        <header class="section-hero">
+          <span class="hero-chip">Skill Verification</span>
+          <h1 class="hero-heading">Interactive Quizzes & Coding Challenges</h1>
+          <p class="hero-subtext">Test your mastery with instant feedback, explanations, and track your streak.</p>
+
+          <div class="quiz-stats-bar">
+            <div class="quiz-stat-card">
+              <span class="stat-number" id="quiz-stat-answered">0</span>
+              <span class="stat-lbl">Questions Solved</span>
+            </div>
+            <div class="quiz-stat-card">
+              <span class="stat-number stat-success" id="quiz-stat-accuracy">100%</span>
+              <span class="stat-lbl">Accuracy</span>
+            </div>
+            <div class="quiz-stat-card">
+              <span class="stat-number stat-streak" id="quiz-stat-streak">🔥 1</span>
+              <span class="stat-lbl">Current Streak</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="quiz-filter-bar">
+          <button class="quiz-cat-btn active" data-cat="all">All Tracks</button>
+          <button class="quiz-cat-btn" data-cat="python">Python</button>
+          <button class="quiz-cat-btn" data-cat="javascript">JavaScript</button>
+          <button class="quiz-cat-btn" data-cat="dsa">DSA & Algorithms</button>
+          <button class="quiz-cat-btn" data-cat="sql">SQL & Data</button>
+        </div>
+
+        <div class="quiz-cards-grid" id="quiz-cards-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 4: ROADMAPS -->
+    <div class="view-container view-roadmaps" id="view-roadmaps">
+      <div class="roadmaps-container">
+        
+        <!-- View State A: All 10 Career Roadmaps Hub -->
+        <div id="rm-hub-view" class="rm-hub-view">
+          <header class="section-hero rm-hero-showcase">
+            <div class="rm-hero-ambient-glow"></div>
+            <div class="hero-chip rm-hero-chip">
+              <span class="rm-chip-pulse"></span>
+              <span>FAANG &amp; Industry Standards</span>
+              <span class="rm-chip-sep">•</span>
+              <span>10 Career Blueprints</span>
+              <span class="rm-chip-sep">•</span>
+              <span>Fresher to Staff</span>
+            </div>
+            <h1 class="hero-heading">Tier-1 Career Engineering Roadmaps</h1>
+            <p class="hero-subtext">
+              Curated, production-grade learning blueprints bridging university fundamentals to FAANG interview mastery. Click any path to view detailed phases, milestones, and interview question guides.
+            </p>
+          </header>
+
+          <!-- Roadmap Search & Category Filter Controls -->
+          <div class="rm-controls-wrapper">
+            <div class="rm-search-box">
+              <svg class="rm-search-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+              </svg>
+              <input type="text" id="rm-search-input" class="rm-search-input" placeholder="Search career paths by role, tech (Python, SQL, RAG, Playwright, Spark)..." autocomplete="off">
+              <button class="rm-search-clear" id="btn-clear-rm-search" style="display: none;" title="Clear search">&times;</button>
+            </div>
+
+            <div class="rm-category-filters" id="rm-category-filters">
+              <button class="rm-filter-btn active" data-category="all">All Career Paths (10)</button>
+              <button class="rm-filter-btn" data-category="data-ai">Data Science &amp; AI (3)</button>
+              <button class="rm-filter-btn" data-category="software-engineering">Software &amp; Systems (3)</button>
+              <button class="rm-filter-btn" data-category="analytics">Analytics &amp; Business (2)</button>
+              <button class="rm-filter-btn" data-category="qa-automation">QA &amp; Automation (2)</button>
+            </div>
+          </div>
+
+          <!-- Roadmaps Grid -->
+          <div class="roadmaps-grid" id="roadmaps-grid">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- View State B: Full Descriptive Roadmap Drill-down View -->
+        <div id="rm-detail-view" class="rm-detail-view" style="display: none;">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW 5: CHEAT SHEETS -->
+    <div class="view-container view-cheatsheets" id="view-cheatsheets">
+      <div class="cheatsheets-container">
+        
+        <!-- View State A: All 21 Course Tiles Hub -->
+        <div id="cs-hub-view" class="cs-hub-view">
+          <header class="section-hero cs-hero-showcase">
+            <div class="cs-hero-ambient-glow"></div>
+
+            <div class="hero-chip cs-hero-chip">
+              <span class="cs-chip-pulse"></span>
+              <span>Quick Reference Library</span>
+              <span class="cs-chip-sep">•</span>
+              <span>21 Course Matrices</span>
+              <span class="cs-chip-sep">•</span>
+              <span>300+ Verified Syntax Items</span>
+            </div>
+
+            <h1 class="hero-heading cs-heading">Developer Cheat Sheets &amp; <span class="gradient-text">Syntax Matrices</span></h1>
+            <p class="hero-subtext cs-subtext">Click on any course tile below to explore comprehensive syntax cheat sheets, method matrices, and real-time code examples.</p>
+
+            <!-- Light Attractive Search Capsule -->
+            <div class="cs-search-wrapper">
+              <div class="cs-search-capsule" id="cs-search-capsule">
+                <div class="cs-search-icon-box">
+                  <svg class="cs-search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </div>
+
+                <input type="text" id="cheatsheet-filter" class="cs-search-input"
+                  placeholder="Search any course, syntax, or command (e.g. Python, Java, MySQL, Spark, DSA)..."
+                  autocomplete="off" spellcheck="false">
+
+                <div class="cs-search-actions">
+                  <button type="button" class="cs-search-clear-btn" id="btn-cs-clear-search" title="Clear search" style="display: none;">
+                    &times;
+                  </button>
+                  <span class="cs-search-badge" id="cs-search-count-pill">21 Courses</span>
+                </div>
+              </div>
+
+              <!-- Quick Search Jump Pills -->
+              <div class="cs-quick-tags" id="cs-quick-tags">
+                <span class="cs-quick-label">⚡ Popular:</span>
+                <button type="button" class="cs-quick-chip" data-quick="python">🐍 Python 3</button>
+                <button type="button" class="cs-quick-chip" data-quick="mysql">🐬 MySQL</button>
+                <button type="button" class="cs-quick-chip" data-quick="java">☕ Java</button>
+                <button type="button" class="cs-quick-chip" data-quick="generative-ai">✨ Generative AI</button>
+                <button type="button" class="cs-quick-chip" data-quick="dsa">⚡ DSA</button>
+                <button type="button" class="cs-quick-chip" data-quick="pyspark">🔥 PySpark</button>
+                <button type="button" class="cs-quick-chip" data-quick="powerbi">📊 Power BI</button>
+              </div>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="cs-category-filter" id="cs-category-filter">
+              <button class="cs-cat-btn active" data-cat="all">
+                <span>All Tracks</span>
+                <span class="cat-count-badge">21</span>
+              </button>
+              <button class="cs-cat-btn" data-cat="programming">
+                <span>Programming</span>
+                <span class="cat-count-badge">3</span>
+              </button>
+              <button class="cs-cat-btn" data-cat="data-science">
+                <span>Data Science &amp; AI</span>
+                <span class="cat-count-badge">7</span>
+              </button>
+              <button class="cs-cat-btn" data-cat="data-eng">
+                <span>Data Engineering</span>
+                <span class="cat-count-badge">4</span>
+              </button>
+              <button class="cs-cat-btn" data-cat="analytics">
+                <span>BI &amp; Analytics</span>
+                <span class="cat-count-badge">2</span>
+              </button>
+              <button class="cs-cat-btn" data-cat="web">
+                <span>Web Frameworks</span>
+                <span class="cat-count-badge">2</span>
+              </button>
+              <button class="cs-cat-btn" data-cat="dsa">
+                <span>DSA &amp; Algorithms</span>
+                <span class="cat-count-badge">3</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- Empty State (hidden by default) -->
+          <div class="cs-empty-state" id="cs-empty-state" style="display: none;">
+            <div class="cs-empty-icon">🔍</div>
+            <h3 class="cs-empty-title">No cheat sheets found</h3>
+            <p class="cs-empty-sub">We couldn't find any courses matching "<span id="cs-empty-query"></span>".</p>
+            <button class="btn-tile-primary" id="btn-cs-reset-empty" style="margin: 16px auto 0 auto; display: inline-flex;">Show All 21 Cheat Sheets</button>
+          </div>
+
+          <div class="cs-courses-grid" id="cs-courses-grid">
+            <!-- Dynamically populated with all 21 course tiles via JS -->
+          </div>
+        </div>
+
+        <!-- View State B: Topic Detailed Cheat Sheet Page -->
+        <div id="cs-detail-view" class="cs-detail-view" style="display: none;">
+          <!-- Dynamically populated with selected topic cheat sheet matrix -->
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col brand-col">
+        <a href="#home" class="brand-logo footer-logo" id="footer-logo-link" aria-label="datadrix home" title="datadrix home">
+          <div class="brand-logo-wrap">
+            <img src="assets/logo_transparent.png" alt="datadrix" class="brand-logo-full brand-logo-light" draggable="false">
+            <img src="assets/logo_white.png" alt="datadrix" class="brand-logo-full brand-logo-dark" draggable="false">
+          </div>
+        </a>
+        <p class="footer-desc">
+          Empowering modern developers, data engineers, and computer science students with visual, interactive
+          tutorials, interview preparation, and real-time coding sandboxes.
+        </p>
+        <div class="footer-socials">
+          <span class="pill-tech">W3Schools Inspired</span>
+          <span class="pill-tech">GFG Depth</span>
+          <span class="pill-tech">2026 UI/UX</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Top Courses (22)</h4>
+        <ul class="footer-links">
+          <li><a href="#py-intro">Python 3 Masterclass</a></li>
+          <li><a href="#pyspark-intro">PySpark & Big Data</a></li>
+          <li><a href="#genai-intro">Generative AI & LLMs</a></li>
+          <li><a href="#mysql-intro">MySQL & Relational Design</a></li>
+          <li><a href="#ml-intro">Machine Learning (Scikit-Learn)</a></li>
+          <li><a href="#kafka-intro">Kafka Real-Time Streaming</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Features</h4>
+        <ul class="footer-links">
+          <li><a href="#playground">Try It Yourself Online Editor</a></li>
+          <li><a href="#quizzes">Skill Quizzes & Streaks</a></li>
+          <li><a href="#roadmaps">Full Stack Developer Roadmap</a></li>
+          <li><a href="#roadmaps">Data Scientist Roadmap</a></li>
+          <li><a href="#cheatsheets">All-in-One Cheat Sheets</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Platform</h4>
+        <ul class="footer-links">
+          <li><a href="#about" id="footer-about">About datadrix</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Learning</a></li>
+          <li><a href="#contribute">Contribute an Article</a></li>
+          <li><span class="status-online"><span class="dot-online"></span> All Systems Operational</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 <strong>datadrix</strong> — Designed for speed, precision, and visual delight. All rights reserved.
+      </p>
+      <div class="footer-legal-tags">
+        <span>Made with ❤️ for Developers</span>
+        <span>•</span>
+        <span>Light Mode Optimized</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Quick Command / Search Modal (CMD+K / Ctrl+K) -->
+  <div class="modal-backdrop" id="search-modal" aria-hidden="true">
+    <div class="search-modal-dialog" role="dialog" aria-modal="true">
+      <div class="search-modal-input-wrap">
+        <svg class="search-modal-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd" />
+        </svg>
+        <input type="text" id="global-search-input" class="search-modal-input"
+          placeholder="Search topics, syntax, algorithms, or tutorials..." autocomplete="off">
+        <kbd class="modal-esc-hint">ESC</kbd>
+      </div>
+
+      <div class="search-modal-results" id="search-results-list">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div class="search-modal-footer">
+        <span><kbd>↑</kbd> <kbd>↓</kbd> to navigate</span>
+        <span><kbd>↵</kbd> to select</span>
+        <span><kbd>ESC</kbd> to dismiss</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookmarks Modal -->
+  <div class="modal-backdrop" id="bookmarks-modal" aria-hidden="true">
+    <div class="bookmarks-modal-dialog">
+      <div class="modal-header">
+        <h3>Saved Articles & Bookmarks</h3>
+        <button class="modal-close" id="btn-close-bookmarks">&times;</button>
+      </div>
+      <div class="bookmarks-list" id="bookmarks-modal-list">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <!-- Mobile Bottom Navigation Bar (High-Engagement Quick Navigation) -->
+  <nav class="mobile-bottom-bar" id="mobile-bottom-bar" aria-label="Mobile Navigation">
+    <button class="nav-item mobile-bottom-item active" data-nav="home" id="m-nav-home" aria-label="Home">
+      <svg class="m-nav-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+      </svg>
+      <span class="m-nav-label">Home</span>
+    </button>
+    <button class="nav-item mobile-bottom-item" data-nav="playground" id="m-nav-playground" aria-label="Editor">
+      <svg class="m-nav-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+      <span class="m-nav-label">Editor</span>
+    </button>
+    <button class="nav-item mobile-bottom-item" data-nav="quizzes" id="m-nav-quizzes" aria-label="Practice & Quiz">
+      <svg class="m-nav-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>
+      <span class="m-nav-label">Quiz</span>
+    </button>
+    <button class="nav-item mobile-bottom-item" data-nav="roadmaps" id="m-nav-roadmaps" aria-label="Roadmaps">
+      <svg class="m-nav-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707l4 4A1 1 0 008 18V5.414L3.707 1.121A1 1 0 003 1a1 1 0 00-.707.293zM14 5.414V18a1 1 0 001.707.707l4-4A1 1 0 0020 14V4a1 1 0 00-.293-.707l-4-4A1 1 0 0014 0a1 1 0 00-1 1v4.414z" clip-rule="evenodd" />
+      </svg>
+      <span class="m-nav-label">Roadmaps</span>
+    </button>
+    <button class="nav-item mobile-bottom-item" data-nav="cheatsheets" id="m-nav-cheatsheets" aria-label="Cheat Sheets">
+      <svg class="m-nav-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+      </svg>
+      <span class="m-nav-label">Cheats</span>
+    </button>
+  </nav>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js?v=20261020_v36_production"></script>
+  <script src="js/editor.js?v=20261020_v36_production"></script>
+  <script src="js/quiz.js?v=20261020_v36_production"></script>
+  <script src="js/app.js?v=20261020_v36_production"></script>
+</body>
+</html>

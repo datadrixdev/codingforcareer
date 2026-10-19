@@ -1,0 +1,25 @@
+{
+  "name": "datadrix — Interactive Coding & Tech Roadmaps",
+  "short_name": "datadrix",
+  "description": "Master Coding, Data Engineering, Apache Airflow, SQL, Java, and DSA with hands-on examples, cheatsheets, and career roadmaps.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
+  "icons": [
+    {
+      "src": "assets/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo_attractive_black_4x.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

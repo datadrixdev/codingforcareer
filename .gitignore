@@ -1,0 +1,12 @@
+# Build & Scratch Artifacts
+scratch/
+backup_before_revert/
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+.vscode/
+.idea/
