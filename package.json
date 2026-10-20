@@ -1,6 +1,6 @@
 {
   "name": "datadrixblog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "datadrix — Interactive Learning Platform for Programming, Cloud & Data Engineering",
   "private": true,
   "scripts": {
