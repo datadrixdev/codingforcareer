@@ -1,0 +1,6 @@
+# Ignore build, scratch, and backup directories
+scratch/
+backup_before_revert/
+.git/
+*.log
+*.tmp
