@@ -1,0 +1,19 @@
+{
+  "name": "datadrixblog",
+  "version": "1.0.0",
+  "description": "datadrix — Interactive Learning Platform for Programming, Cloud & Data Engineering",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static assets ready'",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "tutorials",
+    "python",
+    "airflow",
+    "sql",
+    "dsa"
+  ],
+  "author": "datadrix",
+  "license": "MIT"
+}
