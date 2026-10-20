@@ -4,7 +4,6 @@
   "description": "datadrix — Interactive Learning Platform for Programming, Cloud & Data Engineering",
   "private": true,
   "scripts": {
-    "build": "echo 'Static assets ready'",
     "start": "npx serve ."
   },
   "keywords": [
