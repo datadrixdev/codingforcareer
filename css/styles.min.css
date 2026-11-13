@@ -929,3 +929,5 @@
   }
 }
 
+
+.footer-grid-container{grid-template-columns:1.35fr 1.05fr 1fr 1fr !important;gap:36px !important}.footer-heading-wrap{white-space:nowrap !important;flex-wrap:nowrap !important}.footer-heading{white-space:nowrap !important;flex-shrink:0 !important;letter-spacing:0.6px !important}.footer-col-badge{flex-shrink:0 !important}@media (max-width:1200px){.footer-grid-container{grid-template-columns:repeat(2,1fr) !important;gap:36px !important}.brand-col{grid-column:span 2 !important}}
