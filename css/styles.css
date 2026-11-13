@@ -132,7 +132,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a {
@@ -973,25 +973,43 @@ body.dark-mode #nav-cheatsheets.active .nav-icon {
   width: 100% !important;
 }
 
-/* Left Sidebar */
+/* Left Sidebar (Desktop: Sticky, Full-Height Chapter Navigator) */
 .sidebar {
-  width: 300px !important;
-  min-width: 300px !important;
-  max-width: 300px !important;
-  flex: 0 0 300px !important;
-  flex-shrink: 0 !important;
-  border-right: 1px solid var(--border-default) !important;
-  background-color: var(--bg-surface) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  position: sticky !important;
-  top: 148px !important;
-  height: calc(100vh - 148px) !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  z-index: 50 !important;
-  transition: transform var(--transition-normal) !important;
-  box-sizing: border-box !important;
+  width: 330px;
+  min-width: 330px;
+  max-width: 330px;
+  flex: 0 0 330px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-default);
+  background-color: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 148px;
+  height: calc(100vh - 148px);
+  max-height: calc(100vh - 148px);
+  overflow: hidden;
+  z-index: 50;
+  transition: transform var(--transition-normal);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .sidebar {
+    width: 310px;
+    min-width: 310px;
+    max-width: 310px;
+    flex: 0 0 310px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sidebar {
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    flex: 0 0 320px;
+  }
 }
 
 .sidebar-header {
@@ -1054,9 +1072,29 @@ body.dark-mode #nav-cheatsheets.active .nav-icon {
 
 /* Chapter Tree */
 .sidebar-chapters {
-  flex: 1;
-  padding: 12px 10px;
+  flex: 1 1 auto;
+  padding: 12px 10px 40px 10px;
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.sidebar-chapters::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-chapters::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-chapters::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+}
+
+.sidebar-chapters::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light);
 }
 
 .chapter-group {
@@ -1222,20 +1260,25 @@ body.dark-mode #nav-cheatsheets.active .nav-icon {
 
 .topic-title-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
   line-height: 1.35;
 }
 
 .topic-title-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 0.84rem;
+  line-height: 1.38;
+  word-break: normal;
+  overflow-wrap: break-word;
   white-space: normal;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-main);
 }
 
 .topic-sub-bullet {
@@ -1278,13 +1321,15 @@ body.dark-mode #nav-cheatsheets.active .nav-icon {
 }
 
 .topic-badge {
-  font-size: 0.62rem;
-  padding: 1px 6px;
+  font-size: 0.58rem;
+  padding: 1.5px 5.5px;
   border-radius: var(--radius-full);
-  font-weight: 700;
+  font-weight: 750;
+  letter-spacing: 0.35px;
   text-transform: uppercase;
   flex-shrink: 0;
-  letter-spacing: 0.3px;
+  white-space: nowrap;
+  margin-top: 2px;
 }
 
 .badge-code {
@@ -3451,7 +3496,7 @@ body.dark-mode .quiz-option-item:hover {
   position: relative;
   z-index: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.25em;
@@ -6231,18 +6276,10 @@ body.dark-mode .btn-footer-back-to-top:hover {
 }
 
 @media (max-width: 1024px) {
-  .sidebar {
-    width: 260px !important;
-    min-width: 260px !important;
-    max-width: 260px !important;
-    flex: 0 0 260px !important;
-  }
-
   .content-area,
   .view-tutorials .content-area {
     padding: 24px 20px 56px !important;
   }
-}
 
   .footer-top {
     grid-template-columns: 1fr 1fr;
@@ -6276,30 +6313,78 @@ body.dark-mode .btn-footer-back-to-top:hover {
 
 @media (max-width: 768px) {
   .mobile-menu-btn {
-    display: block;
+    display: flex !important;
   }
 
   .sidebar-close-btn {
-    display: block;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-default);
+    background: var(--bg-surface-alt);
+    color: var(--text-main);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: all 0.2s ease;
+  }
+
+  .sidebar-close-btn:hover {
+    background: var(--border-default);
+    color: var(--text-heading);
   }
 
   .main-nav {
-    display: none;
+    display: none !important;
   }
 
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 290px;
-    z-index: 250;
-    box-shadow: var(--shadow-xl);
-    transform: translateX(-100%);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: min(340px, 88vw) !important;
+    min-width: 0 !important;
+    max-width: 88vw !important;
+    height: 100% !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    z-index: 9999 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45) !important;
+    border-right: 1px solid var(--border-default) !important;
+    background-color: var(--bg-surface) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
   }
 
   .sidebar.mobile-open {
-    transform: translateX(0);
+    transform: translateX(0) !important;
+  }
+
+  .sidebar-backdrop {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(15, 23, 42, 0.65) !important;
+    backdrop-filter: blur(4px) !important;
+    z-index: 9998 !important;
+  }
+
+  .sidebar-backdrop.active {
+    display: block !important;
+  }
+
+  .sidebar-chapters {
+    padding-bottom: 90px !important;
   }
 
   .content-area {
@@ -7045,7 +7130,7 @@ body.dark-mode .btn-footer-back-to-top:hover {
   position: relative;
   z-index: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   height: 2.15rem;
@@ -8043,9 +8128,9 @@ body:not([data-view="tutorials"]) #chapter-nav {
   box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
 }
 
-/* 2. Global Viewport Overflow Protection */
+/* 2. Global Viewport Overflow Protection (Uses clip so position:sticky works flawlessly) */
 html, body {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw !important;
   width: 100% !important;
 }
