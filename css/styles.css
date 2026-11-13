@@ -958,31 +958,40 @@ body.dark-mode #nav-cheatsheets.active .nav-icon {
    7. VIEW 1: TUTORIALS & ARTICLE READER (3-Column Layout)
    -------------------------------------------------------------------------- */
 .view-tutorials {
-  max-width: 1600px;
-  margin: 0 auto;
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
   display: none;
-  min-height: calc(100vh - var(--header-height) - var(--techbar-height));
+  min-height: calc(100vh - 148px);
+  box-sizing: border-box;
 }
 
 .view-tutorials.active {
-  display: flex;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
 }
 
 /* Left Sidebar */
 .sidebar {
-  width: var(--sidebar-width);
-  flex-shrink: 0;
-  border-right: 1px solid var(--border-default);
-  background-color: var(--bg-surface);
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: calc(var(--header-height) + var(--techbar-height));
-  height: calc(100vh - var(--header-height) - var(--techbar-height));
-  overflow-y: auto;
-  z-index: 50;
-  transition: transform var(--transition-normal);
+  width: 300px !important;
+  min-width: 300px !important;
+  max-width: 300px !important;
+  flex: 0 0 300px !important;
+  flex-shrink: 0 !important;
+  border-right: 1px solid var(--border-default) !important;
+  background-color: var(--bg-surface) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: sticky !important;
+  top: 148px !important;
+  height: calc(100vh - 148px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: 50 !important;
+  transition: transform var(--transition-normal) !important;
+  box-sizing: border-box !important;
 }
 
 .sidebar-header {
@@ -6210,14 +6219,30 @@ body.dark-mode .btn-footer-back-to-top:hover {
 /* --------------------------------------------------------------------------
    15. Responsive Breakpoints
    -------------------------------------------------------------------------- */
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .toc-sidebar {
-    display: none;
+    display: none !important;
   }
 
-  .content-area {
+  .content-area,
+  .view-tutorials .content-area {
     padding: 24px 32px;
   }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    flex: 0 0 260px !important;
+  }
+
+  .content-area,
+  .view-tutorials .content-area {
+    padding: 24px 20px 56px !important;
+  }
+}
 
   .footer-top {
     grid-template-columns: 1fr 1fr;
@@ -7966,11 +7991,13 @@ body.dark-mode .mobile-bottom-item.active .m-nav-icon,
 
 /* Ensure content-area takes maximum comfortable reading width and has breathing room at bottom */
 .view-tutorials .content-area {
-  max-width: 1020px !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  max-width: 960px !important;
+  width: auto !important;
   margin: 0 auto !important;
-  width: 100% !important;
   box-sizing: border-box !important;
-  padding-bottom: 56px !important;
+  padding: 32px 36px 64px !important;
 }
 
 @media (max-width: 768px) {
@@ -8045,9 +8072,11 @@ html, body {
 
 /* 4. Article Typography & Reading Measure (Desktop & Mobile) */
 .view-tutorials .content-area {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
   max-width: 960px !important;
+  width: auto !important;
   margin: 0 auto !important;
-  width: 100% !important;
   box-sizing: border-box !important;
   padding: 32px 36px 64px !important;
 }
