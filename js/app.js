@@ -26,6 +26,7 @@ class CodingForCareerApp {
     this.renderHomeHeroSnippet();
     this.updateBookmarkBadge();
     this.updateXPDisplay();
+    this.initResumeAnalyzer();
     this.initTheme();
     this.handleHashChange();
   }
@@ -121,6 +122,10 @@ class CodingForCareerApp {
     this.navItems.forEach(item => {
       item.addEventListener("click", () => {
         const targetView = item.getAttribute("data-nav");
+        if (targetView === "resume") {
+          this.goToResumeAnalyzer();
+          return;
+        }
         if (targetView === "cheatsheets") {
           this.switchView("cheatsheets", true, true);
         } else if (targetView === "home") {
@@ -453,6 +458,11 @@ class CodingForCareerApp {
     }
 
     const hash = rawHash.toLowerCase().replace(/^\/+|\/+$/g, "");
+
+    if (["resume", "resume-analyzer", "analyse-resume", "analyze-resume"].includes(hash)) {
+      this.goToResumeAnalyzer();
+      return;
+    }
 
     // 1. Cheatsheets Hub or Detail: #cheatsheets, #cheatsheets/:track, #cheatsheets-:track
     if (hash === "cheatsheets" || hash === "cheat-sheets") {
@@ -2536,6 +2546,247 @@ class CodingForCareerApp {
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
   }
+
+
+  goToResumeAnalyzer() {
+    this.goToHome(null, false);
+    setTimeout(() => {
+      const el = document.getElementById("resume-analyzer");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 120);
+  }
+
+  initResumeAnalyzer() {
+    this.resumeProfiles = {
+      "data-scientist": {
+        roleTitle: "Data Scientist & Machine Learning Engineer",
+        matchPercent: "78%",
+        statusText: "🟢 STRONG FOUNDATION IDENTIFIED",
+        desc: "Your profile demonstrates solid programming and data manipulation. Bridging 3 missing high-impact tools will qualify you for senior interview rounds.",
+        skillsHave: [
+          { name: "Python 3 Programming", score: "90%" },
+          { name: "SQL Queries & Aggregations", score: "88%" },
+          { name: "Statistical Hypothesis Testing", score: "78%" },
+          { name: "Pandas & NumPy Wrangling", score: "85%" },
+          { name: "Git Version Control", score: "92%" },
+          { name: "Data Structures & Complexity", score: "74%" }
+        ],
+        skillsNeed: [
+          { name: "PySpark Distributed Big Data", desc: "Required for massive dataset processing", link: "#pyspark", linkText: "Learn in Course →" },
+          { name: "Apache Kafka Event Streaming", desc: "Real-time pub/sub pipelines for production ML", link: "#pykafka", linkText: "Learn in Course →" },
+          { name: "RAG & Vector Embeddings", desc: "Modern Generative AI architectures", link: "#generative-ai", linkText: "Master GenAI →" }
+        ]
+      },
+      "data-engineer": {
+        roleTitle: "Data Engineer (PySpark, Kafka & Airflow)",
+        matchPercent: "82%",
+        statusText: "🟢 HIGH RELEVANCE FOR DATA PIPELINES",
+        desc: "Strong SQL and Python foundation detected. Mastering distributed cluster execution and orchestration bridges your gap to senior data engineering.",
+        skillsHave: [
+          { name: "Advanced SQL & Indexing", score: "94%" },
+          { name: "Python Scripting & Automation", score: "88%" },
+          { name: "Relational DB Schema Design", score: "86%" },
+          { name: "Linux Bash & CLI Workflow", score: "80%" },
+          { name: "ETL / Data Warehousing Basics", score: "78%" }
+        ],
+        skillsNeed: [
+          { name: "Apache Airflow DAG Orchestration", desc: "Production workflow scheduling & alerting", link: "#airflow", linkText: "Learn in Course →" },
+          { name: "PySpark Distributed DataFrames", desc: "Big Data processing and partitioning", link: "#pyspark", linkText: "Learn in Course →" },
+          { name: "Apache Kafka Streaming Architecture", desc: "Message broker internals & consumer groups", link: "#pykafka", linkText: "Learn in Course →" }
+        ]
+      },
+      "full-stack": {
+        roleTitle: "Full Stack Software Engineer (Python & Modern Web)",
+        matchPercent: "75%",
+        statusText: "🟡 STRONG APPLICATION LOGIC",
+        desc: "Proficient in backend services and relational databases. Adding high-performance microservices and modern frontend integration completes your profile.",
+        skillsHave: [
+          { name: "Python / Backend Logic", score: "88%" },
+          { name: "Database Design & Normalization", score: "85%" },
+          { name: "RESTful API Endpoints", score: "82%" },
+          { name: "Git Workflow & Team Branching", score: "90%" }
+        ],
+        skillsNeed: [
+          { name: "Django & Microservice Architecture", desc: "Scalable backend web architecture", link: "#django", linkText: "Learn in Course →" },
+          { name: "Flask Lightweight REST Microservices", desc: "Fast JSON APIs and cloud endpoints", link: "#flask", linkText: "Learn in Course →" },
+          { name: "Full Stack Career Roadmap Mastery", desc: "System design patterns and end-to-end integration", link: "#roadmaps", linkText: "View Roadmap →" }
+        ]
+      },
+      "backend-java": {
+        roleTitle: "Backend Enterprise Architect (Java 21 & Spring Boot)",
+        matchPercent: "70%",
+        statusText: "🟡 ENTERPRISE ARCHITECTURE READY",
+        desc: "Core programming principles are solid. Mastering modern JVM concurrency, virtual threads, and Spring enterprise patterns will make you standout.",
+        skillsHave: [
+          { name: "Object-Oriented Design (OOP)", score: "92%" },
+          { name: "Relational Queries & ACID Transactions", score: "88%" },
+          { name: "Data Structures & Algorithms", score: "80%" },
+          { name: "Software Design Patterns", score: "76%" }
+        ],
+        skillsNeed: [
+          { name: "Enterprise Java 21+ & Virtual Threads", desc: "Modern concurrent Java architecture", link: "#java", linkText: "Learn in Course →" },
+          { name: "Apache Kafka Enterprise Messaging", desc: "Event-driven microservice orchestration", link: "#pykafka", linkText: "Learn in Course →" },
+          { name: "MySQL Query Optimization & Index Tuning", desc: "Database performance at enterprise scale", link: "#mysql", linkText: "Learn in Course →" }
+        ]
+      },
+      "systems-cpp": {
+        roleTitle: "High-Performance Systems Engineer (Modern C++ & Linux)",
+        matchPercent: "65%",
+        statusText: "🟡 LOW-LEVEL MEMORY GAPS",
+        desc: "Strong algorithmic thinking detected. Transitioning to explicit memory management, RAII, pointers, and modern C++23 standards required.",
+        skillsHave: [
+          { name: "Algorithmic Complexity & Big-O", score: "86%" },
+          { name: "Mathematical Foundations", score: "82%" },
+          { name: "Problem Solving & Logic", score: "88%" }
+        ],
+        skillsNeed: [
+          { name: "Modern C++ Systems Programming", desc: "RAII, smart pointers, move semantics & templates", link: "#cpp", linkText: "Learn in Course →" },
+          { name: "C Language & Memory Internals", desc: "Pointers, dynamic allocations and system calls", link: "#c", linkText: "Learn in Course →" },
+          { name: "DSA in C++ Optimization", desc: "Cache-friendly memory patterns and high speed", link: "#dsa-cpp", linkText: "Learn in Course →" }
+        ]
+      },
+      "data-analyst": {
+        roleTitle: "Analytics & Business Intelligence Lead",
+        matchPercent: "88%",
+        statusText: "🟢 NEAR JOB-READY PROFILE",
+        desc: "Excellent data manipulation and SQL capability detected. Adding modern executive BI dashboards and statistical A/B testing completes your target profile.",
+        skillsHave: [
+          { name: "SQL Aggregations & Window Functions", score: "92%" },
+          { name: "Exploratory Data Analysis (EDA)", score: "88%" },
+          { name: "Descriptive Statistics", score: "86%" },
+          { name: "Pandas Data Cleaning & Wrangling", score: "85%" }
+        ],
+        skillsNeed: [
+          { name: "Power BI Executive Dashboards", desc: "DAX formulas, data modeling and KPIs", link: "#power-bi", linkText: "Learn in Course →" },
+          { name: "Advanced Excel for Business Analysts", desc: "Financial functions and pivot matrices", link: "#excel", linkText: "Learn in Course →" },
+          { name: "Applied Probability & A/B Testing", desc: "Statistical experimentation in production", link: "#statistics", linkText: "Learn in Course →" }
+        ]
+      }
+    };
+
+    const roleDropdown = document.getElementById("select-target-role");
+    if (roleDropdown) {
+      roleDropdown.addEventListener("change", (e) => {
+        this.renderResumeRole(e.target.value);
+      });
+    }
+
+    const dropzone = document.getElementById("resume-dropzone");
+    const fileInput = document.getElementById("resume-file-input");
+    const browseBtn = document.getElementById("btn-browse-file");
+    const fileNameDisplay = document.getElementById("display-file-name");
+    const fileSizeDisplay = document.getElementById("display-file-size");
+
+    if (browseBtn && fileInput) {
+      browseBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        fileInput.click();
+      });
+    }
+
+    if (dropzone && fileInput) {
+      dropzone.addEventListener("click", () => fileInput.click());
+      
+      dropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropzone.classList.add("drag-active");
+      });
+
+      ["dragleave", "dragend"].forEach(type => {
+        dropzone.addEventListener(type, () => dropzone.classList.remove("drag-active"));
+      });
+
+      dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("drag-active");
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const file = e.dataTransfer.files[0];
+          if (fileNameDisplay) fileNameDisplay.textContent = file.name;
+          if (fileSizeDisplay) fileSizeDisplay.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB • Loaded & Ready to analyze`;
+          this.showToast(`Resume loaded: ${file.name}`);
+        }
+      });
+
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          if (fileNameDisplay) fileNameDisplay.textContent = file.name;
+          if (fileSizeDisplay) fileSizeDisplay.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB • Loaded & Ready to analyze`;
+          this.showToast(`Resume loaded: ${file.name}`);
+        }
+      });
+    }
+
+    // Trigger analysis button (clean front-end interaction ready for future backend wiring)
+    const analyzeBtn = document.getElementById("btn-trigger-resume-analysis");
+    if (analyzeBtn) {
+      analyzeBtn.addEventListener("click", () => {
+        const origContent = analyzeBtn.innerHTML;
+        analyzeBtn.innerHTML = `<span>⚡ Benchmarking Resume Keywords...</span>`;
+        analyzeBtn.style.opacity = "0.85";
+        analyzeBtn.style.pointerEvents = "none";
+
+        setTimeout(() => {
+          analyzeBtn.innerHTML = origContent;
+          analyzeBtn.style.opacity = "1";
+          analyzeBtn.style.pointerEvents = "auto";
+          this.showToast("✅ Resume Analyzed Successfully! Skill Matrix & Gap Report Updated.");
+          const resultsPane = document.getElementById("resume-results-pane");
+          if (resultsPane) {
+            resultsPane.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        }, 450);
+      });
+    }
+
+    // Hero and footer resume buttons
+    document.getElementById("btn-hero-resume")?.addEventListener("click", () => this.goToResumeAnalyzer());
+    document.getElementById("btn-footer-resume")?.addEventListener("click", () => this.goToResumeAnalyzer());
+  }
+
+  renderResumeRole(roleKey) {
+    const profile = this.resumeProfiles[roleKey] || this.resumeProfiles["data-scientist"];
+    
+    const matchPercent = document.getElementById("resume-match-percent");
+    const statusPill = document.getElementById("resume-score-status");
+    const titleDisplay = document.getElementById("resume-target-role-display");
+    const scoreDesc = document.getElementById("resume-score-desc");
+    const countHave = document.getElementById("count-skills-have");
+    const countNeed = document.getElementById("count-skills-need");
+    const listHave = document.getElementById("list-skills-have");
+    const listNeed = document.getElementById("list-skills-need");
+
+    if (matchPercent) matchPercent.textContent = profile.matchPercent;
+    if (statusPill) statusPill.textContent = profile.statusText;
+    if (titleDisplay) titleDisplay.textContent = `Target: ${profile.roleTitle}`;
+    if (scoreDesc) scoreDesc.textContent = profile.desc;
+    if (countHave) countHave.textContent = `${profile.skillsHave.length} Verified`;
+    if (countNeed) countNeed.textContent = `${profile.skillsNeed.length} Gaps to Bridge`;
+
+    if (listHave) {
+      listHave.innerHTML = profile.skillsHave.map(s => `
+        <span class="skill-tag skill-tag-have">
+          <span>${s.name}</span>
+          <span class="tag-status">✓ ${s.score}</span>
+        </span>
+      `).join("");
+    }
+
+    if (listNeed) {
+      listNeed.innerHTML = profile.skillsNeed.map(g => `
+        <div class="skill-gap-item">
+          <div class="gap-info">
+            <strong>${g.name}</strong>
+            <span>${g.desc}</span>
+          </div>
+          <a href="${g.link}" class="pill-learn-link">${g.linkText}</a>
+        </div>
+      `).join("");
+    }
+  }
+
 }
 
 // Instantiate on DOMContentLoaded or immediately if already loaded
