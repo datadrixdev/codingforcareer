@@ -1,7 +1,7 @@
-# 🚀 datadrix — Premier Interactive Tech Learning Platform
+# 🚀 CodingForCareer — Premier Interactive Tech Learning Platform
 
 <p align="center">
-  <img src="assets/logo.png" alt="datadrix Logo" width="160" />
+  <img src="assets/logo.png" alt="CodingForCareer Logo" width="160" />
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@
 ## 📂 Project Architecture
 
 ```
-datadrixblog/
+codingforcareer/
 ├── assets/                  # High-resolution logos, favicons, and graphic assets
 ├── css/
 │   ├── styles.css           # Core design system & theme variables
@@ -82,4 +82,4 @@ This project is pre-configured for instant zero-configuration deployment on:
 
 ## 📄 License
 
-Proprietary © 2026 [datadrix](https://datadrix.com). All rights reserved.
+Proprietary © 2026 [CodingForCareer](https://codingforcareer.com). All rights reserved.

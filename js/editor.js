@@ -1,5 +1,5 @@
 /**
- * datadrix — Interactive "Try It Yourself" Online Editor Engine
+ * CodingForCareer — Interactive "Try It Yourself" Online Editor Engine
  * Inspired by the CodingForCareer interactive sandbox architecture.
  * Features macOS window controls, dynamic font scaling, smart auto-indentation,
  * live execution benchmarks (runtime latency, memory, exit codes), and single-dropdown language selection.
@@ -149,7 +149,7 @@ ORDER BY ranking ASC;
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, avg
 
-spark = SparkSession.builder.appName("DatadrixStream").getOrCreate()
+spark = SparkSession.builder.appName("CodingForCareerStream").getOrCreate()
 print("=== Connected to PySpark 3.5 & Kafka Broker ===")
 print("Consuming events from topic: 'orders_realtime'...")
 print("Partition 0: Offset 12401 -> {'order_id': 991, 'amount': $149.50}")
@@ -178,16 +178,16 @@ print("Aggregated Real-time Total: $569.50 (Latency: 3.8ms)")
 </head>
 <body>
   <div class="card">
-    <h2>datadrix Interactive Sandbox</h2>
+    <h2>CodingForCareer Interactive Sandbox</h2>
     <p>Live HTML, CSS, and JS compilation</p>
-    <button onclick="alert('Hello from datadrix interactive sandbox!')">Click Me</button>
+    <button onclick="alert('Hello from CodingForCareer interactive sandbox!')">Click Me</button>
   </div>
 </body>
 </html>`
   }
 };
 
-class DatadrixEditor {
+class CodingForCareerEditor {
   constructor() {
     this.currentLang = 'python';
     this.fontSize = 14;
@@ -422,7 +422,7 @@ class DatadrixEditor {
       if (this.copyIconSvg) {
         this.copyIconSvg.innerHTML = `<polyline points="20 6 9 17 4 12"></polyline>`;
       }
-      window.datadrixApp?.showToast('Code copied to clipboard! 📋');
+      window.codingForCareerApp?.showToast('Code copied to clipboard! 📋');
 
       setTimeout(() => {
         if (this.btnCopyLabel) this.btnCopyLabel.textContent = 'Copy';
@@ -444,7 +444,7 @@ class DatadrixEditor {
     this.updateLineNumbers();
     this.updateStats();
     this.clearTerminal();
-    window.datadrixApp?.showToast('Editor cleared to blank shell.');
+    window.codingForCareerApp?.showToast('Editor cleared to blank shell.');
   }
 
   loadSample() {
@@ -452,7 +452,7 @@ class DatadrixEditor {
     this.codeTextarea.value = config.sampleCode;
     this.updateLineNumbers();
     this.updateStats();
-    window.datadrixApp?.showToast(`Loaded ${config.label} starter sample.`);
+    window.codingForCareerApp?.showToast(`Loaded ${config.label} starter sample.`);
   }
 
   resetCode() {
@@ -460,7 +460,7 @@ class DatadrixEditor {
     this.codeTextarea.value = config.sampleCode;
     this.updateLineNumbers();
     this.updateStats();
-    window.datadrixApp?.showToast('Code reset to template default.');
+    window.codingForCareerApp?.showToast('Code reset to template default.');
   }
 
   clearTerminal() {
@@ -485,8 +485,8 @@ class DatadrixEditor {
   }
 
   loadPreset(presetKey) {
-    if (!window.DATADRIX_DATA || !window.DATADRIX_DATA.presets) return;
-    const code = window.DATADRIX_DATA.presets[presetKey] || window.DATADRIX_DATA.presets['py-basic'];
+    if (!window.CODINGFORCAREER_DATA || !window.CODINGFORCAREER_DATA.presets) return;
+    const code = window.CODINGFORCAREER_DATA.presets[presetKey] || window.CODINGFORCAREER_DATA.presets['py-basic'];
 
     // Auto-detect matching language
     let targetLang = 'python';
@@ -621,7 +621,7 @@ class DatadrixEditor {
     const htmlCode = this.codeTextarea.value;
     if (this.previewFrame) {
       this.previewFrame.srcdoc = htmlCode;
-      window.datadrixApp?.showToast('Rendered live web sandbox preview! 🚀');
+      window.codingForCareerApp?.showToast('Rendered live web sandbox preview! 🚀');
     }
   }
 
@@ -631,7 +631,7 @@ class DatadrixEditor {
     setTimeout(() => {
       const elapsed = Math.round(performance.now() - startTime + 12);
       this.consoleOutput.innerHTML = `
-        <div class="console-line system-line">[MySQL 8.0 InnoDB] Connected to database: datadrix_db</div>
+        <div class="console-line system-line">[MySQL 8.0 InnoDB] Connected to database: codingforcareer_db</div>
         <div class="console-line success-line">Query OK, 4 rows returned (${elapsed}ms)</div>
         <table class="table-output">
           <thead>
@@ -926,4 +926,4 @@ class DatadrixEditor {
   }
 }
 
-window.DatadrixEditor = DatadrixEditor;
+window.CodingForCareerEditor = CodingForCareerEditor;

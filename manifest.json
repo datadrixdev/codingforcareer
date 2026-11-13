@@ -1,6 +1,6 @@
 {
-  "name": "datadrix — Interactive Coding & Tech Roadmaps",
-  "short_name": "datadrix",
+  "name": "CodingForCareer — Interactive Coding & Tech Roadmaps",
+  "short_name": "CodingForCareer",
   "description": "Master Coding, Data Engineering, Apache Airflow, SQL, Java, and DSA with hands-on examples, cheatsheets, and career roadmaps.",
   "start_url": "./index.html",
   "scope": "./",

@@ -1,17 +1,17 @@
 /**
- * datadrix — Core Application Controller & Router
+ * CodingForCareer — Core Application Controller & Router
  * Integrates navigation, article reader, TOC generator, search modal, bookmarks, and theme switching.
  */
 
-class DatadrixApp {
+class CodingForCareerApp {
   constructor() {
     this.currentTrack = "mysql";
     this.currentTopicId = "mysql-intro";
     this.currentCategory = "all";
     this.currentView = "home";
     this.homeCategory = "all";
-    this.bookmarks = new Set(JSON.parse(localStorage.getItem("datadrix_bookmarks") || "[]"));
-    this.userXP = parseInt(localStorage.getItem("datadrix_user_xp") || "280", 10);
+    this.bookmarks = new Set(JSON.parse(localStorage.getItem("codingforcareer_bookmarks") || "[]"));
+    this.userXP = parseInt(localStorage.getItem("codingforcareer_user_xp") || "280", 10);
 
     this.initDOM();
     this.initSubsystems();
@@ -94,7 +94,7 @@ class DatadrixApp {
     this.rmCategoryFilters = document.getElementById("rm-category-filters");
     this.activeRoadmapCategory = "all";
     this.activeRoadmapId = null;
-    this.roadmapProgress = JSON.parse(localStorage.getItem("datadrix_rm_progress") || "{}");
+    this.roadmapProgress = JSON.parse(localStorage.getItem("codingforcareer_rm_progress") || "{}");
 
     // Cheatsheets containers
     this.csHubView = document.getElementById("cs-hub-view");
@@ -111,9 +111,9 @@ class DatadrixApp {
   }
 
   initSubsystems() {
-    this.editor = new DatadrixEditor();
-    this.quizEngine = new DatadrixQuizEngine();
-    window.datadrixEditor = this.editor;
+    this.editor = new CodingForCareerEditor();
+    this.quizEngine = new CodingForCareerQuizEngine();
+    window.codingForCareerEditor = this.editor;
   }
 
   bindEvents() {
@@ -163,7 +163,7 @@ class DatadrixApp {
       });
     }
 
-    // Return to New Homepage on Datadrix Logo & Breadcrumb click
+    // Return to New Homepage on CodingForCareer Logo & Breadcrumb click
     const returnHome = (e) => {
       if (e && e.preventDefault) e.preventDefault();
       this.goToHome();
@@ -172,6 +172,21 @@ class DatadrixApp {
     document.getElementById("brand-logo-link")?.addEventListener("click", returnHome);
     document.getElementById("footer-logo-link")?.addEventListener("click", returnHome);
     document.querySelector(".breadcrumbs a")?.addEventListener("click", returnHome);
+
+    // Footer Back to Top & Tech Dispatch Newsletter
+    document.getElementById("footer-back-to-top")?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("footer-dispatch-form")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById("dispatch-email-input");
+      const email = emailInput?.value?.trim();
+      if (email) {
+        this.showToast(`Subscribed ${email} to CodingForCareer Dispatch!`);
+        e.target.reset();
+      }
+    });
 
     // Hero buttons
     document.getElementById("btn-hero-mysql")?.addEventListener("click", () => this.openTrackTutorial("mysql"));
@@ -230,6 +245,20 @@ class DatadrixApp {
     this.btnMobileToggle?.addEventListener("click", () => toggleMobileSidebar());
     this.btnCloseSidebar?.addEventListener("click", () => toggleMobileSidebar(false));
     this.sidebarBackdrop?.addEventListener("click", () => toggleMobileSidebar(false));
+    document.getElementById("btn-mobile-chapter-pill")?.addEventListener("click", () => toggleMobileSidebar(true));
+
+    // Global Reading Progress Indicator (Active during reading)
+    window.addEventListener("scroll", () => {
+      const bar = document.getElementById("reading-progress-bar");
+      if (!bar) return;
+      const h = document.documentElement;
+      const b = document.body;
+      const st = "scrollTop" in h ? h.scrollTop : b.scrollTop;
+      const sh = "scrollHeight" in h ? h.scrollHeight : b.scrollHeight;
+      const ch = h.clientHeight || window.innerHeight;
+      const percent = sh > ch ? Math.min(100, Math.max(0, (st / (sh - ch)) * 100)) : 0;
+      bar.style.width = percent + "%";
+    }, { passive: true });
 
     // Sidebar search filter
     this.sidebarFilter?.addEventListener("input", (e) => {
@@ -333,19 +362,19 @@ class DatadrixApp {
 
     // Chapter next/previous buttons
     this.btnPrevTopic?.addEventListener("click", () => {
-      const topic = DATADRIX_DATA.topics[this.currentTopicId];
+      const topic = CODINGFORCAREER_DATA.topics[this.currentTopicId];
       if (topic && topic.prevId) this.selectTopic(topic.prevId);
     });
 
     this.btnNextTopic?.addEventListener("click", () => {
-      const topic = DATADRIX_DATA.topics[this.currentTopicId];
+      const topic = CODINGFORCAREER_DATA.topics[this.currentTopicId];
       if (topic && topic.nextId) this.selectTopic(topic.nextId);
     });
   }
 
   // Slug & URL Routing Helper
   getTopicSlug(topicId) {
-    const topic = DATADRIX_DATA.topics[topicId];
+    const topic = CODINGFORCAREER_DATA.topics[topicId];
     if (!topic) return topicId;
     const cleanSlug = topic.slug || topic.id.replace(new RegExp('^' + topic.track.replace('-', '') + '-'), '');
     return `tutorials/${topic.track}/${cleanSlug}`;
@@ -366,7 +395,7 @@ class DatadrixApp {
     const cleanTrack = (trackId || '').toLowerCase();
     const cleanSlug = (slug || '').toLowerCase().replace(/^\/+|\/+$/g, '');
 
-    const topicsForTrack = Object.values(DATADRIX_DATA.topics).filter(
+    const topicsForTrack = Object.values(CODINGFORCAREER_DATA.topics).filter(
       t => t.track.toLowerCase() === cleanTrack
     );
 
@@ -393,7 +422,7 @@ class DatadrixApp {
     if (matchByTitle) return matchByTitle.id;
 
     // Fallback to track defaultTopic or first topic
-    const trackObj = DATADRIX_DATA.tracks.find(t => t.id.toLowerCase() === cleanTrack);
+    const trackObj = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === cleanTrack);
     if (trackObj && trackObj.defaultTopic) return trackObj.defaultTopic;
     if (topicsForTrack.length > 0) return topicsForTrack[0].id;
 
@@ -432,7 +461,7 @@ class DatadrixApp {
     }
     if (hash.startsWith("cheatsheets/") || hash.startsWith("cheatsheets-")) {
       const trackId = hash.replace(/^cheatsheets[\/-]/, "");
-      const matchedTrack = DATADRIX_DATA.tracks.find(t => t.id.toLowerCase() === trackId.toLowerCase());
+      const matchedTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === trackId.toLowerCase());
       if (matchedTrack) {
         this.switchView("cheatsheets", false, false);
         this.openCourseCheatSheet(matchedTrack.id, false);
@@ -456,7 +485,7 @@ class DatadrixApp {
     }
     if (hash.startsWith("roadmaps/") || hash.startsWith("roadmap/")) {
       const rmId = hash.replace(/^roadmaps?[\/]/, "");
-      const matchedRm = (DATADRIX_DATA.roadmaps || []).find(r => r.id.toLowerCase() === rmId.toLowerCase());
+      const matchedRm = (CODINGFORCAREER_DATA.roadmaps || []).find(r => r.id.toLowerCase() === rmId.toLowerCase());
       if (matchedRm) {
         this.switchView("roadmaps", false, false);
         this.openRoadmapDetail(matchedRm.id, false);
@@ -483,7 +512,7 @@ class DatadrixApp {
         }
       } else if (parts.length === 1) {
         const trackId = parts[0];
-        const matchedTrack = DATADRIX_DATA.tracks.find(t => t.id.toLowerCase() === trackId);
+        const matchedTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === trackId);
         if (matchedTrack) {
           this.switchView("tutorials", false, false);
           this.selectTrack(matchedTrack.id, false);
@@ -506,7 +535,7 @@ class DatadrixApp {
     }
 
     // 5. Track ID direct (e.g. #python, #mysql, #pyspark)
-    const directTrack = DATADRIX_DATA.tracks.find(t => t.id.toLowerCase() === hash);
+    const directTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === hash);
     if (directTrack) {
       this.switchView("tutorials", false, false);
       this.selectTrack(directTrack.id, false);
@@ -514,12 +543,12 @@ class DatadrixApp {
     }
 
     // 6. Topic ID legacy direct (e.g. #py-intro, #mysql-crud, #dsa-py-dp)
-    if (DATADRIX_DATA.topics[rawHash]) {
+    if (CODINGFORCAREER_DATA.topics[rawHash]) {
       this.switchView("tutorials", false, false);
       this.selectTopic(rawHash, false);
       return;
     }
-    const topicKey = Object.keys(DATADRIX_DATA.topics).find(k => k.toLowerCase() === hash);
+    const topicKey = Object.keys(CODINGFORCAREER_DATA.topics).find(k => k.toLowerCase() === hash);
     if (topicKey) {
       this.switchView("tutorials", false, false);
       this.selectTopic(topicKey, false);
@@ -589,7 +618,7 @@ class DatadrixApp {
       if (viewName === "home") {
         this.updateHash("home");
       } else if (viewName === "tutorials") {
-        const topic = DATADRIX_DATA.topics[this.currentTopicId];
+        const topic = CODINGFORCAREER_DATA.topics[this.currentTopicId];
         if (topic) {
           this.updateHash(this.getTopicSlug(this.currentTopicId));
         } else {
@@ -624,7 +653,7 @@ class DatadrixApp {
           termText.innerHTML = `
             &gt; [Compiler] Sandbox execution complete (Exit 0).<br>
             &gt; <span class="term-highlight">⚡ Python 3: 13 Mastery Modules Loaded!</span><br>
-            &gt; [MySQL Server] Connection verified: datadrix_db.orders (3 records).<br>
+            &gt; [MySQL Server] Connection verified: codingforcareer_db.orders (3 records).<br>
             &gt; <span style="color:#10B981;">✓ All assertions passed in ${randomMs}ms. Ready for next lab.</span>
           `;
         }
@@ -641,10 +670,10 @@ class DatadrixApp {
 
     // Render category filter pills
     if (this.homeCategoryPills) {
-      this.homeCategoryPills.innerHTML = DATADRIX_DATA.categories.map(cat => {
+      this.homeCategoryPills.innerHTML = CODINGFORCAREER_DATA.categories.map(cat => {
         const count = cat.id === "all" 
-          ? DATADRIX_DATA.tracks.length 
-          : DATADRIX_DATA.tracks.filter(t => t.category === cat.id).length;
+          ? CODINGFORCAREER_DATA.tracks.length 
+          : CODINGFORCAREER_DATA.tracks.filter(t => t.category === cat.id).length;
         return `
           <button class="course-cat-btn ${cat.id === category ? 'active' : ''}" data-home-cat="${cat.id}">
             ${cat.name} (${count})
@@ -663,7 +692,7 @@ class DatadrixApp {
 
     if (!this.homeCoursesGrid) return;
 
-    const filtered = DATADRIX_DATA.tracks.filter(track => {
+    const filtered = CODINGFORCAREER_DATA.tracks.filter(track => {
       const matchCat = category === "all" || track.category === category;
       const matchQuery = !query || 
         track.name.toLowerCase().includes(query) || 
@@ -676,7 +705,7 @@ class DatadrixApp {
       this.homeCoursesGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 48px; background: var(--bg-surface); border-radius: 16px; border: 1px dashed var(--border-default);">
           <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 12px;">No courses match "${query}" in this category.</p>
-          <button class="btn-tile-primary" style="margin: 0 auto; display: inline-flex;" onclick="window.datadrixApp.renderHomeCourses('all', '')">Show All Courses</button>
+          <button class="btn-tile-primary" style="margin: 0 auto; display: inline-flex;" onclick="window.codingForCareerApp.renderHomeCourses('all', '')">Show All Courses</button>
         </div>
       `;
       return;
@@ -897,7 +926,7 @@ class DatadrixApp {
     };
 
     this.homeCoursesGrid.innerHTML = filtered.map(track => {
-      const curriculumObj = DATADRIX_DATA.curriculum[track.id] || [];
+      const curriculumObj = CODINGFORCAREER_DATA.curriculum[track.id] || [];
       const totalLessons = curriculumObj.reduce((acc, ch) => acc + (ch.topics ? ch.topics.length : 0), 0) || (track.id === "python" ? 13 : 10);
       const badgeClass = track.badge.toLowerCase().replace(/[^a-z0-9]/g, '');
       const accent = TRACK_ACCENTS[track.id] || defaultAccent;
@@ -987,7 +1016,7 @@ class DatadrixApp {
 
   renderCategoryTabs() {
     if (!this.categoryTabsContainer) return;
-    this.categoryTabsContainer.innerHTML = DATADRIX_DATA.categories.map(cat => `
+    this.categoryTabsContainer.innerHTML = CODINGFORCAREER_DATA.categories.map(cat => `
       <button class="cat-tab-btn ${cat.id === this.currentCategory ? 'active' : ''}" data-cat="${cat.id}">
         ${cat.name}
       </button>
@@ -1007,7 +1036,7 @@ class DatadrixApp {
 
   renderTechSubbar() {
     if (!this.techPillContainer) return;
-    const filteredTracks = DATADRIX_DATA.tracks.filter(t => {
+    const filteredTracks = CODINGFORCAREER_DATA.tracks.filter(t => {
       if (this.currentCategory === "all") return true;
       return t.category === this.currentCategory;
     });
@@ -1028,7 +1057,7 @@ class DatadrixApp {
   }
 
   selectTrack(trackId, updateHash = true) {
-    const trackObj = DATADRIX_DATA.tracks.find(t => t.id.toLowerCase() === trackId.toLowerCase());
+    const trackObj = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === trackId.toLowerCase());
     if (!trackObj) return;
 
     this.currentTrack = trackObj.id;
@@ -1040,8 +1069,8 @@ class DatadrixApp {
     this.renderSidebar();
 
     let targetTopic = trackObj.defaultTopic;
-    if (!targetTopic || !DATADRIX_DATA.topics[targetTopic]) {
-      const firstChap = (DATADRIX_DATA.curriculum[trackObj.id] || [])[0];
+    if (!targetTopic || !CODINGFORCAREER_DATA.topics[targetTopic]) {
+      const firstChap = (CODINGFORCAREER_DATA.curriculum[trackObj.id] || [])[0];
       if (firstChap && firstChap.topics && firstChap.topics.length > 0) {
         targetTopic = firstChap.topics[0].id;
       }
@@ -1057,14 +1086,14 @@ class DatadrixApp {
   }
 
   renderSidebar() {
-    const trackObj = DATADRIX_DATA.tracks.find(t => t.id === this.currentTrack);
+    const trackObj = CODINGFORCAREER_DATA.tracks.find(t => t.id === this.currentTrack);
     if (!trackObj) return;
 
     if (this.sidebarTrackTitle) this.sidebarTrackTitle.textContent = `${trackObj.name} Tutorial`;
     if (this.sidebarTrackSubtitle) this.sidebarTrackSubtitle.textContent = trackObj.subtitle;
     if (this.sidebarTrackIcon) this.sidebarTrackIcon.textContent = trackObj.icon;
 
-    const chapters = DATADRIX_DATA.curriculum[this.currentTrack] || [];
+    const chapters = CODINGFORCAREER_DATA.curriculum[this.currentTrack] || [];
 
     if (!this.sidebarChaptersList) return;
     this.sidebarChaptersList.innerHTML = chapters.map((ch, idx) => {
@@ -1156,11 +1185,11 @@ class DatadrixApp {
   }
 
   selectTopic(topicId, updateHash = true) {
-    let topic = DATADRIX_DATA.topics[topicId];
+    let topic = CODINGFORCAREER_DATA.topics[topicId];
     if (!topic) {
-      const key = Object.keys(DATADRIX_DATA.topics).find(k => k.toLowerCase() === String(topicId).toLowerCase());
+      const key = Object.keys(CODINGFORCAREER_DATA.topics).find(k => k.toLowerCase() === String(topicId).toLowerCase());
       if (key) {
-        topic = DATADRIX_DATA.topics[key];
+        topic = CODINGFORCAREER_DATA.topics[key];
         topicId = key;
       }
     }
@@ -1172,7 +1201,7 @@ class DatadrixApp {
     this.currentTrack = resolvedTrack;
 
     if (trackChanged) {
-      const trackObj = DATADRIX_DATA.tracks.find(t => t.id === resolvedTrack);
+      const trackObj = CODINGFORCAREER_DATA.tracks.find(t => t.id === resolvedTrack);
       if (trackObj && this.currentCategory !== "all" && trackObj.category !== this.currentCategory) {
         this.currentCategory = "all";
         this.renderCategoryTabs();
@@ -1201,11 +1230,11 @@ class DatadrixApp {
   }
 
   renderCurrentTopic() {
-    const topic = DATADRIX_DATA.topics[this.currentTopicId];
+    const topic = CODINGFORCAREER_DATA.topics[this.currentTopicId];
     if (!topic || !this.articleBody) return;
 
     // Breadcrumbs
-    const currentTrackObj = DATADRIX_DATA.tracks.find(t => t.id === this.currentTrack);
+    const currentTrackObj = CODINGFORCAREER_DATA.tracks.find(t => t.id === this.currentTrack);
     const resolvedTrackName = topic.trackName || (currentTrackObj ? currentTrackObj.name : "Tutorial");
     if (this.crumbTrack) this.crumbTrack.textContent = resolvedTrackName;
     if (this.crumbTopic) this.crumbTopic.textContent = topic.title || "";
@@ -1217,7 +1246,7 @@ class DatadrixApp {
       <div class="article-meta-tags">
         <span class="article-tag">🏷️ ${topic.badge || 'Core'}</span>
         <span class="article-tag">⏱️ ${topic.readTime || '8 min read'}</span>
-        <span class="article-tag">🔥 W3Schools & GFG Standard</span>
+        <span class="article-tag">⚡ Career-Ready Standard</span>
       </div>
       <h1>${topic.title || ""}</h1>
       ${leadHtml}
@@ -1225,16 +1254,16 @@ class DatadrixApp {
     `;
 
         // Next / Previous buttons (cleanly aligned with display flex/none)
-    if (topic.prevId && DATADRIX_DATA.topics[topic.prevId]) {
+    if (topic.prevId && CODINGFORCAREER_DATA.topics[topic.prevId]) {
       this.btnPrevTopic.style.display = "flex";
-      this.prevTopicTitle.textContent = DATADRIX_DATA.topics[topic.prevId].title;
+      this.prevTopicTitle.textContent = CODINGFORCAREER_DATA.topics[topic.prevId].title;
     } else {
       this.btnPrevTopic.style.display = "none";
     }
 
-    if (topic.nextId && DATADRIX_DATA.topics[topic.nextId]) {
+    if (topic.nextId && CODINGFORCAREER_DATA.topics[topic.nextId]) {
       this.btnNextTopic.style.display = "flex";
-      this.nextTopicTitle.textContent = DATADRIX_DATA.topics[topic.nextId].title;
+      this.nextTopicTitle.textContent = CODINGFORCAREER_DATA.topics[topic.nextId].title;
     } else {
       this.btnNextTopic.style.display = "none";
     }
@@ -1481,7 +1510,7 @@ class DatadrixApp {
   }
 
   saveBookmarks() {
-    localStorage.setItem("datadrix_bookmarks", JSON.stringify(Array.from(this.bookmarks)));
+    localStorage.setItem("codingforcareer_bookmarks", JSON.stringify(Array.from(this.bookmarks)));
   }
 
   openBookmarksModal() {
@@ -1498,7 +1527,7 @@ class DatadrixApp {
     }
 
     this.bookmarksModalList.innerHTML = Array.from(this.bookmarks).map(id => {
-      const topic = DATADRIX_DATA.topics[id];
+      const topic = CODINGFORCAREER_DATA.topics[id];
       if (!topic) return "";
       return `
         <div class="bookmark-item">
@@ -1579,7 +1608,7 @@ class DatadrixApp {
     }
 
     // 2. Perform search with safe optional property chaining
-    const allTopics = Object.values(DATADRIX_DATA.topics || {});
+    const allTopics = Object.values(CODINGFORCAREER_DATA.topics || {});
     const results = allTopics.filter(t => {
       const title = (t.title || "").toLowerCase();
       const lead = (t.lead || "").toLowerCase();
@@ -1631,7 +1660,7 @@ class DatadrixApp {
   renderRoadmaps(category = "all", query = "") {
     if (!this.roadmapsGrid) return;
 
-    let list = DATADRIX_DATA.roadmaps || [];
+    let list = CODINGFORCAREER_DATA.roadmaps || [];
 
     // Filter by category
     if (category && category !== "all") {
@@ -1678,6 +1707,20 @@ class DatadrixApp {
       const completedCount = progressArr.length;
       const percent = Math.round((completedCount / totalMilestones) * 100) || 0;
 
+      // Clean and improvise duration and career level
+      const cleanDuration = (rm.duration || "")
+        .replace(/\s*Recommended/i, "")
+        .replace(/\s*-\s*/, "–")
+        .trim();
+
+      const cleanLevel = rm.level
+        ? rm.level.replace(/\s*\([^)]*\)/g, "").replace(/\s*to\s*/i, " → ").trim()
+        : "Fresher → Senior";
+
+      const cleanSalary = rm.salary
+        ? rm.salary.split('•')[0].replace(',000', 'k').replace(',000', 'k').trim()
+        : "";
+
       return `
         <div class="roadmap-tile-card" data-rm-id="${rm.id}" style="--rm-gradient: ${rm.accentGradient}; --rm-color: ${rm.accentColor}; --rm-glow: ${rm.accentGlow};">
           <!-- Top Branded Accent Bar -->
@@ -1696,7 +1739,7 @@ class DatadrixApp {
                 <span class="badge-dot"></span>
                 ${rm.badge}
               </span>
-              <span class="rm-salary-tag">${rm.salary.split('•')[0].trim()}</span>
+              <span class="rm-salary-tag">${cleanSalary}</span>
             </div>
           </div>
 
@@ -1704,17 +1747,17 @@ class DatadrixApp {
           <h3 class="rm-tile-title">${rm.title}</h3>
           <p class="rm-tile-desc">${rm.desc}</p>
 
-          <!-- Level & Duration Metadata Badges -->
+          <!-- Level, Duration & Milestone Metadata Badges -->
           <div class="rm-meta-pills-row">
-            <span class="rm-meta-pill">🎯 ${rm.level.split('(')[0].trim()}</span>
-            <span class="rm-meta-pill">⏱️ ${rm.duration.split(' ')[0]} ${rm.duration.split(' ')[1]}</span>
-            <span class="rm-meta-pill rm-fresher-pill">✨ Freshers to FAANG</span>
+            <span class="rm-meta-pill" title="Target Career Level">🎯 ${cleanLevel}</span>
+            <span class="rm-meta-pill" title="Recommended Duration">⏱️ ${cleanDuration}</span>
+            <span class="rm-meta-pill rm-milestones-pill" title="Total Milestones">🏁 ${totalMilestones} Milestones</span>
           </div>
 
           <!-- Key Tech Stack Chips -->
           <div class="rm-tech-stack-row">
-            ${rm.techStack.slice(0, 5).map(t => `<span class="rm-tech-chip">${t}</span>`).join('')}
-            ${rm.techStack.length > 5 ? `<span class="rm-tech-chip rm-chip-more">+${rm.techStack.length - 5}</span>` : ''}
+            ${rm.techStack.slice(0, 4).map(t => `<span class="rm-tech-chip">${t}</span>`).join('')}
+            ${rm.techStack.length > 4 ? `<span class="rm-tech-chip rm-chip-more">+${rm.techStack.length - 4}</span>` : ''}
           </div>
 
           <!-- Progress Bar if started -->
@@ -1733,7 +1776,7 @@ class DatadrixApp {
           <!-- Tile Actions Footer -->
           <div class="rm-tile-footer">
             <button class="btn-rm-primary" data-action="explore" data-rm-id="${rm.id}">
-              <span>View Full Blueprint &amp; FAANG Guide</span>
+              <span>View Career Roadmap</span>
               <svg class="rm-arrow-svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
@@ -1762,7 +1805,7 @@ class DatadrixApp {
 
   // Open Full Descriptive Roadmap Drill-down View
   openRoadmapDetail(roadmapId, updateHash = true) {
-    const rm = (DATADRIX_DATA.roadmaps || []).find(r => r.id === roadmapId);
+    const rm = (CODINGFORCAREER_DATA.roadmaps || []).find(r => r.id === roadmapId);
     if (!rm) {
       this.backToRoadmapsHub(updateHash);
       return;
@@ -1783,6 +1826,11 @@ class DatadrixApp {
     const totalCount = allMilestoneIds.length;
     const completedCount = allMilestoneIds.filter(id => savedChecked.has(id)).length;
     const percent = Math.round((completedCount / totalCount) * 100) || 0;
+
+    const cleanDuration = (rm.duration || "")
+      .replace(/\s*Recommended/i, "")
+      .replace(/\s*-\s*/, "–")
+      .trim();
 
     this.rmDetailView.innerHTML = `
       <div class="rm-detail-container" style="--rm-gradient: ${rm.accentGradient}; --rm-color: ${rm.accentColor}; --rm-glow: ${rm.accentGlow};">
@@ -1834,8 +1882,8 @@ class DatadrixApp {
           <!-- Quick Stats Pill Row -->
           <div class="rm-hero-stats-row">
             <div class="rm-stat-card">
-              <span class="rm-stat-label">Recommended Duration</span>
-              <span class="rm-stat-val">${rm.duration}</span>
+              <span class="rm-stat-label">Recommended Timeline</span>
+              <span class="rm-stat-val">⏱️ ${cleanDuration} • 8–10 hrs/wk</span>
             </div>
             <div class="rm-stat-card">
               <span class="rm-stat-label">Experience Scope</span>
@@ -1910,11 +1958,22 @@ class DatadrixApp {
           </div>
 
           <div class="rm-phases-timeline">
-            ${rm.phases.map(p => `
+            ${rm.phases.map((p, pIdx) => {
+              const totalPhases = rm.phases.length || 3;
+              const weeksPerPhase = Math.max(4, Math.round(28 / totalPhases));
+              const startW = pIdx * weeksPerPhase + 1;
+              const endW = (pIdx + 1) * weeksPerPhase;
+              const phaseDuration = `Weeks ${startW}–${endW}`;
+
+              return `
               <div class="rm-phase-block">
                 <div class="rm-phase-header">
                   <div class="rm-phase-number-node">Phase ${p.phaseNumber}</div>
                   <div class="rm-phase-heading-wrap">
+                    <div class="rm-phase-badge-line">
+                      <span class="rm-phase-time-pill">⏱️ ${phaseDuration}</span>
+                      <span class="rm-phase-count-pill">📌 ${p.milestones ? p.milestones.length : 0} Core Milestones</span>
+                    </div>
                     <h3 class="rm-phase-title">${p.title}</h3>
                     <p class="rm-phase-desc">${p.desc}</p>
                   </div>
@@ -1934,11 +1993,14 @@ class DatadrixApp {
                         <div class="rm-milestone-content">
                           <div class="rm-milestone-top">
                             <h4 class="rm-milestone-title">${m.title}</h4>
-                            ${m.linkTrack ? `
-                              <button class="btn-rm-link-track" data-track-id="${m.linkTrack}" title="Practice in Datadrix sandbox">
-                                <span>Practice in ${m.linkTrack.toUpperCase()} Lab</span> &rarr;
-                              </button>
-                            ` : ''}
+                            <div class="rm-milestone-right-meta">
+                              <span class="rm-milestone-est-time">⏱️ ~10–12 hrs</span>
+                              ${m.linkTrack ? `
+                                <button class="btn-rm-link-track" data-track-id="${m.linkTrack}" title="Practice in CodingForCareer sandbox">
+                                  <span>Practice in ${m.linkTrack.toUpperCase()} Lab</span> &rarr;
+                                </button>
+                              ` : ''}
+                            </div>
                           </div>
                           
                           <div class="rm-milestone-skills">
@@ -1960,7 +2022,8 @@ class DatadrixApp {
                   }).join('')}
                 </div>
               </div>
-            `).join('')}
+            `;
+            }).join('')}
           </div>
         </section>
 
@@ -2055,7 +2118,7 @@ class DatadrixApp {
         }
 
         this.roadmapProgress[rm.id] = list;
-        localStorage.setItem("datadrix_rm_progress", JSON.stringify(this.roadmapProgress));
+        localStorage.setItem("codingforcareer_rm_progress", JSON.stringify(this.roadmapProgress));
 
         // Update progress UI
         const newCompleted = allMilestoneIds.filter(id => list.includes(id)).length;
@@ -2079,7 +2142,7 @@ class DatadrixApp {
     document.getElementById("btn-reset-rm-progress")?.addEventListener("click", () => {
       if (confirm(`Reset all checked milestones for the ${rm.title}?`)) {
         this.roadmapProgress[rm.id] = [];
-        localStorage.setItem("datadrix_rm_progress", JSON.stringify(this.roadmapProgress));
+        localStorage.setItem("codingforcareer_rm_progress", JSON.stringify(this.roadmapProgress));
         this.openRoadmapDetail(rm.id, false);
         this.showToast("Progress reset successfully.");
       }
@@ -2121,9 +2184,9 @@ class DatadrixApp {
   renderCheatSheets() {
     if (!this.csCoursesGrid) return;
 
-    const tracks = DATADRIX_DATA.tracks;
+    const tracks = CODINGFORCAREER_DATA.tracks;
     this.csCoursesGrid.innerHTML = tracks.map(track => {
-      const cs = DATADRIX_DATA.cheatsheets[track.id];
+      const cs = CODINGFORCAREER_DATA.cheatsheets[track.id];
       const itemCount = cs 
         ? cs.groups.reduce((acc, g) => acc + g.items.length, 0)
         : 12;
@@ -2258,9 +2321,13 @@ class DatadrixApp {
   }
 
   openCourseCheatSheet(courseId, updateHash = true) {
-    const track = DATADRIX_DATA.tracks.find(t => t.id === courseId);
-    const cs = DATADRIX_DATA.cheatsheets[courseId];
+    const track = CODINGFORCAREER_DATA.tracks.find(t => t.id === courseId);
+    const cs = CODINGFORCAREER_DATA.cheatsheets[courseId];
     if (!track || !cs || !this.csDetailView) return;
+
+    if (this.currentView !== "cheatsheets") {
+      this.switchView("cheatsheets", false, false);
+    }
 
     this.activeCheatSheetTrack = courseId;
     if (this.csHubView) this.csHubView.style.display = "none";
@@ -2418,7 +2485,7 @@ class DatadrixApp {
   // XP & Gamification
   awardXP(amount) {
     this.userXP += amount;
-    localStorage.setItem("datadrix_user_xp", this.userXP.toString());
+    localStorage.setItem("codingforcareer_user_xp", this.userXP.toString());
     this.updateXPDisplay();
   }
 
@@ -2449,7 +2516,7 @@ class DatadrixApp {
 
   // Theme Management
   initTheme() {
-    const savedTheme = localStorage.getItem("datadrix_theme") || "light";
+    const savedTheme = localStorage.getItem("codingforcareer_theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
   }
 
@@ -2457,7 +2524,7 @@ class DatadrixApp {
     const current = document.documentElement.getAttribute("data-theme") || "light";
     const next = current === "light" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("datadrix_theme", next);
+    localStorage.setItem("codingforcareer_theme", next);
     this.showToast(`Switched to ${next === 'dark' ? 'Dark Mode 🌙' : 'Cool Light Mode ☀️'}`);
   }
 
@@ -2474,15 +2541,17 @@ class DatadrixApp {
 // Instantiate on DOMContentLoaded or immediately if already loaded
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    window.datadrixApp = new DatadrixApp();
+    window.codingForCareerApp = new CodingForCareerApp();
+  window.CodingForCareerApp = CodingForCareerApp;
   });
 } else {
-  window.datadrixApp = new DatadrixApp();
+  window.codingForCareerApp = new CodingForCareerApp();
+  window.CodingForCareerApp = CodingForCareerApp;
 }
 
 window.goToHome = function(e) {
-  if (window.datadrixApp && typeof window.datadrixApp.goToHome === "function") {
-    window.datadrixApp.goToHome(e);
+  if (window.codingForCareerApp && typeof window.codingForCareerApp.goToHome === "function") {
+    window.codingForCareerApp.goToHome(e);
   } else {
     window.location.href = "index.html";
   }

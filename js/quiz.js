@@ -1,9 +1,9 @@
 /**
- * datadrix — Practice & Quizzes Engine
+ * CodingForCareer — Practice & Quizzes Engine
  * Provides interactive quizzes with immediate evaluation, streak tracking, and XP awards.
  */
 
-class DatadrixQuizEngine {
+class CodingForCareerQuizEngine {
   constructor() {
     this.container = document.getElementById("quiz-cards-container");
     this.filterButtons = document.querySelectorAll(".quiz-cat-btn");
@@ -25,7 +25,7 @@ class DatadrixQuizEngine {
 
   loadStats() {
     try {
-      const saved = JSON.parse(localStorage.getItem("datadrix_quiz_stats") || "{}");
+      const saved = JSON.parse(localStorage.getItem("codingforcareer_quiz_stats") || "{}");
       this.totalAnswered = saved.totalAnswered || 0;
       this.correctCount = saved.correctCount || 0;
       this.currentStreak = saved.currentStreak || 1;
@@ -37,7 +37,7 @@ class DatadrixQuizEngine {
 
   saveStats() {
     try {
-      localStorage.setItem("datadrix_quiz_stats", JSON.stringify({
+      localStorage.setItem("codingforcareer_quiz_stats", JSON.stringify({
         totalAnswered: this.totalAnswered,
         correctCount: this.correctCount,
         currentStreak: this.currentStreak
@@ -72,7 +72,7 @@ class DatadrixQuizEngine {
   render() {
     if (!this.container) return;
 
-    const filtered = DATADRIX_DATA.quizzes.filter(q => {
+    const filtered = CODINGFORCAREER_DATA.quizzes.filter(q => {
       if (this.currentCategory === "all") return true;
       return q.track === this.currentCategory;
     });
@@ -125,7 +125,7 @@ class DatadrixQuizEngine {
     if (this.answeredQuestions.has(quizId)) return; // Already answered
     this.answeredQuestions.add(quizId);
 
-    const question = DATADRIX_DATA.quizzes.find(q => q.id === quizId);
+    const question = CODINGFORCAREER_DATA.quizzes.find(q => q.id === quizId);
     if (!question) return;
 
     const card = document.getElementById(`quiz-card-${quizId}`);
@@ -139,14 +139,14 @@ class DatadrixQuizEngine {
       this.correctCount++;
       this.currentStreak++;
       selectedElem.classList.add("correct");
-      window.datadrixApp?.awardXP(50);
-      window.datadrixApp?.showToast("🎉 Correct! +50 XP awarded!");
+      window.codingForCareerApp?.awardXP(50);
+      window.codingForCareerApp?.showToast("🎉 Correct! +50 XP awarded!");
     } else {
       this.currentStreak = Math.max(1, this.currentStreak - 1);
       selectedElem.classList.add("incorrect");
       // Highlight the correct answer
       options[question.correctIndex]?.classList.add("correct");
-      window.datadrixApp?.showToast("Not quite! Check out the explanation.");
+      window.codingForCareerApp?.showToast("Not quite! Check out the explanation.");
     }
 
     if (explanation) {
@@ -167,4 +167,4 @@ class DatadrixQuizEngine {
   }
 }
 
-window.DatadrixQuizEngine = DatadrixQuizEngine;
+window.CodingForCareerQuizEngine = CodingForCareerQuizEngine;

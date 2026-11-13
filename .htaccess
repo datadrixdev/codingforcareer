@@ -1,4 +1,4 @@
-# Apache .htaccess configuration for datadrix
+# Apache .htaccess configuration for codingforcareer
 
 # 1. Enable GZIP Compression
 <IfModule mod_deflate.c>
