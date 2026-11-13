@@ -8787,6 +8787,17 @@ html, body {
   line-height: 1.4;
 }
 
+.resume-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: termSpin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 /* Right Pane: Live Skill Matrix Results */
 .resume-results-pane {
   padding: 36px 36px;
