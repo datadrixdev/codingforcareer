@@ -11383,9 +11383,9 @@ html, body {
 
 .outcomes-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-top: 40px;
+  margin-top: 36px;
 }
 
 .outcome-card {
@@ -11424,6 +11424,28 @@ html, body {
   color: #f59e0b;
   font-size: 0.95rem;
   letter-spacing: 2px;
+}
+
+.outcome-badges-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.outcome-track-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] .outcome-track-tag {
+  color: var(--primary-300);
+  background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.35);
 }
 
 .outcome-verified-tag {
