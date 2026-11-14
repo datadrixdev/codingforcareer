@@ -52,8 +52,8 @@
     rel="stylesheet">
 
   <!-- Production Stylesheets -->
-  <link rel="stylesheet" href="css/styles.css?v=cfc_5.0">
-  <link rel="stylesheet" href="css/styles.min.css?v=cfc_5.0">
+  <link rel="stylesheet" href="css/styles.css?v=cfc_7.0">
+  <link rel="stylesheet" href="css/styles.min.css?v=cfc_7.0">
   <!-- Critical Overrides: Enforce visibility of subbars, high-contrast code blocks, hide sidebar chapter counts -->
   <style>
     :root {
@@ -69,6 +69,19 @@
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
+    }
+    @media (max-width: 768px) {
+      body[data-view="resume"] .tech-subbar,
+      body[data-view="resume"] .category-tabs-wrapper {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        border: none !important;
+      }
     }
     .category-tabs-wrapper,
     body[data-view="home"] .category-tabs-wrapper {
@@ -2978,18 +2991,21 @@ SELECT
                 </div>
 
                 <!-- Input Method Switcher Tabs -->
-                <div class="resume-input-tabs">
-                  <button type="button" class="input-tab-btn active" id="tab-upload-file">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                    <span>Upload File</span>
+                <div class="resume-input-tabs" role="tablist">
+                  <button type="button" class="input-tab-btn active" id="tab-upload-file" role="tab" aria-selected="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <span class="tab-label-full">Upload File</span>
+                    <span class="tab-label-short">Upload</span>
                   </button>
-                  <button type="button" class="input-tab-btn" id="tab-paste-text">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                    <span>Paste Text</span>
+                  <button type="button" class="input-tab-btn" id="tab-paste-text" role="tab" aria-selected="false">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    <span class="tab-label-full">Paste Text</span>
+                    <span class="tab-label-short">Paste</span>
                   </button>
-                  <button type="button" class="input-tab-btn" id="tab-sample-profile">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    <span>Use Sample Profile</span>
+                  <button type="button" class="input-tab-btn" id="tab-sample-profile" role="tab" aria-selected="false">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span class="tab-label-full">Use Sample Profile</span>
+                    <span class="tab-label-short">Sample</span>
                   </button>
                 </div>
 
@@ -3004,7 +3020,7 @@ SELECT
                         <line x1="12" y1="3" x2="12" y2="15"></line>
                       </svg>
                     </div>
-                    <h5 class="dropzone-title">Drag &amp; drop your resume here</h5>
+                    <h5 class="dropzone-title"><span class="desktop-only-text">Drag &amp; drop your resume here</span><span class="mobile-only-text">Tap to upload your resume</span></h5>
                     <p class="dropzone-sub">or <button type="button" class="btn-browse-file" id="btn-browse-file">Browse files</button> from your device</p>
                     <div class="dropzone-meta">
                       <span>PDF, DOCX, TXT</span>
@@ -3046,18 +3062,18 @@ SELECT
                 <div class="role-selector-wrap">
                   <label for="select-target-role" class="role-label">Desired Specialization:</label>
                   <div class="custom-select-wrapper">
-                    <select id="select-target-role" class="resume-role-dropdown">
-                      <option value="full_stack_developer" selected>Full Stack Developer (React, Node.js, Express, MongoDB &amp; REST)</option>
-                      <option value="data_scientist">Data Scientist (Python, ML, Pandas, NumPy &amp; SQL)</option>
-                      <option value="data_engineer">Data Engineer (PySpark, Kafka, SQL &amp; Airflow)</option>
-                      <option value="backend_developer">Backend Developer (Node.js, Express, Python &amp; SQL)</option>
-                      <option value="machine_learning_engineer">Machine Learning Engineer (Deep Learning, PyTorch &amp; NLP)</option>
-                      <option value="genai_engineer">Generative AI Specialist (LLMs, LangChain, RAG &amp; Vector DBs)</option>
-                      <option value="python_developer">Python Developer (OOP, SQL, REST APIs &amp; Automation)</option>
-                      <option value="sde">Software Development Engineer - SDE (DSA, OOP &amp; System Design)</option>
-                      <option value="devops_engineer">DevOps &amp; Cloud Engineer (Linux, Docker, Kubernetes &amp; AWS)</option>
-                      <option value="data_analyst">Data Analyst (SQL, Excel, Power BI &amp; Statistics)</option>
-                      <option value="frontend_developer">Frontend Developer (HTML/CSS, JavaScript, React &amp; Tailwind)</option>
+                    <select id="select-target-role" class="resume-role-dropdown" aria-label="Target Tech Role">
+                      <option value="full_stack_developer" selected>Full Stack Developer</option>
+                      <option value="data_scientist">Data Scientist</option>
+                      <option value="data_engineer">Data Engineer</option>
+                      <option value="backend_developer">Backend Developer</option>
+                      <option value="machine_learning_engineer">Machine Learning Engineer</option>
+                      <option value="genai_engineer">Generative AI Specialist</option>
+                      <option value="python_developer">Python Developer</option>
+                      <option value="sde">Software Development Engineer (SDE)</option>
+                      <option value="devops_engineer">DevOps &amp; Cloud Engineer</option>
+                      <option value="data_analyst">Data Analyst</option>
+                      <option value="frontend_developer">Frontend Developer</option>
                     </select>
                   </div>
 
@@ -3077,7 +3093,7 @@ SELECT
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                   </svg>
-                  <span>Analyse Resume &amp; Generate Skill Matrix</span>
+                  <span class="btn-text-full">Analyse Resume &amp; Generate Skill Matrix</span><span class="btn-text-short">Analyse Resume Now</span>
                 </button>
                 <div class="engine-attribution">
                   <span>⚡ Powered by ResumeAnalyser AI API (Vercel) • Real-Time ATS Evaluation Engine</span>
@@ -3105,7 +3121,16 @@ SELECT
               </div>
 
               <!-- Skills Matrix Grid (Skills Have vs Skills Need) -->
-              <div class="skills-matrix-grid">
+              <div class="skills-matrix-grid show-have">
+                <!-- Mobile Segmented Tab Selector (Only shown on mobile <= 640px) -->
+                <div class="mobile-skills-tabs" id="mobile-skills-tabs" role="tablist">
+                  <button type="button" class="mobile-tab-pill active" id="btn-tab-have" onclick="window.codingForCareerApp?.switchMobileSkillsTab('have')">
+                    <span>✅ Verified Skills</span>
+                  </button>
+                  <button type="button" class="mobile-tab-pill" id="btn-tab-need" onclick="window.codingForCareerApp?.switchMobileSkillsTab('need')">
+                    <span>🎯 Skills to Master</span>
+                  </button>
+                </div>
                 <!-- Card 1: Verified Skills You Already Have -->
                 <div class="skill-bucket-card bucket-have">
                   <div class="bucket-header">
@@ -3718,6 +3743,6 @@ SELECT
   <script src="js/data.js?v=cfc_1.0"></script>
   <script src="js/editor.js?v=cfc_1.0"></script>
   <script src="js/quiz.js?v=cfc_1.0"></script>
-  <script src="js/app.js?v=cfc_5.0"></script>
+  <script src="js/app.js?v=cfc_7.0"></script>
 </body>
 </html>

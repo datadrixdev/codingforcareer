@@ -595,22 +595,40 @@ class CodingForCareerApp {
     });
 
     document.body.setAttribute("data-view", viewName);
-    // Guarantee both secondary navbars (category tabs and tech pills) remain visible across all views
+    // Guarantee both secondary navbars (category tabs and tech pills) remain visible across learning views,
+    // but cleanly defer to responsive CSS on dedicated resume studio to reclaim 90px+ space on mobile
     const techSubbar = document.getElementById("tech-subbar") || document.querySelector(".tech-subbar");
-    if (techSubbar) {
-      techSubbar.style.setProperty("display", "block", "important");
-      techSubbar.style.setProperty("visibility", "visible", "important");
-      techSubbar.style.setProperty("opacity", "1", "important");
-    }
     const catWrapper = document.querySelector(".category-tabs-wrapper");
-    if (catWrapper) {
-      catWrapper.style.setProperty("display", "block", "important");
-      catWrapper.style.setProperty("visibility", "visible", "important");
-    }
     const pillContainer = document.getElementById("tech-pill-container");
-    if (pillContainer) {
-      pillContainer.style.setProperty("display", "flex", "important");
-      pillContainer.style.setProperty("visibility", "visible", "important");
+
+    if (viewName === "resume") {
+      if (techSubbar) {
+        techSubbar.style.removeProperty("display");
+        techSubbar.style.removeProperty("visibility");
+        techSubbar.style.removeProperty("opacity");
+      }
+      if (catWrapper) {
+        catWrapper.style.removeProperty("display");
+        catWrapper.style.removeProperty("visibility");
+      }
+      if (pillContainer) {
+        pillContainer.style.removeProperty("display");
+        pillContainer.style.removeProperty("visibility");
+      }
+    } else {
+      if (techSubbar) {
+        techSubbar.style.setProperty("display", "block", "important");
+        techSubbar.style.setProperty("visibility", "visible", "important");
+        techSubbar.style.setProperty("opacity", "1", "important");
+      }
+      if (catWrapper) {
+        catWrapper.style.setProperty("display", "block", "important");
+        catWrapper.style.setProperty("visibility", "visible", "important");
+      }
+      if (pillContainer) {
+        pillContainer.style.setProperty("display", "flex", "important");
+        pillContainer.style.setProperty("visibility", "visible", "important");
+      }
     }
 
     if (viewName === "roadmaps") {
@@ -2554,6 +2572,25 @@ class CodingForCareerApp {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  switchMobileSkillsTab(tab) {
+    const grid = document.querySelector(".skills-matrix-grid");
+    const btnHave = document.getElementById("btn-tab-have");
+    const btnNeed = document.getElementById("btn-tab-need");
+    if (!grid) return;
+
+    if (tab === "need") {
+      grid.classList.remove("show-have");
+      grid.classList.add("show-need");
+      btnHave?.classList.remove("active");
+      btnNeed?.classList.add("active");
+    } else {
+      grid.classList.remove("show-need");
+      grid.classList.add("show-have");
+      btnHave?.classList.add("active");
+      btnNeed?.classList.remove("active");
+    }
+  }
+
   initResumeAnalyzer() {
     window.openResumeStudio = (e) => {
       if (e && e.preventDefault) e.preventDefault();
@@ -3102,7 +3139,7 @@ Selected Engineering Experience:
                 <strong>${skill}</strong>
                 <span>${mapped.desc}</span>
               </div>
-              <a href="${mapped.link}" class="pill-learn-link">${mapped.linkText}</a>
+              <a href="${mapped.link}" class="pill-learn-link"><span class="link-text-full">${mapped.linkText}</span><span class="link-text-short">Learn &rarr;</span></a>
             </div>
           `;
         }).join("");

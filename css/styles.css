@@ -9638,12 +9638,16 @@ html, body {
   border-radius: 8px;
   background: var(--bg-surface);
   border: 1px solid rgba(99, 102, 241, 0.25);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .gap-info {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .gap-info strong {
@@ -10077,74 +10081,557 @@ html, body {
 
 
 /* --------------------------------------------------------------------------
-   D. Responsive Media Queries for Resume Studio
+   D. Mobile & Tablet UI/UX Overhaul for Dedicated Resume Studio
    -------------------------------------------------------------------------- */
+
+/* Responsive tab label helpers */
+
+/* Responsive button text & mobile segmented tabs */
+.btn-text-short {
+  display: none;
+}
+.link-text-short {
+  display: none;
+}
+.mobile-skills-tabs {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .btn-text-full {
+    display: none !important;
+  }
+  .btn-text-short {
+    display: inline !important;
+  }
+  .link-text-full {
+    display: none !important;
+  }
+  .link-text-short {
+    display: inline !important;
+  }
+
+  /* Mobile Segmented Control for Skills Matrix */
+  .mobile-skills-tabs {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bg-surface-alt);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 3px;
+    gap: 4px;
+    margin-bottom: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-tab-pill {
+    padding: 9px 8px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    font-size: 0.78rem;
+    font-weight: 750;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .mobile-tab-pill.active {
+    background: var(--bg-surface);
+    color: var(--primary-600);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  [data-theme="dark"] .mobile-tab-pill.active {
+    background: rgba(99, 102, 241, 0.2);
+    color: #A5B4FC;
+  }
+
+  /* When show-need is active on mobile */
+  .skills-matrix-grid.show-need .bucket-have {
+    display: none !important;
+  }
+  .skills-matrix-grid.show-need .bucket-need {
+    display: flex !important;
+  }
+
+  /* When show-have is active on mobile */
+  .skills-matrix-grid.show-have .bucket-have {
+    display: flex !important;
+  }
+  .skills-matrix-grid.show-have .bucket-need {
+    display: none !important;
+  }
+}
+
+.tab-label-short {
+  display: none;
+}
+.mobile-only-text {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .tab-label-full {
+    display: none !important;
+  }
+  .tab-label-short {
+    display: inline !important;
+  }
+  .desktop-only-text {
+    display: none !important;
+  }
+  .mobile-only-text {
+    display: inline !important;
+  }
+}
+
+/* 1. Large Tablet / iPad Pro (1080px and below) */
 @media (max-width: 1080px) {
   .resume-workspace-card {
     grid-template-columns: 1fr;
+    border-radius: 20px;
   }
   .resume-input-pane {
     border-right: none;
     border-bottom: 1px solid var(--border-default);
+    padding: 30px 24px;
+  }
+  .resume-results-pane {
+    padding: 30px 24px;
   }
   .resume-teaser-card {
     grid-template-columns: 1fr;
   }
   .how-it-works-grid,
-.how-steps-grid {
-    grid-template-columns: 1fr;
+  .how-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
+/* 2. Standard Tablet & Large Mobile (768px and below) */
 @media (max-width: 768px) {
+  /* Hide the 2 course subbars on dedicated resume studio to reclaim 90px+ vertical screen space */
+  body[data-view="resume"] .tech-subbar,
+  body[data-view="resume"] .category-tabs-wrapper {
+    display: none !important;
+  }
+
+  /* Safe bottom padding to prevent floating mobile-bottom-bar overlap */
+  .view-resume {
+    padding-bottom: 120px !important;
+  }
+
+  /* Compact high-impact mobile hero */
   .resume-hero-section {
-    padding: 32px 18px 24px;
+    padding: 20px 16px 14px;
   }
+  .resume-hero-breadcrumb {
+    display: none;
+  }
+  .resume-hero-badge {
+    font-size: 0.66rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+    letter-spacing: 0.2px;
+  }
+  .resume-hero-title {
+    font-size: clamp(1.45rem, 5.5vw, 1.85rem);
+    line-height: 1.25;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+  }
+  .resume-hero-lead {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0 0 14px 0;
+  }
+  .btn-standalone-app {
+    font-size: 0.78rem !important;
+    padding: 7px 14px !important;
+  }
+  .resume-proof-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .proof-chip {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  /* Main Workspace Card on Mobile */
   .resume-workspace-section {
-    padding: 10px 16px 40px;
+    padding: 4px 12px 30px;
   }
-  .resume-input-pane,
+  .resume-workspace-card {
+    border-radius: 18px;
+    box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+  }
+  .resume-input-pane {
+    padding: 20px 16px;
+    gap: 20px;
+  }
   .resume-results-pane {
-    padding: 24px 18px;
+    padding: 20px 16px;
+    gap: 20px;
   }
+
+  /* Segmented tab switcher on mobile */
+  .resume-input-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3px;
+    gap: 4px;
+    border-radius: 12px;
+  }
+  .input-tab-btn {
+    padding: 9px 4px;
+    font-size: 0.75rem;
+    gap: 5px;
+    border-radius: 8px;
+  }
+  .input-tab-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Touch-friendly dropzone */
+  .resume-dropzone {
+    padding: 22px 14px;
+    border-radius: 14px;
+    gap: 6px;
+  }
+  .dropzone-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  .dropzone-title {
+    font-size: 0.9rem;
+  }
+  .dropzone-sub {
+    font-size: 0.78rem;
+  }
+  .dropzone-meta {
+    font-size: 0.68rem;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .resume-selected-file {
+    padding: 8px 10px;
+    margin-top: 8px;
+    border-radius: 10px;
+  }
+  .file-name {
+    font-size: 0.78rem;
+  }
+  .file-size {
+    font-size: 0.68rem;
+  }
+
+  /* Dropdown & chips */
+  .custom-select-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+  .resume-role-dropdown {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.82rem;
+    padding: 10px 32px 10px 12px;
+    border-radius: 10px;
+  }
+  .expected-chips {
+    gap: 5px;
+  }
+  .expected-chip {
+    font-size: 0.68rem;
+    padding: 2.5px 7px;
+    border-radius: 6px;
+  }
+
+  /* Primary Action Button */
+  .btn-analyze-resume {
+    padding: 14px 16px;
+    font-size: 0.92rem;
+    border-radius: 12px;
+    min-height: 48px;
+  }
+  .engine-attribution {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  /* Results Studio on Mobile */
+  .match-score-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding: 14px;
+    border-radius: 14px;
+    gap: 14px;
+  }
+  .score-circle {
+    width: 66px;
+    height: 66px;
+    border-width: 4px;
+    flex-shrink: 0;
+  }
+  .score-num {
+    font-size: 1.3rem;
+  }
+  .score-label {
+    font-size: 0.55rem;
+  }
+  .score-details {
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
+  }
+  .score-status-pill {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+  }
+  .score-title {
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+  .score-desc {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  /* Skills Grid */
   .skills-matrix-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .skill-bucket-card {
+    padding: 14px;
+    border-radius: 14px;
+    gap: 8px;
+  }
+  .bucket-title-wrap h4 {
+    font-size: 0.82rem;
+  }
+  .bucket-count-badge {
+    font-size: 0.68rem;
+    padding: 1.5px 6px;
+  }
+  .skill-bucket-card {
+    padding: 12px;
+    border-radius: 14px;
+    gap: 8px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+  }
+  .skills-tag-list {
+    max-height: 200px;
+    gap: 6px;
+  }
+  .skill-tag-have {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border-radius: 8px;
+  }
+  .skill-gap-item {
+    padding: 7px 10px;
+    gap: 8px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .gap-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .gap-info strong {
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .gap-info span {
+    font-size: 0.68rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pill-learn-link {
+    font-size: 0.68rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .resume-suggestions-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+    gap: 6px;
+  }
+  .resume-suggestions-card h4 {
+    font-size: 0.8rem;
+  }
+  .resume-suggestions-list {
+    padding-left: 14px;
+    gap: 6px;
+  }
+  .resume-suggestions-list li {
+    font-size: 0.74rem;
+  }
+
+  .resume-recommendation-bar {
+    padding: 14px;
+    border-radius: 12px;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .btn-rec-action {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.82rem;
+  }
+
+  /* Lower Sections */
+  .resume-section-container {
+    padding: 40px 16px;
   }
   .career-cards-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .career-spec-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+  .career-spec-header h4 {
+    font-size: 1.05rem;
   }
   .resume-faq-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .faq-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  .resume-cta-banner {
+    padding: 20px 14px 10px;
+  }
+  .resume-cta-container {
+    padding: 28px 18px;
+    border-radius: 18px;
+    gap: 12px;
+  }
+  .resume-cta-container h2 {
+    font-size: 1.4rem;
+  }
+  .resume-cta-container p {
+    font-size: 0.88rem;
+  }
+  .resume-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .btn-cta-primary,
+  .btn-cta-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.88rem;
+  }
+
+  /* Homepage Teaser Card on Mobile */
+  .home-resume-teaser-section {
+    padding: 32px 14px 40px;
+  }
+  .resume-teaser-card {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
+    border-radius: 18px;
+    gap: 20px;
+  }
+  .teaser-headline {
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+  .teaser-body {
+    font-size: 0.86rem;
+    line-height: 1.5;
   }
   .teaser-perks {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
-  .match-score-card {
-    flex-direction: column;
-    text-align: center;
+  .perk-item {
+    font-size: 0.78rem;
   }
-  .score-details {
-    align-items: center;
+  .btn-launch-resume-studio {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+    font-size: 0.88rem;
   }
-  .resume-recommendation-bar {
-    flex-direction: column;
-    text-align: center;
+  .teaser-visual-col {
+    padding: 16px;
+    border-radius: 14px;
   }
 }
 
+/* 3. Small Mobile Phones (480px and below) */
 @media (max-width: 480px) {
-  .resume-teaser-card {
-    padding: 28px 18px;
-  }
-  .resume-input-tabs {
-    flex-direction: column;
-  }
-  .resume-cta-container {
-    padding: 36px 18px;
+  .resume-input-pane,
+  .resume-results-pane {
+    padding: 16px 12px;
   }
   .resume-proof-strip {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .proof-chip {
+    font-size: 0.68rem;
+    padding: 5px 8px;
+  }
+  .proof-icon {
+    font-size: 0.85rem;
+  }
+  .match-score-card {
+    gap: 10px;
+    padding: 12px;
+  }
+  .score-circle {
+    width: 58px;
+    height: 58px;
+  }
+  .score-num {
+    font-size: 1.15rem;
+  }
+  .score-title {
+    font-size: 0.88rem;
+  }
+  .score-desc {
+    font-size: 0.72rem;
   }
 }
 
