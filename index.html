@@ -867,111 +867,163 @@
       </section>
 
       <!-- 8. Engineering Specialization Pathways -->
-      <section class="home-pathways-section">
+      <section class="home-pathways-section" id="home-pathways-section">
         <div class="home-section-header">
-          <div class="section-badge">🚀 Career Roadmaps</div>
+          <div class="section-badge">🚀 CAREER ROADMAPS</div>
           <h2 class="section-main-heading">Structured Specialization Pathways</h2>
           <p class="section-sub-heading">End-to-end curriculums mapped to real-world engineering roles, complete with time estimates and target salary benchmarks.</p>
         </div>
 
         <div class="pathways-grid">
           <!-- Pathway 1: Data Engineering -->
-          <div class="pathway-card">
-            <div class="pathway-header">
-              <div class="pathway-icon-wrap">⚡</div>
-              <span class="pathway-meta-badge badge-de">12 Weeks • 40+ Labs</span>
+          <div class="pathway-card pathway-de">
+            <div class="pathway-top">
+              <div class="pathway-header">
+                <div class="pathway-icon-wrap icon-de">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                  </svg>
+                </div>
+                <span class="pathway-meta-badge badge-de">12 Wks • 40+ Labs</span>
+              </div>
+              <h3 class="pathway-title">Cloud Data &amp; Distributed Systems</h3>
+              <p class="pathway-desc">Distributed stream processing, Kafka pipelines, and lakehouse architectures.</p>
+              
+              <div class="pathway-steps">
+                <span class="path-step-pill">Python 3</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">PySpark</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Kafka</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Airflow</span>
+              </div>
             </div>
-            <h3>Cloud Data &amp; Distributed Systems Engineer</h3>
-            <p>Master distributed data pipelines, stream ingestion, and cloud orchestrators powering modern enterprise architectures.</p>
-            <div class="pathway-steps">
-              <span class="path-step-pill">Python 3</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">MySQL SQL</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Apache PySpark</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Kafka Streaming</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Airflow</span>
-            </div>
+
             <div class="pathway-footer">
-              <span class="pathway-salary">Avg. Compensation: $140k – $225k</span>
-              <a href="#roadmaps" class="btn-pathway">View Curriculum &rarr;</a>
+              <div class="pathway-salary-wrap">
+                <span class="pathway-salary-label">TARGET SALARY</span>
+                <span class="pathway-salary-val">$140k – $225k</span>
+              </div>
+              <a href="/roadmaps/data-engineer" class="btn-pathway btn-pathway-de">
+                <span>View Roadmap &rarr;</span>
+              </a>
             </div>
           </div>
 
           <!-- Pathway 2: AI & ML -->
-          <div class="pathway-card">
-            <div class="pathway-header">
-              <div class="pathway-icon-wrap">🧠</div>
-              <span class="pathway-meta-badge badge-ai-path">14 Weeks • 35+ Projects</span>
+          <div class="pathway-card pathway-ai">
+            <div class="pathway-top">
+              <div class="pathway-header">
+                <div class="pathway-icon-wrap icon-ai">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a8 8 0 0 0-8 8c0 3.37 2.1 6.27 5.09 7.42.15.06.26.19.26.35v1.48c0 .41.34.75.75.75h3.8c.41 0 .75-.34.75-.75v-1.48c0-.16.11-.29.26-.35C17.9 16.27 20 13.37 20 10a8 8 0 0 0-8-8z"></path>
+                    <line x1="9.5" y1="9" x2="9.51" y2="9"></line>
+                    <line x1="14.5" y1="9" x2="14.51" y2="9"></line>
+                    <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
+                  </svg>
+                </div>
+                <span class="pathway-meta-badge badge-ai-path">14 Wks • 35+ Labs</span>
+              </div>
+              <h3 class="pathway-title">Machine Learning &amp; Generative AI</h3>
+              <p class="pathway-desc">Predictive models, vector embeddings, fine-tuning, and production LLM RAG.</p>
+              
+              <div class="pathway-steps">
+                <span class="path-step-pill">Python Math</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Scikit</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">PyTorch</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">RAG</span>
+              </div>
             </div>
-            <h3>Machine Learning &amp; Generative AI Engineer</h3>
-            <p>Build end-to-end predictive models, transformer embeddings, and Retrieval-Augmented Generation (RAG) applications.</p>
-            <div class="pathway-steps">
-              <span class="path-step-pill">Python Math</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Linear Regression</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Scikit-Learn</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Deep Learning</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">GenAI &amp; RAG</span>
-            </div>
+
             <div class="pathway-footer">
-              <span class="pathway-salary">Avg. Compensation: $150k – $245k</span>
-              <a href="#roadmaps" class="btn-pathway">View Curriculum &rarr;</a>
+              <div class="pathway-salary-wrap">
+                <span class="pathway-salary-label">TARGET SALARY</span>
+                <span class="pathway-salary-val">$150k – $245k</span>
+              </div>
+              <a href="/roadmaps/generative-ai" class="btn-pathway btn-pathway-ai">
+                <span>View Roadmap &rarr;</span>
+              </a>
             </div>
           </div>
 
-          <!-- Pathway 3: Enterprise Java -->
-          <div class="pathway-card">
-            <div class="pathway-header">
-              <div class="pathway-icon-wrap">☕</div>
-              <span class="pathway-meta-badge badge-java">10 Weeks • 30+ Labs</span>
+          <!-- Pathway 3: Enterprise Java & Backend -->
+          <div class="pathway-card pathway-java">
+            <div class="pathway-top">
+              <div class="pathway-header">
+                <div class="pathway-icon-wrap icon-java">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                </div>
+                <span class="pathway-meta-badge badge-java">10 Wks • 30+ Labs</span>
+              </div>
+              <h3 class="pathway-title">Enterprise Backend Architect</h3>
+              <p class="pathway-desc">Resilient, high-throughput microservices, Spring Boot, and robust SQL indexing.</p>
+              
+              <div class="pathway-steps">
+                <span class="path-step-pill">Java 21</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Spring Boot</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">MySQL</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Microservices</span>
+              </div>
             </div>
-            <h3>Enterprise Backend Systems Architect</h3>
-            <p>Architect resilient, high-throughput microservices using modern Java 21, Spring Boot, and robust relational indexing.</p>
-            <div class="pathway-steps">
-              <span class="path-step-pill">Java 21 Core</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">OOP Internals</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Spring Boot</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">MySQL Indexes</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Microservices</span>
-            </div>
+
             <div class="pathway-footer">
-              <span class="pathway-salary">Avg. Compensation: $145k – $230k</span>
-              <a href="#roadmaps" class="btn-pathway">View Curriculum &rarr;</a>
+              <div class="pathway-salary-wrap">
+                <span class="pathway-salary-label">TARGET SALARY</span>
+                <span class="pathway-salary-val">$145k – $230k</span>
+              </div>
+              <a href="/roadmaps/python-developer" class="btn-pathway btn-pathway-java">
+                <span>View Roadmap &rarr;</span>
+              </a>
             </div>
           </div>
 
           <!-- Pathway 4: Systems & DSA -->
-          <div class="pathway-card">
-            <div class="pathway-header">
-              <div class="pathway-icon-wrap">⚡</div>
-              <span class="pathway-meta-badge badge-cpp">8 Weeks • 50+ Challenges</span>
+          <div class="pathway-card pathway-cpp">
+            <div class="pathway-top">
+              <div class="pathway-header">
+                <div class="pathway-icon-wrap icon-cpp">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                </div>
+                <span class="pathway-meta-badge badge-cpp">8 Wks • 50+ Labs</span>
+              </div>
+              <h3 class="pathway-title">Low-Latency Systems &amp; DSA</h3>
+              <p class="pathway-desc">Manual memory management, pointers, concurrency, and algorithmic problem-solving.</p>
+              
+              <div class="pathway-steps">
+                <span class="path-step-pill">C / C++23</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Pointers</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">Concurrency</span>
+                <span class="path-sep">&rarr;</span>
+                <span class="path-step-pill">DSA</span>
+              </div>
             </div>
-            <h3>High-Performance Systems &amp; DSA Specialist</h3>
-            <p>Master manual memory management, pointer arithmetic, zero-overhead abstractions, and algorithmic problem-solving.</p>
-            <div class="pathway-steps">
-              <span class="path-step-pill">C Programming</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Modern C++23</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Memory Layouts</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">Concurrency</span>
-              <span class="path-sep">&rarr;</span>
-              <span class="path-step-pill">DSA Mastery</span>
-            </div>
+
             <div class="pathway-footer">
-              <span class="pathway-salary">Avg. Compensation: $160k – $250k</span>
-              <a href="#roadmaps" class="btn-pathway">View Curriculum &rarr;</a>
+              <div class="pathway-salary-wrap">
+                <span class="pathway-salary-label">TARGET SALARY</span>
+                <span class="pathway-salary-val">$160k – $250k</span>
+              </div>
+              <a href="/roadmaps/database-engineer" class="btn-pathway btn-pathway-cpp">
+                <span>View Roadmap &rarr;</span>
+              </a>
             </div>
           </div>
         </div>
