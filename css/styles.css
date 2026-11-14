@@ -11572,6 +11572,17 @@ html, body {
   display: block;
 }
 
+.author-info .author-company {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .author-info .author-company {
+  color: var(--primary-300);
+}
+
 .btn-outcome-linkedin {
   display: inline-flex;
   align-items: center;

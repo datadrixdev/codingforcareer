@@ -268,6 +268,15 @@
       text-overflow: ellipsis !important;
       display: block !important;
     }
+    .author-info .author-company {
+      font-size: 0.76rem !important;
+      font-weight: 700 !important;
+      color: var(--primary-600) !important;
+      margin-top: 2px !important;
+    }
+    [data-theme="dark"] .author-info .author-company {
+      color: var(--primary-300) !important;
+    }
     .btn-outcome-linkedin {
       flex-shrink: 0 !important;
     }
@@ -1301,7 +1310,8 @@
                 </div>
                 <div class="author-info">
                   <strong>Amit Nishchal</strong>
-                  <span>Lead Manager @ Optum</span>
+                  <span>Lead Manager</span>
+                  <span class="author-company">@ Optum</span>
                 </div>
               </div>
               <a href="https://www.linkedin.com/in/amit-nishchal/" target="_blank" rel="noopener noreferrer" class="btn-outcome-linkedin" aria-label="Amit Nishchal on LinkedIn" title="Connect with Amit Nishchal on LinkedIn">
