@@ -426,6 +426,19 @@ textarea {
   filter: drop-shadow(0 0 5px rgba(79, 70, 229, 0.45));
 }
 
+/* 1.1 Analyse Resume - Colors out to Indigo */
+#nav-resume:hover,
+#nav-resume.active {
+  color: #4F46E5;
+  background-color: rgba(79, 70, 229, 0.08);
+  border-color: rgba(79, 70, 229, 0.15);
+}
+#nav-resume:hover .nav-icon,
+#nav-resume.active .nav-icon {
+  color: #4F46E5;
+  filter: drop-shadow(0 0 5px rgba(79, 70, 229, 0.45));
+}
+
 /* 2. Try Editor - Colors out to Emerald */
 #nav-playground:hover,
 #nav-playground.active {
@@ -496,6 +509,22 @@ body.dark-mode #nav-home.active {
 [data-theme="dark"] #nav-home.active .nav-icon,
 body.dark-mode #nav-home:hover .nav-icon,
 body.dark-mode #nav-home.active .nav-icon {
+  color: #818CF8;
+  filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.65));
+}
+
+[data-theme="dark"] #nav-resume:hover,
+[data-theme="dark"] #nav-resume.active,
+body.dark-mode #nav-resume:hover,
+body.dark-mode #nav-resume.active {
+  color: #818CF8;
+  background-color: rgba(99, 102, 241, 0.16);
+  border-color: rgba(99, 102, 241, 0.28);
+}
+[data-theme="dark"] #nav-resume:hover .nav-icon,
+[data-theme="dark"] #nav-resume.active .nav-icon,
+body.dark-mode #nav-resume:hover .nav-icon,
+body.dark-mode #nav-resume.active .nav-icon {
   color: #818CF8;
   filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.65));
 }
@@ -8453,20 +8482,24 @@ html, body {
    ========================================================================== */
 .nav-item-highlight {
   position: relative;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.08)) !important;
-  border-color: rgba(99, 102, 241, 0.22) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
 }
 
 .nav-badge-ai {
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 1px 6px;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #6366F1, #EC4899);
-  color: #FFFFFF;
+  font-size: 0.62rem;
+  font-weight: 750;
+  padding: 1px 5.5px;
+  border-radius: var(--radius-full);
+  background: rgba(99, 102, 241, 0.12);
+  color: #4F46E5;
   margin-left: 4px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .nav-badge-ai {
+  background: rgba(129, 140, 248, 0.2);
+  color: #818CF8;
 }
 
 .btn-hero-resume-action {
