@@ -449,6 +449,170 @@ class CodingForCareerApp {
     this.updateUrl(slug);
   }
 
+  // Centralized SEO Helpers
+  setMetaTag(attrType, attrName, value) {
+    if (value === undefined || value === null) return;
+    let el = document.querySelector(`meta[${attrType}="${attrName}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attrType, attrName);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", value);
+  }
+
+  updateSEO({
+    title,
+    description,
+    canonicalPath = "",
+    ogType = "website",
+    keywords = "",
+    breadcrumbs = [],
+    articleData = null,
+    courseData = null
+  }) {
+    const baseUrl = "https://codingforcareer.com";
+    const cleanPath = (canonicalPath || "").replace(/^#/, "").replace(/^\/+|\/+$/g, "").trim();
+    const canonicalUrl = cleanPath ? `${baseUrl}/${cleanPath}` : `${baseUrl}/`;
+
+    // 1. Title Tag
+    const formattedTitle = title
+      ? (title.includes("CodingForCareer") ? title : `${title} | CodingForCareer`)
+      : "CodingForCareer - Master Modern Tech & Software Engineering Skills";
+    document.title = formattedTitle;
+
+    // 2. Meta Description & Keywords
+    const defaultDesc = "Master modern tech skills with 2,400+ interactive modules, curated engineering tracks, in-browser code sandboxes, and AI resume review. Free open access.";
+    const cleanDesc = (description || defaultDesc).replace(/\s+/g, " ").trim();
+    this.setMetaTag("name", "description", cleanDesc);
+
+    if (keywords) {
+      this.setMetaTag("name", "keywords", keywords);
+    }
+
+    // 3. Canonical Link
+    let canonEl = document.querySelector('link[rel="canonical"]');
+    if (!canonEl) {
+      canonEl = document.createElement("link");
+      canonEl.setAttribute("rel", "canonical");
+      canonEl.id = "canonical-url";
+      document.head.appendChild(canonEl);
+    }
+    canonEl.setAttribute("href", canonicalUrl);
+
+    // 4. OpenGraph Tags
+    this.setMetaTag("property", "og:title", formattedTitle);
+    this.setMetaTag("property", "og:description", cleanDesc);
+    this.setMetaTag("property", "og:url", canonicalUrl);
+    this.setMetaTag("property", "og:type", ogType);
+    this.setMetaTag("property", "og:site_name", "CodingForCareer");
+
+    // 5. Twitter Card Tags
+    this.setMetaTag("name", "twitter:title", formattedTitle);
+    this.setMetaTag("name", "twitter:description", cleanDesc);
+    this.setMetaTag("name", "twitter:url", canonicalUrl);
+
+    // 6. Dynamic JSON-LD Structured Data
+    let schemaEl = document.getElementById("schema-dynamic");
+    if (!schemaEl) {
+      schemaEl = document.createElement("script");
+      schemaEl.type = "application/ld+json";
+      schemaEl.id = "schema-dynamic";
+      document.head.appendChild(schemaEl);
+    }
+
+    const graph = [];
+
+    // BreadcrumbList Schema
+    if (breadcrumbs && breadcrumbs.length > 0) {
+      const itemListElement = [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": `${baseUrl}/`
+        }
+      ];
+
+      breadcrumbs.forEach((crumb, idx) => {
+        const crumbPath = (crumb.path || "").replace(/^#/, "").replace(/^\/+|\/+$/g, "").trim();
+        itemListElement.push({
+          "@type": "ListItem",
+          "position": idx + 2,
+          "name": crumb.name,
+          "item": crumbPath ? `${baseUrl}/${crumbPath}` : `${baseUrl}/`
+        });
+      });
+
+      graph.push({
+        "@type": "BreadcrumbList",
+        "itemListElement": itemListElement
+      });
+    }
+
+    // TechArticle Schema
+    if (articleData) {
+      graph.push({
+        "@type": "TechArticle",
+        "headline": articleData.headline || formattedTitle,
+        "description": cleanDesc,
+        "mainEntityOfPage": canonicalUrl,
+        "url": canonicalUrl,
+        "articleSection": articleData.section || "Technology",
+        "inLanguage": "en-US",
+        "author": {
+          "@type": "Organization",
+          "name": "CodingForCareer Curriculum Team",
+          "url": baseUrl
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CodingForCareer",
+          "url": baseUrl,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${baseUrl}/assets/favicon.png`
+          }
+        },
+        "datePublished": "2026-01-01T00:00:00Z",
+        "dateModified": "2026-11-14T00:00:00Z",
+        "proficiencyLevel": articleData.level || "Beginner",
+        "about": {
+          "@type": "Thing",
+          "name": articleData.topic || "Computer Science"
+        }
+      });
+    }
+
+    // Course Schema
+    if (courseData) {
+      graph.push({
+        "@type": "Course",
+        "name": courseData.name || formattedTitle,
+        "description": courseData.description || cleanDesc,
+        "provider": {
+          "@type": "Organization",
+          "name": "CodingForCareer",
+          "sameAs": baseUrl
+        },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "courseWorkload": courseData.workload || "PT20H"
+        }
+      });
+    }
+
+    if (graph.length > 0) {
+      schemaEl.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": graph
+      }, null, 2);
+    } else {
+      schemaEl.textContent = "";
+    }
+  }
+
   navigateToRoute(route) {
     const clean = (route || "").replace(/^#/, "").replace(/^\/+|\/+$/g, "").trim();
     if (!clean || clean === "home") {
@@ -503,6 +667,13 @@ class CodingForCareerApp {
     if (updateHistory) {
       this.updateUrl("");
     }
+    this.updateSEO({
+      title: "CodingForCareer - Master Modern Tech & Software Engineering Skills",
+      description: "Master modern tech skills with 2,400+ interactive modules, curated engineering tracks, in-browser code sandboxes, and AI resume review. Free open access.",
+      canonicalPath: "",
+      ogType: "website",
+      keywords: "programming tutorials, learn coding, computer science roadmaps, coding interview, python, javascript, react, full stack, machine learning, data science"
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -753,6 +924,43 @@ class CodingForCareerApp {
         }
       } else {
         this.updateUrl(viewName);
+      }
+    }
+
+    // View-level SEO sync
+    if (viewName === "home") {
+      this.updateSEO({
+        title: "CodingForCareer - Master Modern Tech & Software Engineering Skills",
+        description: "Master modern tech skills with 2,400+ interactive modules, curated engineering tracks, in-browser code sandboxes, and AI resume review. Free open access.",
+        canonicalPath: "",
+        ogType: "website",
+        keywords: "programming tutorials, learn coding, computer science roadmaps, coding interview, python, javascript, react, full stack, machine learning, data science"
+      });
+    } else if (viewName === "playground") {
+      this.updateSEO({
+        title: "Interactive Online Code Editor & Web Compiler | CodingForCareer",
+        description: "Write, run, and test code in real-time with our zero-setup online browser sandbox. Supports Python, JavaScript, HTML/CSS, SQL, C++, and Go.",
+        canonicalPath: "playground",
+        ogType: "website",
+        keywords: "online code editor, browser compiler, online python compiler, live coding sandbox, web ide",
+        breadcrumbs: [
+          { name: "Playground", path: "playground" }
+        ]
+      });
+    } else if (viewName === "quizzes") {
+      this.updateSEO({
+        title: "Tech Interview Quizzes & Coding Practice | CodingForCareer",
+        description: "Test your engineering skills with interactive technical quizzes across algorithms, system design, frontend, backend, and data science.",
+        canonicalPath: "quizzes",
+        ogType: "website",
+        keywords: "coding quizzes, tech interview practice, programming test, leetcode quiz, computer science questions",
+        breadcrumbs: [
+          { name: "Quizzes", path: "quizzes" }
+        ]
+      });
+    } else if (viewName === "tutorials") {
+      if (this.currentTopicId && CODINGFORCAREER_DATA.topics[this.currentTopicId]) {
+        this.renderCurrentTopic();
       }
     }
 
@@ -1523,6 +1731,37 @@ metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="co
 
     // Build Table of Contents
     this.generateTOC();
+
+    // Dynamic On-Page SEO for Topic (matching GeeksforGeeks / W3Schools standard)
+    const topicSlug = this.getTopicSlug(this.currentTopicId);
+    const rawLead = (topic.lead || "").replace(/<[^>]*>/g, "").replace(/\*\*/g, "").replace(/\s+/g, " ").trim();
+    const cleanTopicDesc = rawLead.length >= 30
+      ? (rawLead.length > 158 ? rawLead.substring(0, 155) + "..." : rawLead)
+      : `Master ${topic.title} in our comprehensive ${resolvedTrackName} curriculum. Free interactive code examples, quizzes, and career-aligned exercises.`;
+
+    this.updateSEO({
+      title: `${topic.title} - ${resolvedTrackName} Tutorial | CodingForCareer`,
+      description: cleanTopicDesc,
+      canonicalPath: topicSlug,
+      ogType: "article",
+      keywords: `${topic.title}, ${resolvedTrackName}, ${topic.title} tutorial, learn ${resolvedTrackName}, ${resolvedTrackName} code examples, coding interview`,
+      breadcrumbs: [
+        { name: "Tutorials", path: "tutorials" },
+        { name: resolvedTrackName, path: `tutorials/${this.currentTrack}` },
+        { name: topic.title, path: topicSlug }
+      ],
+      articleData: {
+        headline: topic.title,
+        section: resolvedTrackName,
+        level: topic.badge || "Core",
+        topic: resolvedTrackName
+      },
+      courseData: {
+        name: `${resolvedTrackName} Course & Engineering Certification`,
+        description: `Comprehensive hands-on ${resolvedTrackName} curriculum with in-browser coding sandboxes.`,
+        workload: "PT25H"
+      }
+    });
   }
 
   formatTopicContent(html) {
@@ -2413,6 +2652,25 @@ metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="co
       this.updateHash(`roadmaps/${rm.id}`);
     }
 
+    const rmCleanTitle = (rm.title || "Developer").replace(/\s*roadmap\s*$/i, "").trim();
+    this.updateSEO({
+      title: `${rmCleanTitle} Roadmap 2026 - Career Guide | CodingForCareer`,
+      description: `Comprehensive step-by-step ${rmCleanTitle} learning roadmap for 2026. Includes milestone checklists, target salary benchmarks (${rm.salary || '$120k+'}), and linked tutorials.`,
+      canonicalPath: `roadmaps/${rm.id}`,
+      ogType: "article",
+      keywords: `${rmCleanTitle} roadmap, ${rmCleanTitle} career path, software engineering roadmap 2026, tech roadmap`,
+      breadcrumbs: [
+        { name: "Roadmaps", path: "roadmaps" },
+        { name: rm.title, path: `roadmaps/${rm.id}` }
+      ],
+      articleData: {
+        headline: `${rmCleanTitle} Career Roadmap 2026`,
+        section: "Engineering Roadmaps",
+        level: "All Levels",
+        topic: rmCleanTitle
+      }
+    });
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -2425,6 +2683,17 @@ metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="co
     if (updateHash) {
       this.updateHash("roadmaps");
     }
+
+    this.updateSEO({
+      title: "Interactive Developer Career Roadmaps 2026 | CodingForCareer",
+      description: "Explore interactive, step-by-step career roadmaps for Full-Stack, AI/ML, DevOps, Cloud, and Software Engineering. Benchmark skills and target salaries.",
+      canonicalPath: "roadmaps",
+      ogType: "website",
+      keywords: "developer roadmaps, tech career roadmaps, computer science roadmaps 2026, software engineer roadmap",
+      breadcrumbs: [
+        { name: "Roadmaps", path: "roadmaps" }
+      ]
+    });
 
     this.renderRoadmaps(this.activeRoadmapCategory, this.rmSearchInput ? this.rmSearchInput.value.trim() : "");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -2719,6 +2988,27 @@ metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="co
     if (updateHash) {
       this.updateHash(`cheatsheets/${courseId}`);
     }
+
+    const matchedTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id === courseId);
+    const trackTitle = matchedTrack ? matchedTrack.name : courseId;
+    this.updateSEO({
+      title: `${trackTitle} Cheat Sheet - Quick Reference & Syntax Guide | CodingForCareer`,
+      description: `Fast, printable ${trackTitle} cheat sheet and syntax reference guide. Covers key commands, code snippets, methods, and career-ready standard patterns.`,
+      canonicalPath: `cheatsheets/${courseId}`,
+      ogType: "article",
+      keywords: `${trackTitle} cheat sheet, ${trackTitle} syntax reference, ${trackTitle} quick guide, developer cheat sheet`,
+      breadcrumbs: [
+        { name: "Cheat Sheets", path: "cheatsheets" },
+        { name: `${trackTitle} Cheat Sheet`, path: `cheatsheets/${courseId}` }
+      ],
+      articleData: {
+        headline: `${trackTitle} Cheat Sheet & Syntax Guide`,
+        section: "Cheat Sheets",
+        level: "All Levels",
+        topic: trackTitle
+      }
+    });
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -2729,6 +3019,18 @@ metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="co
     if (updateHash) {
       this.updateHash("cheatsheets");
     }
+
+    this.updateSEO({
+      title: "Developer Cheat Sheets & Quick Syntax Reference | CodingForCareer",
+      description: "Instant developer cheat sheets and syntax quick-references across 20+ programming languages, databases, cloud, and engineering frameworks.",
+      canonicalPath: "cheatsheets",
+      ogType: "website",
+      keywords: "developer cheat sheets, programming cheat sheet, syntax quick reference, python cheat sheet, javascript cheat sheet",
+      breadcrumbs: [
+        { name: "Cheat Sheets", path: "cheatsheets" }
+      ]
+    });
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -2790,6 +3092,19 @@ metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="co
 
   goToResumeAnalyzer(updateHash = true) {
     this.switchView("resume", false, updateHash);
+    if (updateHash) {
+      this.updateUrl("resume");
+    }
+    this.updateSEO({
+      title: "AI Resume Analyzer & ATS Score Optimizer | CodingForCareer",
+      description: "Free in-browser AI resume analyzer for software engineers and tech professionals. Get instant ATS scoring, bullet-point metrics, and tech keyword recommendations.",
+      canonicalPath: "resume",
+      ogType: "website",
+      keywords: "tech resume analyzer, AI resume review, software engineer resume scanner, ATS resume score, tech interview resume",
+      breadcrumbs: [
+        { name: "AI Resume Analyzer", path: "resume" }
+      ]
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 

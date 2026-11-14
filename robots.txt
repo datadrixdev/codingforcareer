@@ -1,7 +1,16 @@
 User-agent: *
 Allow: /
-
-# Disallow internal scratch scripts if exposed
+Disallow: /.git/
 Disallow: /scratch/
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://codingforcareer.com/sitemap.xml
+Host: https://codingforcareer.com
