@@ -318,18 +318,14 @@
       <div class="hero-ambient-blob hero-blob-1" aria-hidden="true"></div>
       <div class="hero-ambient-blob hero-blob-2" aria-hidden="true"></div>
 
-      <!-- 1. World-Class Educational Hero Section -->
+      <!-- 1. World-Class Light & Attractive Hero Section -->
       <section class="home-hero-section">
         <div class="home-hero-container">
           <div class="home-hero-content">
-            <!-- Audience Segmented Switcher -->
-            <div class="hero-audience-pills" role="tablist" aria-label="Select Learning Pathway">
-              <button type="button" class="audience-pill active" id="btn-hero-for-students" onclick="window.codingForCareerApp?.focusAudience('students')">
-                <span>🎓 For Students: Campus Placements &amp; SDE</span>
-              </button>
-              <button type="button" class="audience-pill" id="btn-hero-for-pros" onclick="window.codingForCareerApp?.focusAudience('pros')">
-                <span>💼 For Engineers: Senior &amp; AI Transitions</span>
-              </button>
+            <div class="hero-trend-badge">
+              <span class="badge-pulse-dot"></span>
+              <span>✨ Open-Access University Engineering Curriculum • 100% Free Forever</span>
+              <span class="badge-trend-pill">20 Tracks</span>
             </div>
 
             <h1 class="home-hero-title">
@@ -338,7 +334,7 @@
             </h1>
 
             <p class="home-hero-lead" id="hero-lead-text">
-              Master university-grade Computer Science and high-paying engineering specializations. Whether you're cracking your first campus internship or transitioning into $160k+ Cloud Data &amp; AI roles, learn through zero-setup browser labs, battle-tested cheat sheets, and real-time AI ATS resume intelligence.
+              Master university-grade Computer Science and high-paying engineering specializations. Whether you're cracking your first campus internship or accelerating into $160k+ Cloud Data &amp; AI roles, learn through zero-setup browser sandboxes, battle-tested cheat sheets, and real-time AI ATS diagnostics.
             </p>
 
             <div class="home-hero-actions">
@@ -349,7 +345,7 @@
                 </svg>
               </button>
 
-              <a href="#resume" class="btn-hero-secondary btn-hero-resume-action" id="btn-hero-resume" title="Analyse Resume &amp; Discover Missing Skills" onclick="return openResumeStudio(event);" style="text-decoration: none;">
+              <a href="#resume" class="btn-hero-resume-action" id="btn-hero-resume" title="Analyse Resume &amp; Discover Missing Skills" onclick="return openResumeStudio(event);" style="text-decoration: none;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
@@ -357,14 +353,14 @@
                   <line x1="16" y1="17" x2="8" y2="17"></line>
                 </svg>
                 <span>Analyse Resume (AI)</span>
-                <span class="hero-badge-pill">NEW</span>
+                <span class="hero-badge-pill">FREE</span>
               </a>
 
               <button class="btn-hero-secondary" id="btn-hero-playground" title="Open Interactive In-Browser Compiler">
                 <svg class="icon-bolt" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
                 </svg>
-                <span>Try In-Browser Editor</span>
+                <span>Try Live Editor</span>
               </button>
             </div>
 
@@ -372,24 +368,19 @@
             <div class="hero-quick-picks">
               <span class="quick-picks-label">Top Starting Tracks:</span>
               <button class="quick-pick-pill" id="btn-hero-mysql" title="Open MySQL 25-Chapter Deep Dive">
-                <span class="pill-emoji">🐬</span>
-                <span>MySQL DB (25 Ch)</span>
+                <span>🐬 MySQL DB (25 Ch)</span>
               </button>
               <a href="#python" class="quick-pick-pill" title="Python 3 Masterclass">
-                <span class="pill-emoji">🐍</span>
-                <span>Python 3 Core</span>
+                <span>🐍 Python 3 Core</span>
               </a>
               <a href="#pyspark" class="quick-pick-pill" title="PySpark Distributed Processing">
-                <span class="pill-emoji">⚡</span>
-                <span>PySpark Big Data</span>
+                <span>⚡ PySpark Big Data</span>
               </a>
               <a href="#machine-learning" class="quick-pick-pill" title="Machine Learning &amp; AI">
-                <span class="pill-emoji">🧠</span>
-                <span>ML &amp; GenAI</span>
+                <span>🧠 ML &amp; GenAI</span>
               </a>
               <a href="#java" class="quick-pick-pill" title="Enterprise Java 21">
-                <span class="pill-emoji">☕</span>
-                <span>Java 21 Enterprise</span>
+                <span>☕ Java 21 Enterprise</span>
               </a>
             </div>
 
@@ -414,28 +405,48 @@
             </div>
           </div>
 
-          <!-- Hero Right: Interactive Multi-Tab Lab & Sandbox Window -->
+          <!-- Hero Right: Interactive Light Studio Graphic with Floating Badges -->
           <div class="home-hero-visual">
-            <div class="hero-ide-window">
-              <div class="hero-ide-header">
-                <div class="window-controls">
-                  <span class="control-dot dot-close"></span>
-                  <span class="control-dot dot-minimize"></span>
-                  <span class="control-dot dot-expand"></span>
+            <div class="hero-visual-wrapper">
+              <!-- Floating Badge 1 (Top-Right): ATS Match Score -->
+              <div class="floating-hero-badge float-top-right">
+                <div class="float-icon-box" style="background:#ECFDF5; color:#10B981;">🎯</div>
+                <div class="float-text-wrap">
+                  <strong>94% ATS Match</strong>
+                  <span>AI Resume Diagnostics</span>
                 </div>
-                <!-- Interactive Tabs -->
-                <div class="hero-ide-tabs" role="tablist">
-                  <button type="button" class="hero-ide-tab active" id="hero-tab-py" onclick="window.codingForCareerApp?.switchHeroTab('py')">🐍 Python</button>
-                  <button type="button" class="hero-ide-tab" id="hero-tab-sql" onclick="window.codingForCareerApp?.switchHeroTab('sql')">⚡ SQL</button>
-                  <button type="button" class="hero-ide-tab" id="hero-tab-ats" onclick="window.codingForCareerApp?.switchHeroTab('ats')">🎯 ATS AI</button>
-                </div>
-                <button class="btn-hero-run-snippet" id="btn-hero-snippet-run" title="Run sample in sandbox">
-                  <span>▶ Run Demo</span>
-                </button>
               </div>
 
-              <div class="hero-ide-body" id="hero-ide-body-content">
-                <pre class="hero-code-block" id="hero-code-display"><code><span class="code-comment"># CodingForCareer: Zero-setup real-world execution</span>
+              <!-- Floating Badge 2 (Bottom-Left): Zero Setup Runtime -->
+              <div class="floating-hero-badge float-bottom-left">
+                <div class="float-icon-box" style="background:#EEF2FF; color:#4F46E5;">⚡</div>
+                <div class="float-text-wrap">
+                  <strong>0ms Live Sandbox</strong>
+                  <span>Zero Local Setup Required</span>
+                </div>
+              </div>
+
+              <!-- Main Light Studio Window -->
+              <div class="hero-ide-window">
+                <div class="hero-ide-header">
+                  <div class="window-controls">
+                    <span class="control-dot dot-close"></span>
+                    <span class="control-dot dot-minimize"></span>
+                    <span class="control-dot dot-expand"></span>
+                  </div>
+                  <!-- Interactive Tabs -->
+                  <div class="hero-ide-tabs" role="tablist">
+                    <button type="button" class="hero-ide-tab active" id="hero-tab-py" onclick="window.codingForCareerApp?.switchHeroTab('py')">🐍 Python</button>
+                    <button type="button" class="hero-ide-tab" id="hero-tab-sql" onclick="window.codingForCareerApp?.switchHeroTab('sql')">⚡ SQL</button>
+                    <button type="button" class="hero-ide-tab" id="hero-tab-ats" onclick="window.codingForCareerApp?.switchHeroTab('ats')">🎯 ATS AI</button>
+                  </div>
+                  <button class="btn-hero-run-snippet" id="btn-hero-snippet-run" title="Run sample in sandbox">
+                    <span>▶ Run Demo</span>
+                  </button>
+                </div>
+
+                <div class="hero-ide-body" id="hero-ide-body-content">
+                  <pre class="hero-code-block" id="hero-code-display"><code><span class="code-comment"># CodingForCareer: Zero-setup real-world execution</span>
 <span class="code-keyword">from</span> dataclasses <span class="code-keyword">import</span> dataclass
 
 <span class="code-decorator">@dataclass</span>
@@ -449,19 +460,20 @@
 
 lab = EngineeringTrack()
 <span class="code-builtin">print</span>(lab.verify_readiness())</code></pre>
-              </div>
-
-              <!-- Live Terminal output strip inside hero card -->
-              <div class="hero-ide-terminal" id="hero-ide-terminal-output">
-                <div class="hero-term-header">
-                  <span class="pulse-green"></span>
-                  <span id="hero-term-status">Interactive Cloud Sandbox • Exit 0</span>
-                  <span class="term-time" id="hero-term-ms">6ms</span>
                 </div>
-                <div class="hero-term-content" id="hero-term-text">
-                  &gt; [Compiler] Client-side sandbox initialized.<br>
-                  &gt; <span class="term-highlight">⚡ Cloud Data &amp; AI Engineering: 25 Labs Verified • Ready to Run</span><br>
-                  &gt; <span style="color:#10B981;">✓ Execution completed in 6ms. All assertions passed.</span>
+
+                <!-- Light Terminal output strip inside hero card -->
+                <div class="hero-ide-terminal" id="hero-ide-terminal-output">
+                  <div class="hero-term-header">
+                    <span class="pulse-green"></span>
+                    <span id="hero-term-status">Interactive Cloud Sandbox • Exit 0</span>
+                    <span class="term-time" id="hero-term-ms">6ms</span>
+                  </div>
+                  <div class="hero-term-content" id="hero-term-text">
+                    &gt; [Compiler] Client-side sandbox initialized.<br>
+                    &gt; <span class="term-highlight">⚡ Cloud Data &amp; AI Engineering: 25 Labs Verified • Ready to Run</span><br>
+                    &gt; <span style="color:#10B981;">✓ Execution completed in 6ms. All assertions passed.</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -473,16 +485,16 @@ lab = EngineeringTrack()
       <section class="home-trust-strip">
         <div class="home-alumni-headline">Curriculum Designed for Interviews at Tier-1 Tech Giants &amp; Fast-Growing Unicorns</div>
         <div class="alumni-logos-wrap">
-          <div class="alumni-company-chip"><span class="alumni-company-icon">🌐</span> Google</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">💻</span> Microsoft</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">📦</span> Amazon</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">♾️</span> Meta</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">❄️</span> Snowflake</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">🧱</span> Databricks</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">🚗</span> Uber</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">🏦</span> Goldman Sachs</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">🍿</span> Netflix</div>
-          <div class="alumni-company-chip"><span class="alumni-company-icon">🎨</span> Adobe</div>
+          <div class="alumni-company-chip">Google</div>
+          <div class="alumni-company-chip">Microsoft</div>
+          <div class="alumni-company-chip">Amazon</div>
+          <div class="alumni-company-chip">Meta</div>
+          <div class="alumni-company-chip">Snowflake</div>
+          <div class="alumni-company-chip">Databricks</div>
+          <div class="alumni-company-chip">Uber</div>
+          <div class="alumni-company-chip">Goldman Sachs</div>
+          <div class="alumni-company-chip">Netflix</div>
+          <div class="alumni-company-chip">Adobe</div>
         </div>
 
         <div class="trust-strip-grid">
@@ -620,7 +632,7 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 4. Active Learning vs Video Courses Comparison Section -->
+      <!-- 4. Active Learning Visual Cards (Video vs Active Coding) -->
       <section class="home-comparison-section">
         <div class="home-section-header">
           <div class="section-badge">💡 THE ACTIVE LEARNING ADVANTAGE</div>
@@ -630,85 +642,52 @@ lab = EngineeringTrack()
           </p>
         </div>
 
-        <div class="comparison-card-container">
-          <div class="comparison-header-row">
-            <span>Engineering Dimension</span>
-            <span>Traditional Video Courses</span>
-            <span>CodingForCareer Interactive Platform</span>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comp-feature">
-              <strong>Learning Model</strong>
-              <span>How concepts are absorbed and retained</span>
-            </div>
-            <div class="comp-bad">
-              <span class="comp-bad-icon">✕</span>
-              <span>40+ hours of passive video watching where you lose focus and forget 80% within 48 hours.</span>
-            </div>
-            <div class="comp-good">
-              <span class="comp-good-icon">✓</span>
-              <span>Bite-sized architectural blueprints with visual memory diagrams, trade-off analyses, and immediate concept checks.</span>
+        <div class="comp-cards-grid">
+          <!-- Card 1 -->
+          <div class="comp-feature-card">
+            <span class="comp-card-badge">RETENTION &amp; MEMORY</span>
+            <h3>Active Concept Blueprints vs. Passive Video Watching</h3>
+            <div class="comp-split-box">
+              <div class="comp-bad-box">
+                <span class="comp-bad-icon">✕</span>
+                <span><strong>Video Courses:</strong> 40+ hours of passive video watching where you lose focus and forget 80% within 48 hours.</span>
+              </div>
+              <div class="comp-good-box">
+                <span class="comp-good-icon">✓</span>
+                <span><strong>CodingForCareer:</strong> Interactive blueprints with visual memory diagrams, trade-off analyses, and immediate recall checks.</span>
+              </div>
             </div>
           </div>
 
-          <div class="comparison-row">
-            <div class="comp-feature">
-              <strong>Coding Practice</strong>
-              <span>How you write and test code</span>
-            </div>
-            <div class="comp-bad">
-              <span class="comp-bad-icon">✕</span>
-              <span>Copy-pasting code from a video player while troubleshooting broken local dependencies, package conflicts, and OS quirks.</span>
-            </div>
-            <div class="comp-good">
-              <span class="comp-good-icon">✓</span>
-              <span>Instant client-side browser execution sandboxes with pre-configured runtimes, instant outputs, and zero setup.</span>
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comp-feature">
-              <strong>Career Diagnostic</strong>
-              <span>How your readiness is validated</span>
-            </div>
-            <div class="comp-bad">
-              <span class="comp-bad-icon">✕</span>
-              <span>Generic certificate of completion that hiring managers and ATS filters completely disregard.</span>
-            </div>
-            <div class="comp-good">
-              <span class="comp-good-icon">✓</span>
-              <span>Real-time AI ATS resume benchmark against 10,000+ job descriptions with verified skills and direct curriculum gap fixes.</span>
+          <!-- Card 2 -->
+          <div class="comp-feature-card">
+            <span class="comp-card-badge">PRACTICE &amp; EXECUTION</span>
+            <h3>Zero-Setup In-Browser Labs vs. Broken Environments</h3>
+            <div class="comp-split-box">
+              <div class="comp-bad-box">
+                <span class="comp-bad-icon">✕</span>
+                <span><strong>Video Courses:</strong> Copy-pasting code while debugging local OS errors, conflicting package versions, and broken dependencies.</span>
+              </div>
+              <div class="comp-good-box">
+                <span class="comp-good-icon">✓</span>
+                <span><strong>CodingForCareer:</strong> Instant client-side browser execution sandboxes with pre-configured runtimes and zero local setup.</span>
+              </div>
             </div>
           </div>
 
-          <div class="comparison-row">
-            <div class="comp-feature">
-              <strong>Production Reference</strong>
-              <span>How you reference syntax on the job</span>
-            </div>
-            <div class="comp-bad">
-              <span class="comp-bad-icon">✕</span>
-              <span>Rewinding 2-hour video lectures to find a single syntax example or configuration flag.</span>
-            </div>
-            <div class="comp-good">
-              <span class="comp-good-icon">✓</span>
-              <span>21 searchable, high-density production cheat sheets with one-click code copy engineered for your daily work desk.</span>
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comp-feature">
-              <strong>Access &amp; Pricing</strong>
-              <span>Transparency and long-term cost</span>
-            </div>
-            <div class="comp-bad">
-              <span class="comp-bad-icon">✕</span>
-              <span>$29/mo subscriptions or $2,000+ bootcamps hidden behind aggressive paywalls and upsells.</span>
-            </div>
-            <div class="comp-good">
-              <span class="comp-good-icon">✓</span>
-              <span>100% Free and open access forever. Zero ads, no paywall, no credit card required.</span>
+          <!-- Card 3 -->
+          <div class="comp-feature-card">
+            <span class="comp-card-badge">CAREER READINESS</span>
+            <h3>AI ATS Diagnostics vs. Ignored Certificates</h3>
+            <div class="comp-split-box">
+              <div class="comp-bad-box">
+                <span class="comp-bad-icon">✕</span>
+                <span><strong>Video Courses:</strong> Generic certificates of completion that hiring managers and ATS filters completely disregard.</span>
+              </div>
+              <div class="comp-good-box">
+                <span class="comp-good-icon">✓</span>
+                <span><strong>CodingForCareer:</strong> Real-time AI ATS resume benchmark against 10,000+ job descriptions with verified skill gap fixes.</span>
+              </div>
             </div>
           </div>
         </div>
