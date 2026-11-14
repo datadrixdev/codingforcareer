@@ -2555,6 +2555,11 @@ class CodingForCareerApp {
   }
 
   initResumeAnalyzer() {
+    window.openResumeStudio = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.goToResumeAnalyzer();
+      return false;
+    };
     this.resumeApiBase = "https://resumeanalyser-livid.vercel.app";
     this.selectedResumeFile = null;
     this.hasUserAnalyzed = false;
