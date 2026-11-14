@@ -11423,24 +11423,24 @@ html, body {
 
 .outcome-rating-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 2px;
-  min-width: 0;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+  width: 100%;
 }
 
 .star-rating {
   color: #f59e0b;
   font-size: 0.95rem;
   letter-spacing: 2px;
+  line-height: 1;
 }
 
 .outcome-badges-group {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   min-width: 0;
   flex-wrap: wrap;
 }
