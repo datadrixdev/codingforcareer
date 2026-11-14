@@ -196,6 +196,104 @@
       line-height: inherit !important;
       white-space: pre !important;
     }
+
+    /* Uniform Grid & Complete Card Visibility for Outcomes */
+    .home-outcomes-section {
+      padding: 60px 24px 80px !important;
+      max-width: 1400px !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .outcomes-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      grid-auto-rows: 1fr !important;
+      gap: 20px !important;
+      margin-top: 36px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .outcome-card {
+      min-width: 0 !important;
+      height: 100% !important;
+      box-sizing: border-box !important;
+      padding: 24px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+    }
+    .outcome-rating-row {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+      min-width: 0 !important;
+    }
+    .outcome-badges-group {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      flex-wrap: wrap !important;
+      min-width: 0 !important;
+    }
+    .outcome-track-tag, .outcome-verified-tag {
+      white-space: nowrap !important;
+    }
+    .outcome-quote {
+      flex: 1 1 auto !important;
+      margin-bottom: 16px !important;
+    }
+    .outcome-footer {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      min-width: 0 !important;
+      margin-top: auto !important;
+    }
+    .outcome-author {
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+    }
+    .author-info {
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
+      overflow: hidden !important;
+    }
+    .author-info strong, .author-info span {
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      display: block !important;
+    }
+    .btn-outcome-linkedin {
+      flex-shrink: 0 !important;
+    }
+    @media (max-width: 1180px) {
+      .outcomes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-auto-rows: 1fr !important;
+        gap: 18px !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .home-outcomes-section {
+        padding: 40px 16px 56px !important;
+      }
+      .outcomes-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-auto-rows: auto !important;
+        gap: 16px !important;
+      }
+      .outcome-card {
+        padding: 20px !important;
+      }
+      .outcome-footer {
+        flex-wrap: wrap !important;
+      }
+    }
   </style>
   <!-- Fail-Safe Instant Router for Resume Studio -->
   <script>
