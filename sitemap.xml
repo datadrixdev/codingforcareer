@@ -7,217 +7,211 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#home</loc>
-    <lastmod>2026-10-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://codingforcareer.com/#tutorials</loc>
+    <loc>https://codingforcareer.com/tutorials</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps</loc>
+    <loc>https://codingforcareer.com/roadmaps</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#cheatsheets</loc>
+    <loc>https://codingforcareer.com/cheatsheets</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#quizzes</loc>
+    <loc>https://codingforcareer.com/quizzes</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#playground</loc>
+    <loc>https://codingforcareer.com/playground</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=python</loc>
+    <loc>https://codingforcareer.com/tutorials/python</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=mysql</loc>
+    <loc>https://codingforcareer.com/tutorials/mysql</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=java</loc>
+    <loc>https://codingforcareer.com/tutorials/java</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=statistics</loc>
+    <loc>https://codingforcareer.com/tutorials/statistics</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=machine-learning</loc>
+    <loc>https://codingforcareer.com/tutorials/machine-learning</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=powerbi</loc>
+    <loc>https://codingforcareer.com/tutorials/powerbi</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=pyspark</loc>
+    <loc>https://codingforcareer.com/tutorials/pyspark</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=pykafka</loc>
+    <loc>https://codingforcareer.com/tutorials/pykafka</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=airflow</loc>
+    <loc>https://codingforcareer.com/tutorials/airflow</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=generative-ai</loc>
+    <loc>https://codingforcareer.com/tutorials/generative-ai</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=c</loc>
+    <loc>https://codingforcareer.com/tutorials/c</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=cpp</loc>
+    <loc>https://codingforcareer.com/tutorials/cpp</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=excel</loc>
+    <loc>https://codingforcareer.com/tutorials/excel</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=django</loc>
+    <loc>https://codingforcareer.com/tutorials/django</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=numpy</loc>
+    <loc>https://codingforcareer.com/tutorials/numpy</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=pandas</loc>
+    <loc>https://codingforcareer.com/tutorials/pandas</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=flask</loc>
+    <loc>https://codingforcareer.com/tutorials/flask</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=dsa-python</loc>
+    <loc>https://codingforcareer.com/tutorials/dsa-python</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=dsa-cpp</loc>
+    <loc>https://codingforcareer.com/tutorials/dsa-cpp</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#tutorials?track=dsa-java</loc>
+    <loc>https://codingforcareer.com/tutorials/dsa-java</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=data-scientist</loc>
+    <loc>https://codingforcareer.com/roadmaps/data-scientist</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=data-analyst</loc>
+    <loc>https://codingforcareer.com/roadmaps/data-analyst</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=business-analyst</loc>
+    <loc>https://codingforcareer.com/roadmaps/business-analyst</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=python-developer</loc>
+    <loc>https://codingforcareer.com/roadmaps/python-developer</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=django-developer</loc>
+    <loc>https://codingforcareer.com/roadmaps/django-developer</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=data-engineer</loc>
+    <loc>https://codingforcareer.com/roadmaps/data-engineer</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=generative-ai</loc>
+    <loc>https://codingforcareer.com/roadmaps/generative-ai</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=database-engineer</loc>
+    <loc>https://codingforcareer.com/roadmaps/database-engineer</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=automation-engineer</loc>
+    <loc>https://codingforcareer.com/roadmaps/automation-engineer</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://codingforcareer.com/#roadmaps?id=playwright-developer</loc>
+    <loc>https://codingforcareer.com/roadmaps/playwright-developer</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

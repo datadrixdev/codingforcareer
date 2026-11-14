@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>CodingForCareer — Master Coding, Data Structures & Tech Roadmaps</title>
   <meta name="description"
@@ -52,8 +53,8 @@
     rel="stylesheet">
 
   <!-- Production Stylesheets -->
-  <link rel="stylesheet" href="css/styles.css?v=cfc_7.0">
-  <link rel="stylesheet" href="css/styles.min.css?v=cfc_7.0">
+  <link rel="stylesheet" href="/css/styles.css?v=cfc_7.0">
+  <link rel="stylesheet" href="/css/styles.min.css?v=cfc_7.0">
   <!-- Critical Overrides: Enforce visibility of subbars, high-contrast code blocks, hide sidebar chapter counts -->
   <style>
     :root {
@@ -144,7 +145,11 @@
   <script>
     function openResumeStudio(e) {
       if (e && e.preventDefault) e.preventDefault();
-      window.location.hash = '#resume';
+      try {
+        if (window.location.pathname !== '/resume' || window.location.hash) {
+          history.pushState(null, '', '/resume');
+        }
+      } catch (err) {}
       if (window.codingForCareerApp && typeof window.codingForCareerApp.goToResumeAnalyzer === 'function') {
         window.codingForCareerApp.goToResumeAnalyzer(false);
       } else {
@@ -164,6 +169,13 @@
     }
     window.openResumeStudio = openResumeStudio;
 
+    window.addEventListener('popstate', function() {
+      var p = (window.location.pathname || '').replace(/^\/+|\/+$/g, '').toLowerCase();
+      if (['resume', 'resume-analyzer', 'analyse-resume', 'analyze-resume'].indexOf(p) !== -1) {
+        openResumeStudio();
+      }
+    });
+
     window.addEventListener('hashchange', function() {
       var h = (window.location.hash || '').replace('#', '').toLowerCase();
       if (['resume', 'resume-analyzer', 'analyse-resume', 'analyze-resume'].indexOf(h) !== -1) {
@@ -171,7 +183,10 @@
       }
     });
 
-    if (['#resume', '#resume-analyzer', '#analyse-resume', '#analyze-resume'].indexOf(window.location.hash.toLowerCase()) !== -1) {
+    var initialPath = (window.location.pathname || '').replace(/^\/+|\/+$/g, '').toLowerCase();
+    var initialHash = (window.location.hash || '').replace('#', '').toLowerCase();
+    if (['resume', 'resume-analyzer', 'analyse-resume', 'analyze-resume'].indexOf(initialPath) !== -1 ||
+        ['resume', 'resume-analyzer', 'analyse-resume', 'analyze-resume'].indexOf(initialHash) !== -1) {
       document.addEventListener('DOMContentLoaded', function() { openResumeStudio(); });
     }
   </script>
@@ -3954,9 +3969,9 @@ SELECT
   <div class="toast-container" id="toast-container"></div>
 
   <!-- JavaScript Modules -->
-  <script src="js/data.js?v=cfc_1.0"></script>
-  <script src="js/editor.js?v=cfc_1.0"></script>
-  <script src="js/quiz.js?v=cfc_1.0"></script>
-  <script src="js/app.js?v=cfc_7.0"></script>
+  <script src="/js/data.js?v=cfc_1.0"></script>
+  <script src="/js/editor.js?v=cfc_1.0"></script>
+  <script src="/js/quiz.js?v=cfc_1.0"></script>
+  <script src="/js/app.js?v=cfc_7.0"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@ class CodingForCareerApp {
     this.updateXPDisplay();
     this.initResumeAnalyzer();
     this.initTheme();
-    this.handleHashChange();
+    this.handleRouteChange();
   }
 
   initDOM() {
@@ -229,8 +229,49 @@ class CodingForCareerApp {
       this.renderHomeCourses(this.homeCategory, e.target.value.trim().toLowerCase());
     });
 
-    // Hash navigation
-    window.addEventListener("hashchange", () => this.handleHashChange());
+    // Routing: Clean URLs (HTML5 History API) & Hash Backwards Compatibility
+    window.addEventListener("popstate", () => this.handleRouteChange());
+    window.addEventListener("hashchange", () => this.handleRouteChange());
+
+    // Intercept in-app link clicks for smooth SPA navigation with clean URLs
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest("a");
+      if (!link) return;
+      const href = link.getAttribute("href");
+      if (!href) return;
+
+      if (href.startsWith("http://") || href.startsWith("https://") || href.startsWith("mailto:") || href.startsWith("javascript:")) {
+        return;
+      }
+
+      if (href.startsWith("#")) {
+        const target = href.slice(1).trim();
+        if (!target) return;
+
+        const targetEl = document.getElementById(target);
+        const isAppRoute = ['resume', 'playground', 'quizzes', 'roadmaps', 'cheatsheets', 'tutorials', 'home'].includes(target.toLowerCase()) || 
+                           CODINGFORCAREER_DATA.tracks.some(t => t.id === target.toLowerCase()) ||
+                           target.includes("/");
+
+        if (targetEl && !isAppRoute) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+
+        e.preventDefault();
+        this.navigateToRoute(target);
+        return;
+      }
+
+      if (href.startsWith("/")) {
+        if (href.match(/\.(png|jpg|jpeg|svg|webp|ico|css|js|json|xml|txt)$/i)) {
+          return;
+        }
+        e.preventDefault();
+        this.navigateToRoute(href.replace(/^\/+/, ""));
+      }
+    });
 
     // Announcement bar close
     this.btnCloseAnnouncement?.addEventListener("click", () => {
@@ -378,7 +419,7 @@ class CodingForCareerApp {
     });
   }
 
-  // Slug & URL Routing Helper
+  // Slug & Clean URL Routing Helper
   getTopicSlug(topicId) {
     const topic = CODINGFORCAREER_DATA.topics[topicId];
     if (!topic) return topicId;
@@ -386,15 +427,36 @@ class CodingForCareerApp {
     return `tutorials/${topic.track}/${cleanSlug}`;
   }
 
-  updateHash(slug) {
-    const target = `#${slug.replace(/^#/, '')}`;
-    if (window.location.hash !== target) {
+  updateUrl(slug, replace = false) {
+    const clean = (slug || "").replace(/^#/, "").replace(/^\/+|\/+$/g, "").trim();
+    const targetPath = (!clean || clean === "home") ? "/" : `/${clean}`;
+    const currentPath = window.location.pathname;
+
+    if (currentPath !== targetPath || window.location.hash) {
       try {
-        history.pushState(null, "", target);
+        if (replace) {
+          history.replaceState(null, "", targetPath);
+        } else {
+          history.pushState(null, "", targetPath);
+        }
       } catch (e) {
-        window.location.hash = target;
+        console.warn("History pushState failed", e);
       }
     }
+  }
+
+  updateHash(slug) {
+    this.updateUrl(slug);
+  }
+
+  navigateToRoute(route) {
+    const clean = (route || "").replace(/^#/, "").replace(/^\/+|\/+$/g, "").trim();
+    if (!clean || clean === "home") {
+      this.goToHome(null, true);
+      return;
+    }
+    this.updateUrl(clean);
+    this.handleRouteChange();
   }
 
   findTopicIdByTrackAndSlug(trackId, slug) {
@@ -435,11 +497,11 @@ class CodingForCareerApp {
     return null;
   }
 
-  goToHome(e, updateHash = true) {
+  goToHome(e, updateHistory = true) {
     if (e && e.preventDefault) e.preventDefault();
     this.switchView("home", false, false);
-    if (updateHash) {
-      this.updateHash("home");
+    if (updateHistory) {
+      this.updateUrl("");
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -451,27 +513,51 @@ class CodingForCareerApp {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  handleHashChange() {
-    const rawHash = (window.location.hash || "").replace(/^#/, "").trim();
-    if (!rawHash || rawHash === "home") {
+  handleRouteChange() {
+    let rawRoute = "";
+
+    // 1. Check if user arrived via an old hash link (e.g. /#tutorials/machine-learning/ml-intro or /#resume)
+    if (window.location.hash && window.location.hash.length > 1) {
+      const rawHash = window.location.hash.replace(/^#\/?/, "").trim();
+      const isDOMAnchor = document.getElementById(rawHash);
+      const isAppRoute = ['resume', 'resume-analyzer', 'analyse-resume', 'analyze-resume', 'playground', 'editor', 'try-it', 'quizzes', 'quiz', 'practice', 'roadmaps', 'roadmap', 'cheatsheets', 'cheat-sheets', 'tutorials', 'home'].includes(rawHash.toLowerCase()) ||
+                         CODINGFORCAREER_DATA.tracks.some(t => t.id === rawHash.toLowerCase()) ||
+                         rawHash.includes("/");
+
+      if (!isDOMAnchor || isAppRoute) {
+        rawRoute = rawHash;
+        const targetPath = (!rawRoute || rawRoute === "home") ? "/" : `/${rawRoute}`;
+        try {
+          history.replaceState(null, "", targetPath);
+        } catch (e) {}
+      }
+    }
+
+    // 2. Read route from pathname if no hash migration occurred
+    if (!rawRoute) {
+      const pathname = window.location.pathname || "";
+      rawRoute = pathname.replace(/^\/+|\/+$/g, "").replace(/^index\.html\/?/i, "").trim();
+    }
+
+    if (!rawRoute || rawRoute === "home") {
       this.goToHome(null, false);
       return;
     }
 
-    const hash = rawHash.toLowerCase().replace(/^\/+|\/+$/g, "");
+    const route = rawRoute.toLowerCase().replace(/^\/+|\/+$/g, "");
 
-    if (["resume", "resume-analyzer", "analyse-resume", "analyze-resume"].includes(hash)) {
-      this.goToResumeAnalyzer();
+    if (["resume", "resume-analyzer", "analyse-resume", "analyze-resume"].includes(route)) {
+      this.goToResumeAnalyzer(false);
       return;
     }
 
     // 1. Cheatsheets Hub or Detail: #cheatsheets, #cheatsheets/:track, #cheatsheets-:track
-    if (hash === "cheatsheets" || hash === "cheat-sheets") {
+    if (route === "cheatsheets" || route === "cheat-sheets") {
       this.switchView("cheatsheets", true, false);
       return;
     }
-    if (hash.startsWith("cheatsheets/") || hash.startsWith("cheatsheets-")) {
-      const trackId = hash.replace(/^cheatsheets[\/-]/, "");
+    if (route.startsWith("cheatsheets/") || route.startsWith("cheatsheets-")) {
+      const trackId = route.replace(/^cheatsheets[\/-]/, "");
       const matchedTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === trackId.toLowerCase());
       if (matchedTrack) {
         this.switchView("cheatsheets", false, false);
@@ -481,21 +567,21 @@ class CodingForCareerApp {
     }
 
     // 2. Standalone Views
-    if (["playground", "editor", "try-it"].includes(hash)) {
+    if (["playground", "editor", "try-it"].includes(route)) {
       this.switchView("playground", false, false);
       return;
     }
-    if (["quizzes", "quiz", "practice"].includes(hash)) {
+    if (["quizzes", "quiz", "practice"].includes(route)) {
       this.switchView("quizzes", false, false);
       return;
     }
-    if (hash === "roadmaps" || hash === "roadmap") {
+    if (route === "roadmaps" || route === "roadmap") {
       this.switchView("roadmaps", false, false);
       this.backToRoadmapsHub(false);
       return;
     }
-    if (hash.startsWith("roadmaps/") || hash.startsWith("roadmap/")) {
-      const rmId = hash.replace(/^roadmaps?[\/]/, "");
+    if (route.startsWith("roadmaps/") || route.startsWith("roadmap/")) {
+      const rmId = route.replace(/^roadmaps?[\/]/, "");
       const matchedRm = (CODINGFORCAREER_DATA.roadmaps || []).find(r => r.id.toLowerCase() === rmId.toLowerCase());
       if (matchedRm) {
         this.switchView("roadmaps", false, false);
@@ -503,14 +589,14 @@ class CodingForCareerApp {
         return;
       }
     }
-    if (hash === "tutorials") {
+    if (route === "tutorials") {
       this.switchView("tutorials", false, false);
       return;
     }
 
     // 3. Hierarchical tutorials routing: #tutorials/:track/:topic or #tutorials/:track
-    if (hash.startsWith("tutorials/")) {
-      const sub = hash.replace(/^tutorials\//, "");
+    if (route.startsWith("tutorials/")) {
+      const sub = route.replace(/^tutorials\//, "");
       const parts = sub.split("/");
       if (parts.length >= 2) {
         const trackId = parts[0];
@@ -533,8 +619,8 @@ class CodingForCareerApp {
     }
 
     // 4. Combined slash slug: e.g. #python/intro or #mysql/crud-and-constraints
-    if (hash.includes("/")) {
-      const parts = hash.split("/");
+    if (route.includes("/")) {
+      const parts = route.split("/");
       const trackId = parts[0];
       const topicSlug = parts.slice(1).join("/");
       const topicId = this.findTopicIdByTrackAndSlug(trackId, topicSlug);
@@ -546,7 +632,7 @@ class CodingForCareerApp {
     }
 
     // 5. Track ID direct (e.g. #python, #mysql, #pyspark)
-    const directTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === hash);
+    const directTrack = CODINGFORCAREER_DATA.tracks.find(t => t.id.toLowerCase() === route);
     if (directTrack) {
       this.switchView("tutorials", false, false);
       this.selectTrack(directTrack.id, false);
@@ -554,12 +640,12 @@ class CodingForCareerApp {
     }
 
     // 6. Topic ID legacy direct (e.g. #py-intro, #mysql-crud, #dsa-py-dp)
-    if (CODINGFORCAREER_DATA.topics[rawHash]) {
+    if (CODINGFORCAREER_DATA.topics[rawRoute]) {
       this.switchView("tutorials", false, false);
-      this.selectTopic(rawHash, false);
+      this.selectTopic(rawRoute, false);
       return;
     }
-    const topicKey = Object.keys(CODINGFORCAREER_DATA.topics).find(k => k.toLowerCase() === hash);
+    const topicKey = Object.keys(CODINGFORCAREER_DATA.topics).find(k => k.toLowerCase() === route);
     if (topicKey) {
       this.switchView("tutorials", false, false);
       this.selectTopic(topicKey, false);
@@ -567,15 +653,19 @@ class CodingForCareerApp {
     }
 
     // 7. Section anchors or footer pages (#about, #privacy, #terms, #contribute)
-    if (["about", "privacy", "terms", "contribute"].includes(hash)) {
-      this.showToast(`Navigated to ${hash.toUpperCase()} section`);
-      const targetEl = document.getElementById("footer-" + hash) || document.querySelector("footer");
+    if (["about", "privacy", "terms", "contribute"].includes(route)) {
+      this.showToast(`Navigated to ${route.toUpperCase()} section`);
+      const targetEl = document.getElementById("footer-" + route) || document.querySelector("footer");
       targetEl?.scrollIntoView({ behavior: "smooth" });
       return;
     }
 
     // Fallback to home
     this.goToHome(null, false);
+  }
+
+  handleHashChange() {
+    this.handleRouteChange();
   }
 
   switchView(viewName, forceHubReset = false, updateHash = false) {
@@ -631,36 +721,38 @@ class CodingForCareerApp {
       }
     }
 
+    const currentRoute = (window.location.pathname || "").replace(/^\/+|\/+$/g, "");
+
     if (viewName === "roadmaps") {
-      if (forceHubReset || (!window.location.hash.startsWith("#roadmaps/") && !window.location.hash.startsWith("#roadmap/"))) {
+      if (forceHubReset || (!currentRoute.startsWith("roadmaps/") && !currentRoute.startsWith("roadmap/"))) {
         this.backToRoadmapsHub(false);
       }
     }
 
     if (viewName === "cheatsheets") {
-      if (forceHubReset || (!window.location.hash.startsWith("#cheatsheets/") && !window.location.hash.startsWith("#cheatsheets-"))) {
+      if (forceHubReset || (!currentRoute.startsWith("cheatsheets/") && !currentRoute.startsWith("cheatsheets-"))) {
         this.backToCheatSheetsHub(false);
       }
     }
 
     if (updateHash) {
       if (viewName === "home") {
-        this.updateHash("home");
+        this.updateUrl("");
       } else if (viewName === "tutorials") {
         const topic = CODINGFORCAREER_DATA.topics[this.currentTopicId];
         if (topic) {
-          this.updateHash(this.getTopicSlug(this.currentTopicId));
+          this.updateUrl(this.getTopicSlug(this.currentTopicId));
         } else {
-          this.updateHash("tutorials");
+          this.updateUrl("tutorials");
         }
       } else if (viewName === "cheatsheets") {
         if (this.activeCheatSheetTrack && this.csDetailView && this.csDetailView.style.display !== "none") {
-          this.updateHash(`cheatsheets/${this.activeCheatSheetTrack}`);
+          this.updateUrl(`cheatsheets/${this.activeCheatSheetTrack}`);
         } else {
-          this.updateHash("cheatsheets");
+          this.updateUrl("cheatsheets");
         }
       } else {
-        this.updateHash(viewName);
+        this.updateUrl(viewName);
       }
     }
 
