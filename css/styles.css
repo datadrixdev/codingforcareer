@@ -12380,33 +12380,51 @@ html, body {
   color: #94A3B8;
 }
 
-/* 5. DUAL-AUDIENCE CAREER ACCELERATOR (STUDENTS VS PROS) */
+/* 5. DUAL-AUDIENCE CAREER ACCELERATOR (COMPACT HIGH-DENSITY REDESIGN) */
 .home-persona-section {
-  padding: 64px 24px 80px;
-  max-width: 1540px;
+  padding: 36px 24px 40px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+}
+
+.home-persona-section .home-section-header {
+  margin-bottom: 20px;
+}
+
+.home-persona-section .section-main-heading {
+  font-size: clamp(1.45rem, 2.2vw, 1.95rem);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.home-persona-section .section-sub-heading {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 660px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 .persona-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  margin-top: 36px;
+  gap: 20px;
+  margin-top: 18px;
 }
 
 .persona-card {
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  border-radius: 24px;
-  padding: 38px 34px;
+  border-radius: 16px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
   position: relative;
   overflow: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .persona-card::before {
@@ -12415,7 +12433,7 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: #0F172A;
 }
 
@@ -12424,27 +12442,45 @@ html, body {
 }
 
 .persona-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px -10px rgba(99, 102, 241, 0.16);
-  border-color: #6366F1;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.14);
+  border-color: #CBD5E1;
 }
 
 [data-theme="dark"] .persona-card {
   background: #1E293B;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .persona-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.persona-card-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.persona-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .persona-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  font-weight: 850;
+  gap: 5px;
+  font-size: 0.70rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  padding: 4px 12px;
+  letter-spacing: 0.6px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
-  margin-bottom: 14px;
 }
 
 .badge-student {
@@ -12471,13 +12507,42 @@ html, body {
   border-color: rgba(99, 102, 241, 0.35);
 }
 
+.persona-exp-pill {
+  font-size: 0.70rem;
+  font-weight: 700;
+  color: #64748B;
+  background: #F8FAFC;
+  padding: 2px 9px;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  letter-spacing: 0.2px;
+}
+
+[data-theme="dark"] .persona-exp-pill {
+  background: rgba(255, 255, 255, 0.05);
+  color: #94A3B8;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.persona-exp-pro {
+  color: #4F46E5;
+  background: #F5F3FF;
+  border-color: #DDD6FE;
+}
+
+[data-theme="dark"] .persona-exp-pro {
+  color: #C4B5FD;
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
 .persona-title {
-  font-size: 1.55rem;
-  font-weight: 850;
+  font-size: 1.22rem;
+  font-weight: 800;
   color: #0F172A;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-  margin-bottom: 12px;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin: 0 0 6px 0;
 }
 
 [data-theme="dark"] .persona-title {
@@ -12485,10 +12550,10 @@ html, body {
 }
 
 .persona-desc {
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   color: #64748B;
-  line-height: 1.62;
-  margin-bottom: 24px;
+  line-height: 1.48;
+  margin: 0 0 14px 0;
 }
 
 [data-theme="dark"] .persona-desc {
@@ -12498,49 +12563,52 @@ html, body {
 .persona-perks-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .persona-perk-item {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 0.88rem;
-  line-height: 1.5;
+  gap: 8px;
+  font-size: 0.82rem;
+  line-height: 1.42;
   color: #1E293B;
 }
 
 [data-theme="dark"] .persona-perk-item {
-  color: #E2E8F0;
+  color: #CBD5E1;
 }
 
 .persona-check {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background: #EEF2FF;
   color: #4F46E5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 900;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 [data-theme="dark"] .persona-check {
-  background: rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.22);
   color: #A5B4FC;
 }
 
 .persona-flow {
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 24px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 [data-theme="dark"] .persona-flow {
@@ -12549,85 +12617,93 @@ html, body {
 }
 
 .persona-flow-label {
-  font-size: 0.70rem;
+  font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
   color: #64748B;
-  margin-bottom: 8px;
-  display: block;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .persona-flow-label {
+  color: #94A3B8;
 }
 
 .persona-steps-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .persona-step-pill {
-  font-size: 0.78rem;
-  font-weight: 750;
+  font-size: 0.74rem;
+  font-weight: 700;
   color: #1E293B;
   background: #FFFFFF;
-  padding: 4px 10px;
-  border-radius: 8px;
+  padding: 2px 7px;
+  border-radius: 6px;
   border: 1px solid #CBD5E1;
 }
 
 [data-theme="dark"] .persona-step-pill {
   background: #1E293B;
   color: #F1F5F9;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.path-sep {
+  color: #94A3B8;
+  font-size: 0.74rem;
 }
 
 .btn-persona {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 13px 24px;
-  border-radius: 10px;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 9px;
   background: #0F172A;
   color: #FFFFFF !important;
-  font-size: 0.92rem;
-  font-weight: 750;
+  font-size: 0.86rem;
+  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid #1E293B;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
   box-sizing: border-box;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.16);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
 }
 
 .btn-persona:hover {
   background: #1E293B;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
   color: #FFFFFF !important;
 }
 
 .btn-persona-pro {
   background: #4F46E5;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28);
+  border-color: #4338CA;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.25);
 }
 
 .btn-persona-pro:hover {
   background: #4338CA;
-  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
   color: #FFFFFF !important;
 }
 
 [data-theme="dark"] .btn-persona {
-  background: #1E293B;
+  background: #334155;
   border-color: rgba(255, 255, 255, 0.15);
   color: #F8FAFC !important;
 }
 
 [data-theme="dark"] .btn-persona:hover {
-  background: #334155;
+  background: #475569;
   border-color: #64748B;
 }
 
@@ -12789,14 +12865,29 @@ html, body {
   .trust-strip-grid {
     grid-template-columns: 1fr;
   }
+  .home-persona-section {
+    padding: 28px 16px 32px;
+  }
   .persona-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 14px;
   }
   .persona-card {
-    padding: 24px 20px;
+    padding: 16px 14px;
   }
   .persona-title {
-    font-size: 1.35rem;
+    font-size: 1.12rem;
+  }
+  .persona-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .persona-flow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
   .home-hero-title {
     font-size: 2.2rem;
