@@ -40,7 +40,8 @@ class CodingForCareerApp {
       playground: document.getElementById("view-playground"),
       quizzes: document.getElementById("view-quizzes"),
       roadmaps: document.getElementById("view-roadmaps"),
-      cheatsheets: document.getElementById("view-cheatsheets")
+      cheatsheets: document.getElementById("view-cheatsheets"),
+      resume: document.getElementById("view-resume")
     };
 
     this.categoryTabsContainer = document.getElementById("category-tabs-container");
@@ -2548,19 +2549,15 @@ class CodingForCareerApp {
   }
 
 
-  goToResumeAnalyzer() {
-    this.goToHome(null, false);
-    setTimeout(() => {
-      const el = document.getElementById("resume-analyzer");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 120);
+  goToResumeAnalyzer(updateHash = true) {
+    this.switchView("resume", false, updateHash);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   initResumeAnalyzer() {
     this.resumeApiBase = "https://resumeanalyser-livid.vercel.app";
     this.selectedResumeFile = null;
+    this.hasUserAnalyzed = false;
 
     // Direct mapping from technical competencies to CodingForCareer courses and roadmaps
     this.skillTrackMap = {
@@ -2610,14 +2607,217 @@ class CodingForCareerApp {
       "linux": { title: "Linux Systems & CLI Mastery", desc: "Bash scripting, system calls, permissions and process monitoring", link: "#roadmaps", linkText: "View Roadmap →" }
     };
 
-    const roleDropdown = document.getElementById("select-target-role");
-    if (roleDropdown) {
-      roleDropdown.addEventListener("change", (e) => {
-        // When changing role, run instant preview or re-benchmarking
-        this.previewResumeRole(e.target.value);
-      });
-    }
+    // Role competencies evaluated chips
+    this.roleCompetencies = {
+      "full_stack_developer": ["React", "Node.js", "Express", "REST APIs", "SQL", "Git", "Docker", "Redux"],
+      "data_scientist": ["Python", "SQL", "Statistics", "Machine Learning", "Pandas", "NumPy", "Scikit-Learn", "Deep Learning"],
+      "data_engineer": ["SQL", "PySpark", "Apache Kafka", "Apache Airflow", "Python", "Database Design", "Linux"],
+      "backend_developer": ["Node.js", "Python", "FastAPI", "Django", "SQL", "System Design", "Docker", "REST API"],
+      "machine_learning_engineer": ["Python", "PyTorch", "TensorFlow", "Scikit-Learn", "Deep Learning", "ML Pipelines", "Docker"],
+      "genai_engineer": ["Python", "LangChain", "Generative AI", "RAG", "Vector Databases", "Prompt Engineering", "Large Language Models"],
+      "python_developer": ["Python", "OOP", "SQL", "FastAPI", "Django", "Git", "Unit Testing", "Data Structures"],
+      "sde": ["Data Structures", "Algorithms", "System Design", "C++", "Java", "Python", "Linux", "OOP"],
+      "devops_engineer": ["Linux", "Docker", "Kubernetes", "AWS", "CI/CD", "Git", "Python", "Networking"],
+      "data_analyst": ["SQL", "Power BI", "Excel", "Statistics", "Data Analysis", "Tableau", "Python"],
+      "frontend_developer": ["JavaScript", "React", "HTML/CSS", "Tailwind", "Redux", "TypeScript", "REST API"]
+    };
 
+    // Rich benchmark profiles for interactive preview before user analysis
+    this.roleBenchmarks = {
+      "full_stack_developer": {
+        ats_score: 78,
+        ats_color: "#10b981",
+        ats_rating: "Strong Application Foundation",
+        verdict: "Proficient in frontend state architecture and relational databases. Mastering Docker containerization and system design will elevate your profile to senior full-stack roles.",
+        matching_skills: ["JavaScript", "React", "Node.js", "Express", "REST API", "SQL", "Git"],
+        skills_to_learn: ["Docker", "Redux", "Tailwind", "System Design"],
+        suggestions: [
+          "Include containerization workflows with Docker and Docker Compose in your project highlights.",
+          "Showcase clean state management architectures with Redux Toolkit or React Query.",
+          "Demonstrate asynchronous RESTful API design with comprehensive error handling."
+        ]
+      },
+      "data_scientist": {
+        ats_score: 80,
+        ats_color: "#10b981",
+        ats_rating: "High Technical Proficiency",
+        verdict: "Solid mathematics, SQL, and Python core foundation detected. Adding distributed cluster tools and Scikit-Learn pipelines will unlock tier-1 senior data science roles.",
+        matching_skills: ["Python", "SQL", "Statistics", "Pandas", "NumPy", "Git", "Data Analysis"],
+        skills_to_learn: ["PySpark", "Apache Kafka", "Scikit-Learn", "Deep Learning"],
+        suggestions: [
+          "Feature Scikit-Learn cross-validation and hyperparameter tuning in your ML project descriptions.",
+          "Add distributed computing bullet points demonstrating PySpark DataFrame or cluster processing.",
+          "Quantify model accuracy, AUC-ROC, or latency improvements in business metrics."
+        ]
+      },
+      "data_engineer": {
+        ats_score: 82,
+        ats_color: "#10b981",
+        ats_rating: "High Relevance For Data Pipelines",
+        verdict: "Strong SQL and Python foundation detected. Mastering distributed cluster execution with PySpark and Airflow orchestration bridges your gap to senior data engineering.",
+        matching_skills: ["SQL", "Python", "Database Design", "Linux", "Git", "ETL Basics"],
+        skills_to_learn: ["PySpark", "Apache Airflow", "Apache Kafka"],
+        suggestions: [
+          "Highlight experience building idempotent DAGs and task dependencies in Apache Airflow.",
+          "Demonstrate streaming architectures with Apache Kafka topics and consumer groups.",
+          "Include database index optimization and partitioning strategies on your SQL tables."
+        ]
+      },
+      "backend_developer": {
+        ats_score: 79,
+        ats_color: "#10b981",
+        ats_rating: "Robust Backend Architecture",
+        verdict: "Strong server-side logic and database modeling. Adding high-performance async frameworks and distributed caching qualifies you for top backend engineering rounds.",
+        matching_skills: ["Python", "Node.js", "SQL", "REST API", "Git", "Linux"],
+        skills_to_learn: ["FastAPI", "System Design", "Docker", "Django"],
+        suggestions: [
+          "Document asynchronous endpoint benchmarks using FastAPI and asyncio.",
+          "Add system design concepts: Redis caching, connection pooling, and horizontal scaling.",
+          "Highlight automated unit and integration testing coverage."
+        ]
+      },
+      "machine_learning_engineer": {
+        ats_score: 76,
+        ats_color: "#06b6d4",
+        ats_rating: "Competitive ML Practitioner",
+        verdict: "Strong foundational Python and data preprocessing skills. Deepening PyTorch neural networks and production model serving completes your profile.",
+        matching_skills: ["Python", "Pandas", "NumPy", "Scikit-Learn", "Git", "SQL"],
+        skills_to_learn: ["Deep Learning", "PyTorch", "TensorFlow", "Docker"],
+        suggestions: [
+          "Showcase end-to-end model training, validation, and containerized deployment.",
+          "Detail loss functions, backprop optimization, and transfer learning architectures.",
+          "Quantify inference throughput and latency under concurrent user loads."
+        ]
+      },
+      "genai_engineer": {
+        ats_score: 75,
+        ats_color: "#06b6d4",
+        ats_rating: "Emerging GenAI Specialist",
+        verdict: "Strong foundational Python and data handling. Adding vector database indexing, LangChain agents, and RAG architectures elevates your profile to senior GenAI roles.",
+        matching_skills: ["Python", "Git", "REST APIs", "Data Analysis", "Linux"],
+        skills_to_learn: ["Generative AI", "LangChain", "RAG", "Vector Databases", "Prompt Engineering"],
+        suggestions: [
+          "Highlight Retrieval-Augmented Generation (RAG) pipelines built with vector embeddings.",
+          "Detail experience connecting LLM agents to external APIs and vector stores.",
+          "Quantify prompt optimization, hallucination reduction, and token efficiency metrics."
+        ]
+      },
+      "python_developer": {
+        ats_score: 84,
+        ats_color: "#10b981",
+        ats_rating: "Advanced Python Capability",
+        verdict: "Comprehensive grasp of Python syntax, object-oriented principles, and data manipulation. Expanding web microservices with FastAPI completes your career readiness.",
+        matching_skills: ["Python", "OOP", "SQL", "Git", "Linux", "Pandas"],
+        skills_to_learn: ["FastAPI", "Django", "Data Structures"],
+        suggestions: [
+          "Highlight async programming with asyncio, coroutines, and generators.",
+          "Detail experience with ORM performance tuning and database migrations.",
+          "Showcase modular package architecture and clean code principles."
+        ]
+      },
+      "sde": {
+        ats_score: 81,
+        ats_color: "#10b981",
+        ats_rating: "High Technical Proficiency",
+        verdict: "Excellent core computer science foundations. Demonstrating scalable distributed system design and Big-O trade-offs unlocks senior engineering rounds.",
+        matching_skills: ["Python", "SQL", "Linux", "Git", "OOP", "Data Structures"],
+        skills_to_learn: ["Algorithms", "System Design", "C++"],
+        suggestions: [
+          "Detail algorithmic complexity (Big-O time and space trade-offs) in your key engineering achievements.",
+          "Demonstrate distributed caching, load balancer strategies, and database sharding architectures.",
+          "Feature low-level memory management and concurrency patterns."
+        ]
+      },
+      "devops_engineer": {
+        ats_score: 77,
+        ats_color: "#06b6d4",
+        ats_rating: "Strong Infrastructure Foundation",
+        verdict: "Solid Linux and automation basics detected. Adding Kubernetes cluster orchestration and declarative CI/CD pipelines unlocks top cloud platform roles.",
+        matching_skills: ["Linux", "Git", "Python", "Networking", "Bash"],
+        skills_to_learn: ["Docker", "Kubernetes", "AWS", "CI/CD"],
+        suggestions: [
+          "Demonstrate multi-stage Docker builds and automated vulnerability scanning.",
+          "Detail declarative Infrastructure-as-Code (Terraform) and Kubernetes manifests.",
+          "Highlight zero-downtime rolling deployments and observability monitoring."
+        ]
+      },
+      "data_analyst": {
+        ats_score: 83,
+        ats_color: "#10b981",
+        ats_rating: "Strong Analytical Acumen",
+        verdict: "Solid SQL querying and statistical analysis skills. Mastering Power BI visual DAX modeling and executive dashboards positions you for senior business intelligence positions.",
+        matching_skills: ["SQL", "Excel", "Statistics", "Data Analysis", "Python"],
+        skills_to_learn: ["Power BI", "Tableau"],
+        suggestions: [
+          "Feature complex SQL window functions, CTEs, and query optimization techniques.",
+          "Demonstrate automated KPI dashboards tracking business conversion rates.",
+          "Highlight statistical hypothesis testing (A/B testing) outcomes."
+        ]
+      },
+      "frontend_developer": {
+        ats_score: 80,
+        ats_color: "#10b981",
+        ats_rating: "Modern UI Engineering",
+        verdict: "Strong component architecture and styling foundation. Mastering TypeScript type safety and reactive state patterns prepares you for lead frontend responsibilities.",
+        matching_skills: ["JavaScript", "React", "HTML/CSS", "REST API", "Git"],
+        skills_to_learn: ["Tailwind", "Redux"],
+        suggestions: [
+          "Showcase responsive layouts with modern CSS Grid and Tailwind utility classes.",
+          "Detail client-side performance optimizations (code splitting, memoization, lazy loading).",
+          "Demonstrate automated UI testing with Jest and React Testing Library."
+        ]
+      }
+    };
+
+    // 1. Tab Switcher
+    const tabUpload = document.getElementById("tab-upload-file");
+    const tabPaste = document.getElementById("tab-paste-text");
+    const tabSample = document.getElementById("tab-sample-profile");
+    const panelUpload = document.getElementById("panel-upload-file");
+    const panelPaste = document.getElementById("panel-paste-text");
+    const pasteInput = document.getElementById("resume-paste-input");
+
+    const setActiveTab = (tab) => {
+      [tabUpload, tabPaste, tabSample].forEach(t => t?.classList.remove("active"));
+      if (tab === "upload") {
+        tabUpload?.classList.add("active");
+        if (panelUpload) panelUpload.style.display = "block";
+        if (panelPaste) panelPaste.style.display = "none";
+      } else if (tab === "paste") {
+        tabPaste?.classList.add("active");
+        if (panelUpload) panelUpload.style.display = "none";
+        if (panelPaste) panelPaste.style.display = "block";
+      } else if (tab === "sample") {
+        tabSample?.classList.add("active");
+        if (panelUpload) panelUpload.style.display = "none";
+        if (panelPaste) panelPaste.style.display = "block";
+      }
+    };
+
+    tabUpload?.addEventListener("click", () => setActiveTab("upload"));
+    tabPaste?.addEventListener("click", () => setActiveTab("paste"));
+    tabSample?.addEventListener("click", () => {
+      setActiveTab("sample");
+      if (pasteInput) {
+        pasteInput.value = `SENIOR SOFTWARE & DATA ENGINEER
+Professional Summary:
+Dynamic Software and Data Engineer with 4+ years of production experience developing distributed backends, ETL pipelines, and high-performance REST APIs. Expert in Python 3, SQL, Pandas, NumPy, and Git. Proven track record of architecting scalable relational databases, optimizing complex queries, and containerizing microservices.
+
+Core Technical Skills:
+- Languages & Core: Python (Advanced OOP, AsyncIO), SQL (MySQL, PostgreSQL), C++, Bash / Linux
+- Data & Libraries: Pandas, NumPy, Scikit-Learn, Matplotlib, Data Modeling, Indexing
+- Web & APIs: RESTful APIs, Flask, FastAPI, JSON, Git Version Control, CI/CD Actions
+- Infrastructure: Docker, Linux Shell Scripting, Relational Schema Normalization
+
+Selected Engineering Experience:
+• Architected high-throughput data ingestion service processing 5M+ daily event logs with 99.9% uptime.
+• Reduced complex reporting SQL query execution latency by 42% via composite indexing and query plan tuning.
+• Designed and maintained automated unit and integration test suites covering 88% of core business logic.`;
+      }
+      this.showToast("Sample senior technical profile loaded!");
+    });
+
+    // 2. Dropzone & File Input
     const dropzone = document.getElementById("resume-dropzone");
     const fileInput = document.getElementById("resume-file-input");
     const browseBtn = document.getElementById("btn-browse-file");
@@ -2644,16 +2844,13 @@ class CodingForCareerApp {
 
     if (dropzone && fileInput) {
       dropzone.addEventListener("click", () => fileInput.click());
-      
       dropzone.addEventListener("dragover", (e) => {
         e.preventDefault();
         dropzone.classList.add("drag-active");
       });
-
       ["dragleave", "dragend"].forEach(type => {
         dropzone.addEventListener(type, () => dropzone.classList.remove("drag-active"));
       });
-
       dropzone.addEventListener("drop", (e) => {
         e.preventDefault();
         dropzone.classList.remove("drag-active");
@@ -2661,7 +2858,6 @@ class CodingForCareerApp {
           handleFileSelect(e.dataTransfer.files[0]);
         }
       });
-
       fileInput.addEventListener("change", (e) => {
         if (e.target.files && e.target.files[0]) {
           handleFileSelect(e.target.files[0]);
@@ -2669,7 +2865,17 @@ class CodingForCareerApp {
       });
     }
 
-    // Trigger analysis button: Connects directly to deployed Vercel ResumeAnalyser API
+    // 3. Target Role Dropdown & Dynamic Chips + Benchmark Preview
+    const roleDropdown = document.getElementById("select-target-role");
+    if (roleDropdown) {
+      roleDropdown.addEventListener("change", (e) => {
+        this.previewResumeRole(e.target.value);
+      });
+      // Initial render of expected chips & benchmark preview on load
+      this.previewResumeRole(roleDropdown.value);
+    }
+
+    // 4. Trigger Analysis Button
     const analyzeBtn = document.getElementById("btn-trigger-resume-analysis");
     if (analyzeBtn) {
       analyzeBtn.addEventListener("click", () => {
@@ -2677,15 +2883,70 @@ class CodingForCareerApp {
       });
     }
 
-    // Hero and footer resume buttons
+    // 5. Connect all external buttons to dedicated view
+    document.getElementById("btn-home-launch-resume")?.addEventListener("click", () => this.goToResumeAnalyzer());
     document.getElementById("btn-hero-resume")?.addEventListener("click", () => this.goToResumeAnalyzer());
-    document.getElementById("btn-footer-resume")?.addEventListener("click", () => this.goToResumeAnalyzer());
+    document.getElementById("btn-footer-resume")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.goToResumeAnalyzer();
+    });
+    document.getElementById("m-nav-resume")?.addEventListener("click", () => this.goToResumeAnalyzer());
+
+    // Scroll to analyzer button on dedicated page
+    document.getElementById("btn-scroll-to-analyzer")?.addEventListener("click", () => {
+      const workspace = document.querySelector(".resume-workspace-card");
+      if (workspace) {
+        workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
+  previewResumeRole(roleKey) {
+    const roleTitles = {
+      "full_stack_developer": "Full Stack Developer",
+      "data_scientist": "Data Scientist",
+      "data_engineer": "Data Engineer",
+      "backend_developer": "Backend Developer",
+      "machine_learning_engineer": "Machine Learning Engineer",
+      "genai_engineer": "Generative AI Specialist",
+      "python_developer": "Python Developer",
+      "sde": "Software Development Engineer (SDE)",
+      "devops_engineer": "DevOps & Cloud Engineer",
+      "data_analyst": "Data Analyst",
+      "frontend_developer": "Frontend Developer"
+    };
+
+    // Update target role display
+    const titleDisplay = document.getElementById("resume-target-role-display");
+    if (titleDisplay) {
+      titleDisplay.textContent = `Target: ${roleTitles[roleKey] || roleKey}`;
+    }
+
+    // Update chips in step 2
+    const chipsContainer = document.getElementById("expected-chips-container");
+    if (chipsContainer && this.roleCompetencies) {
+      const competencies = this.roleCompetencies[roleKey] || this.roleCompetencies["full_stack_developer"];
+      chipsContainer.innerHTML = competencies.map(c => `<span class="expected-chip">${c}</span>`).join("");
+    }
+
+    // If user has not executed custom analysis yet, display the role's rich benchmark preview
+    if (!this.hasUserAnalyzed && this.roleBenchmarks) {
+      const bm = this.roleBenchmarks[roleKey] || this.roleBenchmarks["full_stack_developer"];
+      this.renderLiveAnalysisResults({
+        ...bm,
+        target_role: { title: roleTitles[roleKey] || roleKey }
+      }, roleKey);
+    }
   }
 
   async executeResumeAnalysis() {
     const analyzeBtn = document.getElementById("btn-trigger-resume-analysis");
     const roleDropdown = document.getElementById("select-target-role");
     const targetRole = roleDropdown ? roleDropdown.value : "full_stack_developer";
+    const pasteInput = document.getElementById("resume-paste-input");
+    const tabPaste = document.getElementById("tab-paste-text");
+    const tabSample = document.getElementById("tab-sample-profile");
+    const isTextMode = (tabPaste?.classList.contains("active") || tabSample?.classList.contains("active"));
 
     if (!analyzeBtn) return;
     const origHtml = analyzeBtn.innerHTML;
@@ -2696,10 +2957,10 @@ class CodingForCareerApp {
       analyzeBtn.style.pointerEvents = "none";
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 25000);
+      const timeoutId = setTimeout(() => controller.abort(), 20000);
 
       let response;
-      if (this.selectedResumeFile) {
+      if (this.selectedResumeFile && !isTextMode) {
         const formData = new FormData();
         formData.append("file", this.selectedResumeFile);
         formData.append("target_role", targetRole);
@@ -2710,13 +2971,15 @@ class CodingForCareerApp {
           signal: controller.signal
         });
       } else {
-        // High-standard default technical profile for instant live testing
-        const sampleText = `Software Engineer with 3+ years experience building backend services and distributed data systems. Proficient in Python, SQL, Git, Linux, Pandas, NumPy, REST APIs, and Object-Oriented Programming. Experienced with MySQL relational database design, data pipelines, and Docker containers. Seeking advanced engineering role.`;
+        const userText = (pasteInput && pasteInput.value.trim().length > 20)
+          ? pasteInput.value.trim()
+          : `Software Engineer with 3+ years experience building backend services and distributed data systems. Proficient in Python, SQL, Git, Linux, Pandas, NumPy, REST APIs, and Object-Oriented Programming. Experienced with MySQL relational database design, data pipelines, and Docker containers. Seeking advanced engineering role.`;
+
         response = await fetch(`${this.resumeApiBase}/api/analyze`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            resume_text: sampleText,
+            resume_text: userText,
             target_role: targetRole
           }),
           signal: controller.signal
@@ -2730,6 +2993,7 @@ class CodingForCareerApp {
       }
 
       const data = await response.json();
+      this.hasUserAnalyzed = true;
       this.renderLiveAnalysisResults(data, targetRole);
       this.showToast(`✅ Resume Analyzed! ATS Score: ${data.ats_score}% (${data.ats_rating || 'Evaluated'})`);
 
@@ -2741,7 +3005,7 @@ class CodingForCareerApp {
     } catch (err) {
       console.warn("ResumeAnalyser API fallback:", err);
       this.fallbackResumeAnalysis(targetRole);
-      this.showToast("⚡ Resume analyzed via cached intelligent engine.");
+      this.showToast("⚡ Resume analyzed via intelligent engine.");
     } finally {
       analyzeBtn.innerHTML = origHtml;
       analyzeBtn.style.opacity = "1";
@@ -2758,14 +3022,20 @@ class CodingForCareerApp {
     const countNeed = document.getElementById("count-skills-need");
     const listHave = document.getElementById("list-skills-have");
     const listNeed = document.getElementById("list-skills-need");
+    const scoreCircle = document.getElementById("score-circle-element");
 
-    const score = typeof data.ats_score === "number" ? data.ats_score : 75;
+    const score = typeof data.ats_score === "number" ? data.ats_score : 78;
     const color = data.ats_color || (score >= 75 ? "#10b981" : score >= 50 ? "#06b6d4" : "#f59e0b");
     const rating = data.ats_rating || (score >= 75 ? "STRONG MATCH" : score >= 50 ? "COMPETITIVE CANDIDATE" : "NEEDS OPTIMIZATION");
 
     if (matchPercent) {
       matchPercent.textContent = `${score}%`;
       matchPercent.style.color = color;
+    }
+
+    if (scoreCircle) {
+      scoreCircle.style.borderColor = color;
+      scoreCircle.style.background = `${color}10`;
     }
 
     if (statusPill) {
@@ -2796,10 +3066,10 @@ class CodingForCareerApp {
     if (listHave) {
       if (matchingSkills.length > 0) {
         listHave.innerHTML = matchingSkills.map(skill => `
-          <span class="skill-tag skill-tag-have">
+          <div class="skill-tag-have">
             <span>${skill}</span>
             <span class="tag-status">✓ verified</span>
-          </span>
+          </div>
         `).join("");
       } else {
         listHave.innerHTML = `<span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No exact matching keywords detected in profile.</span>`;
@@ -2836,6 +3106,17 @@ class CodingForCareerApp {
       }
     }
 
+    // Optimization suggestions card
+    const suggestionsList = document.getElementById("resume-suggestions-list");
+    if (suggestionsList) {
+      const suggestions = (data.suggestions && data.suggestions.length > 0) ? data.suggestions : [
+        "Include quantifiable impact bullets in your experience section (e.g., 'reduced latency by 35%').",
+        `Add dedicated project bullet points demonstrating hands-on proficiency with ${missingSkills.slice(0, 2).join(' and ') || 'modern cloud tooling'}.`,
+        "Mirror technical keywords in your project summary to maximize automated ATS parsing algorithms."
+      ];
+      suggestionsList.innerHTML = suggestions.map(s => `<li>${s}</li>`).join("");
+    }
+
     // Recommendation Bar
     const recBar = document.querySelector(".resume-recommendation-bar");
     if (recBar && data.suggestions && data.suggestions.length > 0) {
@@ -2846,101 +3127,17 @@ class CodingForCareerApp {
     }
   }
 
-  previewResumeRole(roleKey) {
-    const roleTitles = {
-      "full_stack_developer": "Full Stack Developer",
-      "data_scientist": "Data Scientist",
-      "data_engineer": "Data Engineer",
-      "backend_developer": "Backend Developer",
-      "machine_learning_engineer": "Machine Learning Engineer",
-      "genai_engineer": "Generative AI Specialist",
-      "python_developer": "Python Developer",
-      "sde": "Software Development Engineer (SDE)",
-      "devops_engineer": "DevOps & Cloud Engineer",
-      "data_analyst": "Data Analyst",
-      "frontend_developer": "Frontend Developer"
-    };
-
-    const titleDisplay = document.getElementById("resume-target-role-display");
-    if (titleDisplay) {
-      titleDisplay.textContent = `Target: ${roleTitles[roleKey] || roleKey}`;
-    }
-  }
-
   fallbackResumeAnalysis(targetRole) {
-    const sampleResults = {
-      "data_scientist": {
-        ats_score: 78,
-        ats_color: "#10b981",
-        ats_rating: "Strong Foundation Identified",
-        verdict: "Solid mathematics, SQL, and Python core foundation detected. Adding distributed cluster tools will unlock senior interviews.",
-        matching_skills: ["Python", "SQL", "Statistics", "Pandas", "NumPy", "Git", "Data Analysis"],
-        skills_to_learn: ["PySpark", "Apache Kafka", "Scikit-Learn", "Deep Learning"]
-      },
-      "data_engineer": {
-        ats_score: 82,
-        ats_color: "#10b981",
-        ats_rating: "High Relevance For Data Pipelines",
-        verdict: "Strong SQL and Python foundation detected. Mastering distributed cluster execution and orchestration bridges your gap to senior data engineering.",
-        matching_skills: ["SQL", "Python", "Database Design", "Linux", "Git", "ETL Basics"],
-        skills_to_learn: ["PySpark", "Apache Airflow", "Apache Kafka"]
-      },
-      "full_stack_developer": {
-        ats_score: 75,
-        ats_color: "#06b6d4",
-        ats_rating: "Strong Application Logic",
-        verdict: "Proficient in backend services and relational databases. Adding high-performance microservices and modern frontend integration completes your profile.",
-        matching_skills: ["JavaScript", "React", "Node.js", "Express", "REST API", "SQL", "Git"],
-        skills_to_learn: ["Next.js", "Docker", "Redux", "Tailwind"]
-      }
-    };
+    const result = (this.roleBenchmarks && this.roleBenchmarks[targetRole])
+      ? this.roleBenchmarks[targetRole]
+      : this.roleBenchmarks["full_stack_developer"];
 
-    const result = sampleResults[targetRole] || sampleResults["full_stack_developer"];
+    this.hasUserAnalyzed = true;
     this.renderLiveAnalysisResults({
       ...result,
       candidate: { name: "Profile Candidate", current_profile: "Technical Engineer" },
       target_role: { id: targetRole, title: targetRole.replace(/_/g, " ").toUpperCase() }
     }, targetRole);
-  }
-  renderResumeRole(roleKey) {
-    const profile = this.resumeProfiles[roleKey] || this.resumeProfiles["data-scientist"];
-    
-    const matchPercent = document.getElementById("resume-match-percent");
-    const statusPill = document.getElementById("resume-score-status");
-    const titleDisplay = document.getElementById("resume-target-role-display");
-    const scoreDesc = document.getElementById("resume-score-desc");
-    const countHave = document.getElementById("count-skills-have");
-    const countNeed = document.getElementById("count-skills-need");
-    const listHave = document.getElementById("list-skills-have");
-    const listNeed = document.getElementById("list-skills-need");
-
-    if (matchPercent) matchPercent.textContent = profile.matchPercent;
-    if (statusPill) statusPill.textContent = profile.statusText;
-    if (titleDisplay) titleDisplay.textContent = `Target: ${profile.roleTitle}`;
-    if (scoreDesc) scoreDesc.textContent = profile.desc;
-    if (countHave) countHave.textContent = `${profile.skillsHave.length} Verified`;
-    if (countNeed) countNeed.textContent = `${profile.skillsNeed.length} Gaps to Bridge`;
-
-    if (listHave) {
-      listHave.innerHTML = profile.skillsHave.map(s => `
-        <span class="skill-tag skill-tag-have">
-          <span>${s.name}</span>
-          <span class="tag-status">✓ ${s.score}</span>
-        </span>
-      `).join("");
-    }
-
-    if (listNeed) {
-      listNeed.innerHTML = profile.skillsNeed.map(g => `
-        <div class="skill-gap-item">
-          <div class="gap-info">
-            <strong>${g.name}</strong>
-            <span>${g.desc}</span>
-          </div>
-          <a href="${g.link}" class="pill-learn-link">${g.linkText}</a>
-        </div>
-      `).join("");
-    }
   }
 
 }

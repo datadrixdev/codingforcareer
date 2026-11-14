@@ -436,183 +436,74 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 3. AI Career Resume & Skill Gap Analyzer Section -->
-      <section class="home-resume-section" id="resume-analyzer">
-        <div class="resume-section-container">
-          <div class="home-section-header resume-header-block">
-            <div class="section-badge resume-ai-badge">
-              <span class="badge-pulse-glow"></span>
-              <span>⚡ AI CAREER INTELLIGENCE • SKILL GAP MATRIX</span>
-            </div>
-            <h2 class="section-main-heading">Resume Benchmarking &amp; Career Readiness Engine</h2>
-            <p class="section-sub-heading">
-              Benchmark your technical background against 10,000+ engineering job requirements. Discover which core competencies you already have, and access instant direct curriculum links to bridge the remaining skill gaps.
+      <!-- 3. AI Career Intelligence Teaser Section (Directs to Dedicated Studio) -->
+      <section class="home-resume-teaser-section" id="home-resume-teaser">
+        <div class="home-section-header">
+          <div class="section-badge">⚡ AI CAREER INTELLIGENCE • ATS BENCHMARKING</div>
+          <h2 class="section-main-heading">Resume Benchmarking &amp; Career Readiness Engine</h2>
+          <p class="section-sub-heading">
+            Benchmark your technical background against 10,000+ engineering job requirements. Discover which core competencies you already have, and access instant direct curriculum links to bridge the remaining skill gaps.
+          </p>
+        </div>
+
+        <div class="resume-teaser-card">
+          <div class="teaser-content">
+            <div class="teaser-tag">⚡ DEDICATED AI STUDIO</div>
+            <h3 class="teaser-headline">Discover Exactly What Top Tech Employers Look For in Your Resume</h3>
+            <p class="teaser-body">
+              Stop guessing why your resume isn't getting interview callbacks. Our AI ATS diagnostics engine parses your technical background, benchmarks it against 11 high-demand specializations, calculates your ATS score, and reveals the exact missing tools separating you from tier-1 offers.
             </p>
+            <div class="teaser-perks">
+              <div class="perk-item">
+                <span class="perk-check">✓</span>
+                <span>Instant ATS Match Score (0–100%)</span>
+              </div>
+              <div class="perk-item">
+                <span class="perk-check">✓</span>
+                <span>Side-by-Side Skills Matrix (Verified vs Missing)</span>
+              </div>
+              <div class="perk-item">
+                <span class="perk-check">✓</span>
+                <span>1-Click Direct Curriculum Links to Close Gaps</span>
+              </div>
+              <div class="perk-item">
+                <span class="perk-check">✓</span>
+                <span>100% Free &amp; In-Memory Privacy Protection</span>
+              </div>
+            </div>
+            <div class="teaser-cta-wrap">
+              <button class="btn-launch-resume-studio" id="btn-home-launch-resume" title="Open Dedicated AI Resume Analyzer Studio">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                <span>Launch AI Resume Analyzer Studio &rarr;</span>
+              </button>
+            </div>
           </div>
-
-          <div class="resume-analyzer-card">
-            <div class="resume-card-grid">
-              <!-- Left Column: Input Configuration (Upload & Profile) -->
-              <div class="resume-input-pane">
-                <div class="pane-step-tag">
-                  <span class="step-num">1</span>
-                  <span>Upload Your Resume</span>
-                </div>
-
-                <!-- Drag & Drop Upload Zone -->
-                <div class="resume-dropzone" id="resume-dropzone">
-                  <input type="file" id="resume-file-input" class="resume-file-input" accept=".pdf,.docx,.txt" style="display: none;">
-                  <div class="dropzone-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                      <polyline points="17 8 12 3 7 8"></polyline>
-                      <line x1="12" y1="3" x2="12" y2="15"></line>
-                    </svg>
-                  </div>
-                  <h4 class="dropzone-title">Upload your resume file</h4>
-                  <p class="dropzone-sub">Drag &amp; drop PDF or DOCX here, or <button type="button" class="btn-browse-file" id="btn-browse-file">Browse files</button></p>
-                  <div class="dropzone-meta">
-                    <span>PDF, DOCX, TXT</span>
-                    <span>•</span>
-                    <span>Max 10MB</span>
-                    <span>•</span>
-                    <span>🔒 100% Client-Side Privacy</span>
-                  </div>
-
-                  <!-- Active / Selected File Preview Box -->
-                  <div class="resume-selected-file" id="resume-selected-file">
-                    <div class="file-icon-box">📄</div>
-                    <div class="file-info-box">
-                      <span class="file-name" id="display-file-name">Senior_Software_Engineer_Resume.pdf</span>
-                      <span class="file-size" id="display-file-size">1.4 MB • Loaded &amp; Ready to analyze</span>
-                    </div>
-                    <span class="file-status-badge">Loaded</span>
-                  </div>
-                </div>
-
-                <div class="pane-step-tag" style="margin-top: 22px;">
-                  <span class="step-num">2</span>
-                  <span>Choose Desired Target Profile</span>
-                </div>
-
-                <div class="role-selector-wrap">
-                  <label for="select-target-role" class="role-label">Target Career Role:</label>
-                  <div class="custom-select-wrapper">
-                    <select id="select-target-role" class="resume-role-dropdown">
-                      <option value="full_stack_developer" selected>Full Stack Developer (React, Node.js, Express, MongoDB &amp; REST)</option>
-                      <option value="data_scientist">Data Scientist (Python, ML, Pandas, NumPy &amp; SQL)</option>
-                      <option value="data_engineer">Data Engineer (PySpark, Kafka, SQL &amp; Airflow)</option>
-                      <option value="backend_developer">Backend Developer (Node.js, Express, Python &amp; SQL)</option>
-                      <option value="machine_learning_engineer">Machine Learning Engineer (Deep Learning, PyTorch &amp; NLP)</option>
-                      <option value="genai_engineer">Generative AI Specialist (LLMs, LangChain, RAG &amp; Vector DBs)</option>
-                      <option value="python_developer">Python Developer (OOP, SQL, REST APIs &amp; Automation)</option>
-                      <option value="sde">Software Development Engineer - SDE (DSA, OOP &amp; System Design)</option>
-                      <option value="devops_engineer">DevOps &amp; Cloud Engineer (Linux, Docker, Kubernetes &amp; AWS)</option>
-                      <option value="data_analyst">Data Analyst (SQL, Excel, Power BI &amp; Statistics)</option>
-                      <option value="frontend_developer">Frontend Developer (HTML/CSS, JavaScript, React &amp; Tailwind)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Analyze Resume Button -->
-                <div class="analyze-btn-container">
-                  <button class="btn-analyze-resume" id="btn-trigger-resume-analysis" title="Analyse Resume &amp; Generate Skill Matrix">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                    </svg>
-                    <span>Analyse Resume &amp; Generate Skill Matrix</span>
-                  </button>
-                  <span class="btn-subtext-hint">⚡ Powered by ResumeAnalyser AI API (Vercel) • Real-time ATS Benchmarking</span>
+          <div class="teaser-visual-col">
+            <div class="teaser-score-badge">
+              <div class="teaser-radial">
+                <span class="score-big">85%</span>
+                <span class="score-sub">ATS Match</span>
+              </div>
+              <span class="badge-status-pill">✓ Strong Foundation</span>
+            </div>
+            <div class="teaser-cards-mock">
+              <div class="mock-card mock-have">
+                <strong>Skills You Have (Verified)</strong>
+                <div class="mock-tags">
+                  <span class="tag-match">Python 3 ✓</span>
+                  <span class="tag-match">SQL Queries ✓</span>
+                  <span class="tag-match">Git &amp; CI/CD ✓</span>
+                  <span class="tag-match">Pandas &amp; NumPy ✓</span>
                 </div>
               </div>
-
-              <!-- Right Column: Live Skill Matrix & Gap Analysis Display -->
-              <div class="resume-results-pane" id="resume-results-pane">
-                <!-- Top Match Score Bar -->
-                <div class="match-score-card">
-                  <div class="score-circle-wrap">
-                    <div class="score-circle">
-                      <span class="score-num" id="resume-match-percent">78%</span>
-                      <span class="score-label">MATCH</span>
-                    </div>
-                  </div>
-                  <div class="score-details">
-                    <div class="score-status-pill" id="resume-score-status">🟢 STRONG FOUNDATION IDENTIFIED</div>
-                    <h4 class="score-title" id="resume-target-role-display">Target: Data Scientist &amp; ML Engineer</h4>
-                    <p class="score-desc" id="resume-score-desc">
-                      Your resume shows strong proficiency in foundational programming and data handling. Mastering 3 missing high-impact tools will qualify you for tier-1 interviews.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Split Skill Cards: Skills You Already Have vs Skills You Need to Run -->
-                <div class="skills-matrix-grid">
-                  <!-- Card 1: Skills You Already Have -->
-                  <div class="skill-bucket-card bucket-have">
-                    <div class="bucket-header">
-                      <div class="bucket-title-wrap">
-                        <span class="bucket-icon">✅</span>
-                        <h4>Skills You Already Have</h4>
-                      </div>
-                      <span class="bucket-count-badge" id="count-skills-have">6 Verified</span>
-                    </div>
-                    <p class="bucket-caption">Verified competencies detected in your profile:</p>
-                    <div class="skills-tag-list" id="list-skills-have">
-                      <span class="skill-tag skill-tag-have"><span>Python 3 Programming</span> <span class="tag-status">✓ 85%</span></span>
-                      <span class="skill-tag skill-tag-have"><span>SQL Queries &amp; Aggregations</span> <span class="tag-status">✓ 90%</span></span>
-                      <span class="skill-tag skill-tag-have"><span>Statistical Hypothesis Testing</span> <span class="tag-status">✓ 75%</span></span>
-                      <span class="skill-tag skill-tag-have"><span>Pandas &amp; NumPy Wrangling</span> <span class="tag-status">✓ 80%</span></span>
-                      <span class="skill-tag skill-tag-have"><span>Git Version Control</span> <span class="tag-status">✓ 90%</span></span>
-                      <span class="skill-tag skill-tag-have"><span>Data Structures (DSA)</span> <span class="tag-status">✓ 70%</span></span>
-                    </div>
-                  </div>
-
-                  <!-- Card 2: Skills Which You Need to Run / Missing Skills -->
-                  <div class="skill-bucket-card bucket-need">
-                    <div class="bucket-header">
-                      <div class="bucket-title-wrap">
-                        <span class="bucket-icon">🎯</span>
-                        <h4>Skills You Need to Master</h4>
-                      </div>
-                      <span class="bucket-count-badge badge-gap" id="count-skills-need">3 Gaps to Bridge</span>
-                    </div>
-                    <p class="bucket-caption">High-impact missing requirements. Click to learn directly on CodingForCareer:</p>
-                    <div class="skills-tag-list" id="list-skills-need">
-                      <div class="skill-gap-item">
-                        <div class="gap-info">
-                          <strong>PySpark Distributed Big Data</strong>
-                          <span>Required for massive dataset processing</span>
-                        </div>
-                        <a href="#pyspark" class="pill-learn-link">Learn in Course &rarr;</a>
-                      </div>
-                      <div class="skill-gap-item">
-                        <div class="gap-info">
-                          <strong>Apache Kafka Event Streaming</strong>
-                          <span>Real-time pub/sub pipelines for production ML</span>
-                        </div>
-                        <a href="#pykafka" class="pill-learn-link">Learn in Course &rarr;</a>
-                      </div>
-                      <div class="skill-gap-item">
-                        <div class="gap-info">
-                          <strong>RAG &amp; Vector Embeddings</strong>
-                          <span>Modern Generative AI architectures</span>
-                        </div>
-                        <a href="#generative-ai" class="pill-learn-link">Master GenAI &rarr;</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Personalized Learning Path Recommendation Footer -->
-                <div class="resume-recommendation-bar">
-                  <div class="recommendation-info">
-                    <span class="rec-icon">🚀</span>
-                    <div>
-                      <strong>Personalized Gap-Closure Plan Ready</strong>
-                      <span class="rec-sub">Estimated 4–6 weeks to bridge all 3 skill gaps using our curated curriculums.</span>
-                    </div>
-                  </div>
-                  <a href="#roadmaps" class="btn-rec-action" id="btn-rec-view-roadmap">View Recommended Roadmap &rarr;</a>
+              <div class="mock-card mock-need">
+                <strong>Skills to Master (Gaps)</strong>
+                <div class="mock-tags">
+                  <span class="tag-gap">PySpark Big Data &rarr;</span>
+                  <span class="tag-gap">Apache Kafka Streaming &rarr;</span>
+                  <span class="tag-gap">RAG &amp; Vector DBs &rarr;</span>
                 </div>
               </div>
             </div>
@@ -620,7 +511,7 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-<section class="home-courses-section" id="courses-section">
+      <section class="home-courses-section" id="courses-section">
         <div class="home-section-header">
           <div class="section-badge">🚀 Explore All Tech Tracks</div>
           <h2 class="section-main-heading">Industry-Standard Course Curriculum</h2>
@@ -2973,6 +2864,457 @@ SELECT
       </div>
     </div>
 
+  
+    <!-- VIEW 6: DEDICATED AI RESUME ANALYZER & CAREER SKILL GAP DIAGNOSTICS STUDIO -->
+    <div class="view-container view-resume" id="view-resume">
+      <!-- Ambient Glow Blobs -->
+      <div class="resume-ambient-blob resume-blob-1" aria-hidden="true"></div>
+      <div class="resume-ambient-blob resume-blob-2" aria-hidden="true"></div>
+
+      <!-- 1. Dedicated Studio Hero Section -->
+      <section class="resume-hero-section">
+        <div class="resume-hero-container">
+          <div class="resume-hero-breadcrumb">
+            <a href="#home">Home</a>
+            <span class="sep">/</span>
+            <span>AI Career Intelligence</span>
+            <span class="sep">/</span>
+            <span class="active">Resume Analyzer &amp; Skill Gap Studio</span>
+          </div>
+
+          <div class="resume-hero-badge">
+            <span class="badge-pulse-glow"></span>
+            <span>⚡ AI-POWERED CAREER INTELLIGENCE • ATS BENCHMARKING ENGINE</span>
+          </div>
+
+          <h1 class="resume-hero-title">
+            Precision Resume Analyzer &amp; <br>
+            <span class="gradient-text">Technical Skill Gap Diagnostics</span>
+          </h1>
+
+          <p class="resume-hero-lead">
+            Benchmark your resume against 10,000+ real tech job requirements across 11 high-demand engineering careers. Discover your exact ATS readiness score, verified skills you already have, critical missing tools to learn, and access personalized 1-click curriculums to bridge the gap.
+          </p>
+
+          <!-- Key Value Metrics Strip -->
+          <div class="resume-proof-strip">
+            <div class="proof-chip">
+              <span class="proof-icon">🎯</span>
+              <span><strong>10,000+</strong> Tech Job Benchmarks</span>
+            </div>
+            <div class="proof-chip">
+              <span class="proof-icon">⚡</span>
+              <span><strong>11 Specializations</strong> Mapped</span>
+            </div>
+            <div class="proof-chip">
+              <span class="proof-icon">📊</span>
+              <span><strong>Instant ATS Score</strong> &amp; Match %</span>
+            </div>
+            <div class="proof-chip">
+              <span class="proof-icon">🔒</span>
+              <span><strong>100% Private</strong> &amp; Open Access</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. The Main Interactive Analyzer Studio (2-Column Organized Layout) -->
+      <section class="resume-workspace-section">
+        <div class="resume-workspace-container">
+          <div class="resume-workspace-card">
+
+            <!-- Left Column: Input Configuration Pane (Upload, Role & Trigger) -->
+            <div class="resume-input-pane">
+              <!-- Step 1: Upload or Input Resume -->
+              <div class="pane-step-block">
+                <div class="pane-step-tag">
+                  <span class="step-num">1</span>
+                  <div class="step-meta">
+                    <h4>Upload or Input Your Resume</h4>
+                    <p>Supported: PDF, DOCX, TXT or raw text</p>
+                  </div>
+                </div>
+
+                <!-- Input Method Switcher Tabs -->
+                <div class="resume-input-tabs">
+                  <button type="button" class="input-tab-btn active" id="tab-upload-file">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <span>Upload File</span>
+                  </button>
+                  <button type="button" class="input-tab-btn" id="tab-paste-text">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    <span>Paste Text</span>
+                  </button>
+                  <button type="button" class="input-tab-btn" id="tab-sample-profile">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span>Use Sample Profile</span>
+                  </button>
+                </div>
+
+                <!-- Tab 1: Drag & Drop Upload Zone -->
+                <div class="resume-dropzone-panel" id="panel-upload-file">
+                  <div class="resume-dropzone" id="resume-dropzone">
+                    <input type="file" id="resume-file-input" class="resume-file-input" accept=".pdf,.docx,.txt" style="display: none;">
+                    <div class="dropzone-icon">
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                      </svg>
+                    </div>
+                    <h5 class="dropzone-title">Drag &amp; drop your resume here</h5>
+                    <p class="dropzone-sub">or <button type="button" class="btn-browse-file" id="btn-browse-file">Browse files</button> from your device</p>
+                    <div class="dropzone-meta">
+                      <span>PDF, DOCX, TXT</span>
+                      <span>•</span>
+                      <span>Max 10MB</span>
+                      <span>•</span>
+                      <span>🔒 100% In-Memory Privacy</span>
+                    </div>
+
+                    <!-- Active / Selected File Preview Box -->
+                    <div class="resume-selected-file" id="resume-selected-file">
+                      <div class="file-icon-box">📄</div>
+                      <div class="file-info-box">
+                        <span class="file-name" id="display-file-name">Senior_Software_Engineer_Resume.pdf</span>
+                        <span class="file-size" id="display-file-size">1.4 MB • Loaded &amp; Ready for AI Analysis</span>
+                      </div>
+                      <span class="file-status-badge">Ready</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tab 2: Paste Resume Text Panel -->
+                <div class="resume-text-panel" id="panel-paste-text" style="display: none;">
+                  <textarea id="resume-paste-input" class="resume-paste-textarea" placeholder="Paste your resume content here (e.g. summary, technical skills, employment experience, education)..." rows="6"></textarea>
+                  <span class="paste-hint">💡 Tip: Include your technical skills and project descriptions for highest parsing accuracy.</span>
+                </div>
+              </div>
+
+              <!-- Step 2: Choose Target Role -->
+              <div class="pane-step-block">
+                <div class="pane-step-tag">
+                  <span class="step-num">2</span>
+                  <div class="step-meta">
+                    <h4>Select Your Target Career Profile</h4>
+                    <p>Benchmarks keywords against verified industry requirements</p>
+                  </div>
+                </div>
+
+                <div class="role-selector-wrap">
+                  <label for="select-target-role" class="role-label">Desired Specialization:</label>
+                  <div class="custom-select-wrapper">
+                    <select id="select-target-role" class="resume-role-dropdown">
+                      <option value="full_stack_developer" selected>Full Stack Developer (React, Node.js, Express, MongoDB &amp; REST)</option>
+                      <option value="data_scientist">Data Scientist (Python, ML, Pandas, NumPy &amp; SQL)</option>
+                      <option value="data_engineer">Data Engineer (PySpark, Kafka, SQL &amp; Airflow)</option>
+                      <option value="backend_developer">Backend Developer (Node.js, Express, Python &amp; SQL)</option>
+                      <option value="machine_learning_engineer">Machine Learning Engineer (Deep Learning, PyTorch &amp; NLP)</option>
+                      <option value="genai_engineer">Generative AI Specialist (LLMs, LangChain, RAG &amp; Vector DBs)</option>
+                      <option value="python_developer">Python Developer (OOP, SQL, REST APIs &amp; Automation)</option>
+                      <option value="sde">Software Development Engineer - SDE (DSA, OOP &amp; System Design)</option>
+                      <option value="devops_engineer">DevOps &amp; Cloud Engineer (Linux, Docker, Kubernetes &amp; AWS)</option>
+                      <option value="data_analyst">Data Analyst (SQL, Excel, Power BI &amp; Statistics)</option>
+                      <option value="frontend_developer">Frontend Developer (HTML/CSS, JavaScript, React &amp; Tailwind)</option>
+                    </select>
+                  </div>
+
+                  <!-- Dynamic Role Requirements Teaser Chips -->
+                  <div class="role-expected-skills" id="role-expected-skills">
+                    <span class="expected-label">Core Competencies Evaluated:</span>
+                    <div class="expected-chips" id="expected-chips-container">
+                      <!-- Rendered dynamically via JS according to selected role -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3: Action Trigger -->
+              <div class="analyze-btn-container">
+                <button class="btn-analyze-resume" id="btn-trigger-resume-analysis" title="Analyse Resume &amp; Generate Skill Matrix">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                  <span>Analyse Resume &amp; Generate Skill Matrix</span>
+                </button>
+                <div class="engine-attribution">
+                  <span>⚡ Powered by ResumeAnalyser AI API (Vercel) • Real-Time ATS Evaluation Engine</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Live Results Studio Pane -->
+            <div class="resume-results-pane" id="resume-results-pane">
+              <!-- Top Score Overview -->
+              <div class="match-score-card">
+                <div class="score-circle-wrap">
+                  <div class="score-circle" id="score-circle-element">
+                    <span class="score-num" id="resume-match-percent">78%</span>
+                    <span class="score-label">MATCH</span>
+                  </div>
+                </div>
+                <div class="score-details">
+                  <div class="score-status-pill" id="resume-score-status">🟢 STRONG FOUNDATION IDENTIFIED</div>
+                  <h4 class="score-title" id="resume-target-role-display">Target: Full Stack Developer</h4>
+                  <p class="score-desc" id="resume-score-desc">
+                    Your profile demonstrates solid engineering capability. Bridging 3 missing high-impact tools will qualify you for tier-1 interviews.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Skills Matrix Grid (Skills Have vs Skills Need) -->
+              <div class="skills-matrix-grid">
+                <!-- Card 1: Verified Skills You Already Have -->
+                <div class="skill-bucket-card bucket-have">
+                  <div class="bucket-header">
+                    <div class="bucket-title-wrap">
+                      <span class="bucket-icon">✅</span>
+                      <h4>Skills You Already Have</h4>
+                    </div>
+                    <span class="bucket-count-badge" id="count-skills-have">6 Verified</span>
+                  </div>
+                  <p class="bucket-caption">Verified competencies detected in your profile:</p>
+                  <div class="skills-tag-list" id="list-skills-have">
+                    <!-- Populated dynamically via JS -->
+                  </div>
+                </div>
+
+                <!-- Card 2: Skills You Need to Master -->
+                <div class="skill-bucket-card bucket-need">
+                  <div class="bucket-header">
+                    <div class="bucket-title-wrap">
+                      <span class="bucket-icon">🎯</span>
+                      <h4>Skills You Need to Master</h4>
+                    </div>
+                    <span class="bucket-count-badge badge-gap" id="count-skills-need">3 Gaps to Bridge</span>
+                  </div>
+                  <p class="bucket-caption">High-impact missing requirements. Click any course to learn directly on CodingForCareer:</p>
+                  <div class="skills-tag-list" id="list-skills-need">
+                    <!-- Populated dynamically via JS with 1-click links -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Actionable ATS Recruiter Suggestions -->
+              <div class="resume-suggestions-card" id="resume-suggestions-card">
+                <div class="sugg-header">
+                  <span class="sugg-icon">💡</span>
+                  <strong>ATS Recruiter &amp; Formatting Optimization Tips</strong>
+                </div>
+                <ul class="sugg-list" id="resume-suggestions-list">
+                  <li>Quantify impact: add specific metrics (e.g. reduced latency by 40%, processed 2TB/day) in your work experience bullet points.</li>
+                  <li>Ensure modern toolchains (e.g. Docker, CI/CD, Kafka) are explicitly highlighted in your core Technical Skills summary.</li>
+                </ul>
+              </div>
+
+              <!-- Learning Path Recommendation Footer -->
+              <div class="resume-recommendation-bar">
+                <div class="recommendation-info">
+                  <span class="rec-icon">🚀</span>
+                  <div>
+                    <strong>Personalized Gap-Closure Plan Ready</strong>
+                    <span class="rec-sub">Estimated 4–6 weeks to bridge all skill gaps using CodingForCareer tracks.</span>
+                  </div>
+                </div>
+                <a href="#roadmaps" class="btn-rec-action" id="btn-rec-view-roadmap">View Recommended Roadmap &rarr;</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Elaborative Educational Section: How the Engine Works -->
+      <section class="resume-how-it-works-section">
+        <div class="resume-section-container">
+          <div class="home-section-header">
+            <div class="section-badge">⚙️ ARCHITECTURAL TRANSPARENCY</div>
+            <h2 class="section-main-heading">How Our AI ATS Diagnostics Engine Works</h2>
+            <p class="section-sub-heading">
+              Our analyzer doesn't just scan for generic keywords. It uses semantic competency graphs trained on 10,000+ real job postings from Tier-1 tech companies.
+            </p>
+          </div>
+
+          <div class="how-it-works-grid">
+            <div class="how-step-card">
+              <div class="step-badge-num">01</div>
+              <div class="step-card-icon">📄</div>
+              <h4>Deep Document Tokenization</h4>
+              <p>Extracts unstructured text from PDF, DOCX, and TXT files, normalizing work history, project bullets, and technical stacks while ignoring parser-breaking styling traps.</p>
+            </div>
+            <div class="how-step-card">
+              <div class="step-badge-num">02</div>
+              <div class="step-card-icon">🧠</div>
+              <h4>Semantic Entity Mapping</h4>
+              <p>Matches tokens against a database of 1,200+ engineering frameworks, libraries, databases, and architectural concepts, identifying both core technologies and modern equivalents.</p>
+            </div>
+            <div class="how-step-card">
+              <div class="step-badge-num">03</div>
+              <div class="step-card-icon">📊</div>
+              <h4>Role Competency Benchmarking</h4>
+              <p>Scores your verified technical footprint against the real job requirements for your target role, calculating both an overall ATS match score and section completeness.</p>
+            </div>
+            <div class="how-step-card">
+              <div class="step-badge-num">04</div>
+              <div class="step-card-icon">🎯</div>
+              <h4>Curriculum-Integrated Gap Routing</h4>
+              <p>Translates identified skill gaps into direct, actionable 1-click links to CodingForCareer's university-grade syllabi, interactive browser compilers, and cheat sheets.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Top In-Demand Specializations Breakdown -->
+      <section class="resume-career-tracks-section">
+        <div class="resume-section-container">
+          <div class="home-section-header">
+            <div class="section-badge">🌟 INDUSTRY BENCHMARKS</div>
+            <h2 class="section-main-heading">Explore Core Skills for Top Tech Roles</h2>
+            <p class="section-sub-heading">
+              Review the exact competencies top hiring managers evaluate during technical resume screening in 2026.
+            </p>
+          </div>
+
+          <div class="career-cards-grid">
+            <!-- Role 1: Cloud Data Engineer -->
+            <div class="career-spec-card">
+              <div class="career-spec-header">
+                <span class="spec-icon">🏗️</span>
+                <div>
+                  <h4>Data Engineer</h4>
+                  <span class="spec-salary">$140k – $225k Avg.</span>
+                </div>
+              </div>
+              <p class="spec-desc">Builds resilient, high-volume ETL pipelines, distributed data warehouses, and streaming telemetry clusters.</p>
+              <div class="spec-skills-box">
+                <span class="skills-label">Must-Have Core Skills:</span>
+                <div class="spec-tags">
+                  <span class="spec-pill">Python</span>
+                  <span class="spec-pill">SQL &amp; Indexing</span>
+                  <span class="spec-pill">Apache Spark / PySpark</span>
+                  <span class="spec-pill">Apache Kafka</span>
+                  <span class="spec-pill">Airflow DAGs</span>
+                </div>
+              </div>
+              <a href="#pyspark" class="btn-career-explore">Explore Data Track &rarr;</a>
+            </div>
+
+            <!-- Role 2: Full Stack Developer -->
+            <div class="career-spec-card">
+              <div class="career-spec-header">
+                <span class="spec-icon">🌐</span>
+                <div>
+                  <h4>Full Stack Developer</h4>
+                  <span class="spec-salary">$135k – $210k Avg.</span>
+                </div>
+              </div>
+              <p class="spec-desc">Develops responsive client interfaces, scalable server-side APIs, and manages database architectures.</p>
+              <div class="spec-skills-box">
+                <span class="skills-label">Must-Have Core Skills:</span>
+                <div class="spec-tags">
+                  <span class="spec-pill">React</span>
+                  <span class="spec-pill">Node.js</span>
+                  <span class="spec-pill">REST APIs</span>
+                  <span class="spec-pill">TypeScript</span>
+                  <span class="spec-pill">PostgreSQL / MongoDB</span>
+                  <span class="spec-pill">Docker</span>
+                </div>
+              </div>
+              <a href="#roadmaps" class="btn-career-explore">Explore Full Stack &rarr;</a>
+            </div>
+
+            <!-- Role 3: Generative AI Specialist -->
+            <div class="career-spec-card">
+              <div class="career-spec-header">
+                <span class="spec-icon">✨</span>
+                <div>
+                  <h4>Generative AI Specialist</h4>
+                  <span class="spec-salary">$160k – $260k Avg.</span>
+                </div>
+              </div>
+              <p class="spec-desc">Builds autonomous agent systems, RAG architectures, custom LLM solutions, and vector embeddings.</p>
+              <div class="spec-skills-box">
+                <span class="skills-label">Must-Have Core Skills:</span>
+                <div class="spec-tags">
+                  <span class="spec-pill">Python</span>
+                  <span class="spec-pill">LangChain / LlamaIndex</span>
+                  <span class="spec-pill">Vector DBs (Chroma/Pinecone)</span>
+                  <span class="spec-pill">RAG Pipelines</span>
+                  <span class="spec-pill">PyTorch</span>
+                </div>
+              </div>
+              <a href="#generative-ai" class="btn-career-explore">Explore GenAI Track &rarr;</a>
+            </div>
+
+            <!-- Role 4: SDE / Systems Engineer -->
+            <div class="career-spec-card">
+              <div class="career-spec-header">
+                <span class="spec-icon">💻</span>
+                <div>
+                  <h4>Software Engineer (SDE)</h4>
+                  <span class="spec-salary">$130k – $215k Avg.</span>
+                </div>
+              </div>
+              <p class="spec-desc">Applies rigorous computer science fundamentals, data structures, algorithms, and modular design patterns.</p>
+              <div class="spec-skills-box">
+                <span class="skills-label">Must-Have Core Skills:</span>
+                <div class="spec-tags">
+                  <span class="spec-pill">Data Structures (DSA)</span>
+                  <span class="spec-pill">Algorithms &amp; Big-O</span>
+                  <span class="spec-pill">System Design</span>
+                  <span class="spec-pill">C++ / Java / Python</span>
+                  <span class="spec-pill">Operating Systems</span>
+                </div>
+              </div>
+              <a href="#dsa" class="btn-career-explore">Explore DSA Curriculum &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. FAQ Section -->
+      <section class="resume-faq-section">
+        <div class="resume-section-container">
+          <div class="home-section-header">
+            <div class="section-badge">❓ FREQUENTLY ASKED QUESTIONS</div>
+            <h2 class="section-main-heading">Everything You Need to Know</h2>
+            <p class="section-sub-heading">Clear answers about how we analyze resumes, handle privacy, and calculate scores.</p>
+          </div>
+
+          <div class="resume-faq-grid">
+            <div class="faq-card">
+              <h4>Is the Resume Analyzer really 100% free?</h4>
+              <p>Yes. CodingForCareer provides this tool completely free with zero subscription fees, no paywalls, and no hidden charges.</p>
+            </div>
+            <div class="faq-card">
+              <h4>Is my resume secure and private?</h4>
+              <p>Yes. Your resume is parsed in-memory exclusively to compute ATS scoring and skill gaps. We do not sell, store, or share your resume with any third parties or recruiters.</p>
+            </div>
+            <div class="faq-card">
+              <h4>What file formats are accepted?</h4>
+              <p>We accept PDF, DOCX (Microsoft Word), and TXT files up to 10MB. You can also paste your resume text directly into the text tab.</p>
+            </div>
+            <div class="faq-card">
+              <h4>How do I increase my ATS score?</h4>
+              <p>Review the "Skills You Need to Master" list generated for your profile. Learn the missing skills using our interactive tutorials, and add concrete project bullets with quantifiable metrics to your resume.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Bottom Banner -->
+      <section class="resume-cta-banner">
+        <div class="resume-cta-container">
+          <h2>Ready to Bridge Your Skill Gaps and Get Hired?</h2>
+          <p>Choose any course track to start learning with zero installation. Master modern distributed systems, AI, and backend architectures today.</p>
+          <div class="resume-cta-buttons">
+            <a href="#home" class="btn-cta-primary">Explore All 20 Tech Tracks 🚀</a>
+            <button class="btn-cta-secondary" id="btn-scroll-to-analyzer">Upload Resume Now &uarr;</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <!-- Global Footer: High-Tech, Elaborative & Professional Redesign -->
@@ -2995,7 +3337,7 @@ SELECT
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
             <span>Try Editor</span>
           </a>
-          <a href="#resume-analyzer" class="footer-btn footer-btn-accent" id="btn-footer-resume" title="Analyse Resume &amp; Skills Gap">
+          <a href="#resume" class="footer-btn footer-btn-accent" id="btn-footer-resume" title="Analyse Resume &amp; Skills Gap">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
             <span>Analyse Resume</span>
           </a>
@@ -3179,7 +3521,7 @@ SELECT
             <span class="footer-col-badge badge-pro">PRO</span>
           </div>
           <ul class="footer-links">
-            <li><a href="#resume-analyzer" title="AI Career Resume &amp; Skill Gap Analyzer">AI Resume Analyzer</a></li>
+            <li><a href="#resume" title="AI Career Resume &amp; Skill Gap Analyzer">AI Resume Analyzer</a></li>
             <li><a href="#roadmaps" title="Full Stack Developer Path">Full Stack Career Path</a></li>
             <li><a href="#roadmaps" title="Data Science Career Path">Data Scientist Career Path</a></li>
             <li><a href="#about" id="footer-about" title="About CodingForCareer">About CodingForCareer</a></li>
