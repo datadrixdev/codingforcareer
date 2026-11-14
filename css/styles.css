@@ -11731,21 +11731,42 @@ html, body {
   color: #CBD5E1;
 }
 
-/* Stats Row */
+/* Stats Row — Center Aligned & Full Width */
 .hero-stats-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  justify-content: center;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 44px auto 0;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 
 .hero-stat-pill {
   display: flex;
   flex-direction: column;
-  padding: 10px 18px;
-  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 20px;
+  border-radius: 16px;
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  flex: 1 1 135px;
+  min-width: 130px;
+  max-width: 180px;
+  box-sizing: border-box;
+}
+
+.hero-stat-pill:hover {
+  transform: translateY(-3px);
+  border-color: #6366F1;
+  box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.15);
 }
 
 [data-theme="dark"] .hero-stat-pill {
@@ -11754,10 +11775,13 @@ html, body {
 }
 
 .hero-stat-pill strong {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 850;
   color: #0F172A;
   line-height: 1.1;
+  text-align: center;
+  margin-bottom: 4px;
+  display: block;
 }
 
 [data-theme="dark"] .hero-stat-pill strong {
@@ -11765,10 +11789,16 @@ html, body {
 }
 
 .hero-stat-pill span {
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: #64748B;
-  font-weight: 650;
-  margin-top: 2px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.35;
+  display: block;
+}
+
+[data-theme="dark"] .hero-stat-pill span {
+  color: #94A3B8;
 }
 
 /* 3. LIGHT-THEMED INTERACTIVE HERO STUDIO GRAPHIC */
