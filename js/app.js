@@ -667,30 +667,159 @@ class CodingForCareerApp {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-    renderHomeHeroSnippet() {
+  focusAudience(audience) {
+    const btnStudents = document.getElementById("btn-hero-for-students");
+    const btnPros = document.getElementById("btn-hero-for-pros");
+    const leadText = document.getElementById("hero-lead-text");
+
+    if (audience === "students") {
+      btnStudents?.classList.add("active");
+      btnPros?.classList.remove("active");
+      if (leadText) {
+        leadText.innerHTML = "Accelerate your path from university classroom to Tier-1 product company offers. Master first-principles DSA, build resume-worthy production systems, and pass automated ATS screening with zero paywalls.";
+      }
+      const targetCard = document.getElementById("persona-card-students");
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        targetCard.style.boxShadow = "0 0 0 3px #10B981, var(--shadow-xl)";
+        setTimeout(() => { targetCard.style.boxShadow = ""; }, 2000);
+      }
+    } else {
+      btnStudents?.classList.remove("active");
+      btnPros?.classList.add("active");
+      if (leadText) {
+        leadText.innerHTML = "Transition from legacy maintenance to high-growth Cloud Data Engineering, Kafka event streaming, and Generative AI ($160k–$250k+). Benchmark your resume with live AI diagnostics and reference 21 desktop cheat sheets.";
+      }
+      const targetCard = document.getElementById("persona-card-pros");
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+        targetCard.style.boxShadow = "0 0 0 3px #6366F1, var(--shadow-xl)";
+        setTimeout(() => { targetCard.style.boxShadow = ""; }, 2000);
+      }
+    }
+  }
+
+  switchHeroTab(tab) {
+    this.currentHeroTab = tab;
+    const tabPy = document.getElementById("hero-tab-py");
+    const tabSql = document.getElementById("hero-tab-sql");
+    const tabAts = document.getElementById("hero-tab-ats");
+    const codeDisplay = document.getElementById("hero-code-display");
+    const termStatus = document.getElementById("hero-term-status");
+    const termMs = document.getElementById("hero-term-ms");
+    const termText = document.getElementById("hero-term-text");
+
+    tabPy?.classList.toggle("active", tab === "py");
+    tabSql?.classList.toggle("active", tab === "sql");
+    tabAts?.classList.toggle("active", tab === "ats");
+
+    if (tab === "py") {
+      if (codeDisplay) {
+        codeDisplay.innerHTML = `<code><span class="code-comment"># Distributed Data Pipeline with PySpark</span>
+<span class="code-keyword">from</span> pyspark.sql <span class="code-keyword">import</span> SparkSession
+<span class="code-keyword">from</span> pyspark.sql.functions <span class="code-keyword">import</span> col, avg
+
+spark = SparkSession.builder.appName(<span class="code-str">"PipelineBenchmark"</span>).getOrCreate()
+df = spark.read.parquet(<span class="code-str">"s3://production/events.parquet"</span>)
+metrics = df.groupBy(<span class="code-str">"service"</span>).agg(avg(<span class="code-str">"latency_ms"</span>).alias(<span class="code-str">"avg_lat"</span>))
+metrics.filter(col(<span class="code-str">"avg_lat"</span>) &lt; <span class="code-num">25</span>).show(<span class="code-num">5</span>)</code>`;
+      }
+      if (termStatus) termStatus.textContent = "PySpark Cluster Node • Client-Side Runtime";
+      if (termMs) termMs.textContent = "6ms";
+      if (termText) {
+        termText.innerHTML = `
+          &gt; [Cluster] SparkSession initialized in local sandbox mode.<br>
+          &gt; <span class="term-highlight">⚡ PySpark Partitioning: 40M Event Batch Processed!</span><br>
+          &gt; <span style="color:#10B981;">✓ Execution completed in 6ms. All SLA assertions passed.</span>
+        `;
+      }
+    } else if (tab === "sql") {
+      if (codeDisplay) {
+        codeDisplay.innerHTML = `<code><span class="code-comment">-- Relational Analytics & Window Function</span>
+<span class="code-keyword">SELECT</span> 
+    u.id <span class="code-keyword">AS</span> engineer_id,
+    u.name,
+    COUNT(o.id) <span class="code-keyword">AS</span> completed_labs,
+    DENSE_RANK() <span class="code-keyword">OVER</span> (
+        <span class="code-keyword">ORDER BY</span> COUNT(o.id) <span class="code-keyword">DESC</span>
+    ) <span class="code-keyword">AS</span> leaderboard_rank
+<span class="code-keyword">FROM</span> users u
+<span class="code-keyword">JOIN</span> completed_labs o <span class="code-keyword">ON</span> u.id = o.user_id
+<span class="code-keyword">GROUP BY</span> u.id, u.name;</code>`;
+      }
+      if (termStatus) termStatus.textContent = "MySQL 8.4 Server • Query Optimizer Active";
+      if (termMs) termMs.textContent = "3ms";
+      if (termText) {
+        termText.innerHTML = `
+          &gt; [MySQL Server] Index scan on 'idx_completed_user_id' used (Index Only).<br>
+          &gt; <span class="term-highlight">⚡ Leaderboard: 4 rows aggregated (0 temporary disk tables created).</span><br>
+          &gt; <span style="color:#10B981;">✓ Query execution time: 3.1ms. B-Tree index hit ratio 100%.</span>
+        `;
+      }
+    } else if (tab === "ats") {
+      if (codeDisplay) {
+        codeDisplay.innerHTML = `<code><span class="code-comment">// AI ATS Resume Diagnostics Engine Output</span>
+{
+  <span class="code-str">"candidate"</span>: <span class="code-str">"Senior Cloud Candidate"</span>,
+  <span class="code-str">"ats_score"</span>: <span class="code-num">88</span>,
+  <span class="code-str">"verified_skills"</span>: [<span class="code-str">"Python"</span>, <span class="code-str">"MySQL"</span>, <span class="code-str">"PySpark"</span>, <span class="code-str">"Docker"</span>],
+  <span class="code-str">"critical_gaps"</span>: [
+    { <span class="code-str">"skill"</span>: <span class="code-str">"Apache Kafka"</span>, <span class="code-str">"priority"</span>: <span class="code-str">"HIGH"</span> },
+    { <span class="code-str">"skill"</span>: <span class="code-str">"RAG Vector DBs"</span>, <span class="code-str">"priority"</span>: <span class="code-str">"HIGH"</span> }
+  ],
+  <span class="code-str">"status"</span>: <span class="code-str">"STRONG_CANDIDATE"</span>
+}</code>`;
+      }
+      if (termStatus) termStatus.textContent = "ResumeAnalyser AI API (Vercel) • Real-Time Scan";
+      if (termMs) termMs.textContent = "12ms";
+      if (termText) {
+        termText.innerHTML = `
+          &gt; [ATS Engine] In-memory text extraction & embeddings calculated.<br>
+          &gt; <span class="term-highlight">⚡ ATS Match Score: 88% • Match: Strong Foundation</span><br>
+          &gt; <span style="color:#10B981;">✓ 2 high-impact skill gaps detected. Direct curriculum links mapped.</span>
+        `;
+      }
+    }
+  }
+
+  renderHomeHeroSnippet() {
+    this.currentHeroTab = "py";
     const btnRun = document.getElementById("btn-hero-snippet-run");
     const termText = document.getElementById("hero-term-text");
     const termMs = document.getElementById("hero-term-ms");
 
     btnRun?.addEventListener("click", () => {
       btnRun.innerHTML = "<span>⏳ Running...</span>";
-      const randomMs = Math.floor(Math.random() * 6) + 4;
+      const randomMs = Math.floor(Math.random() * 5) + 3;
 
       setTimeout(() => {
         if (termMs) termMs.textContent = `${randomMs}ms`;
         if (termText) {
-          termText.innerHTML = `
-            &gt; [Compiler] Sandbox execution complete (Exit 0).<br>
-            &gt; <span class="term-highlight">⚡ Python 3: 13 Mastery Modules Loaded!</span><br>
-            &gt; [MySQL Server] Connection verified: codingforcareer_db.orders (3 records).<br>
-            &gt; <span style="color:#10B981;">✓ All assertions passed in ${randomMs}ms. Ready for next lab.</span>
-          `;
+          if (this.currentHeroTab === "sql") {
+            termText.innerHTML = `
+              &gt; [MySQL Server] Index scan executed across 10,000 mock records.<br>
+              &gt; <span class="term-highlight">⚡ Returned 4 rows in ${randomMs}ms • 0 temporary disk tables</span><br>
+              &gt; <span style="color:#10B981;">✓ Assertion passed: Leaderboard rank calculated with DENSE_RANK().</span>
+            `;
+          } else if (this.currentHeroTab === "ats") {
+            termText.innerHTML = `
+              &gt; [ATS AI API] Neural vector similarity completed.<br>
+              &gt; <span class="term-highlight">⚡ Profile parsed: 14 verified tokens, 2 recommended additions.</span><br>
+              &gt; <span style="color:#10B981;">✓ Scan passed in ${randomMs}ms. Ready to launch Dedicated Studio.</span>
+            `;
+          } else {
+            termText.innerHTML = `
+              &gt; [Compiler] Sandbox execution complete (Exit 0).<br>
+              &gt; <span class="term-highlight">⚡ Cloud Data & AI Engineering: 25 Labs Verified • Ready to Run</span><br>
+              &gt; <span style="color:#10B981;">✓ All assertions passed in ${randomMs}ms. Memory usage: 14.2 MB.</span>
+            `;
+          }
         }
         btnRun.innerHTML = "<span>✓ Ran!</span>";
         setTimeout(() => {
           btnRun.innerHTML = "<span>▶ Run Demo</span>";
         }, 2200);
-      }, 350);
+      }, 300);
     });
   }
 

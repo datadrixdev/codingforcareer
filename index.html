@@ -322,24 +322,28 @@
       <section class="home-hero-section">
         <div class="home-hero-container">
           <div class="home-hero-content">
-            <div class="hero-trend-badge">
-              <span class="badge-pulse-dot"></span>
-              <span class="badge-trend-text">Open-Access Technical University Curriculum</span>
-              <span class="badge-trend-pill">20+ Tracks</span>
+            <!-- Audience Segmented Switcher -->
+            <div class="hero-audience-pills" role="tablist" aria-label="Select Learning Pathway">
+              <button type="button" class="audience-pill active" id="btn-hero-for-students" onclick="window.codingForCareerApp?.focusAudience('students')">
+                <span>🎓 For Students: Campus Placements &amp; SDE</span>
+              </button>
+              <button type="button" class="audience-pill" id="btn-hero-for-pros" onclick="window.codingForCareerApp?.focusAudience('pros')">
+                <span>💼 For Engineers: Senior &amp; AI Transitions</span>
+              </button>
             </div>
 
             <h1 class="home-hero-title">
-              Rigorous Engineering Education <br>
-              <span class="gradient-text">for Modern Tech Careers.</span>
+              Where Students Become Engineers. <br>
+              <span class="gradient-text">Where Engineers Become Leaders.</span>
             </h1>
 
-            <p class="home-hero-lead">
-              Skip passive video watching. Master Python, Enterprise Java, Modern C++, Distributed PySpark, and Machine Learning through structured, university-grade syllabi, live browser execution environments, and real-world architectures.
+            <p class="home-hero-lead" id="hero-lead-text">
+              Master university-grade Computer Science and high-paying engineering specializations. Whether you're cracking your first campus internship or transitioning into $160k+ Cloud Data &amp; AI roles, learn through zero-setup browser labs, battle-tested cheat sheets, and real-time AI ATS resume intelligence.
             </p>
 
             <div class="home-hero-actions">
               <button class="btn-hero-primary" id="btn-hero-explore">
-                <span>Explore Curriculum (20 Tracks)</span>
+                <span>Explore All 20 Tracks ↓</span>
                 <svg class="icon-arrow" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
                 </svg>
@@ -366,10 +370,10 @@
 
             <!-- Curated Quick-Picks strip for fast learning access -->
             <div class="hero-quick-picks">
-              <span class="quick-picks-label">Popular Starting Tracks:</span>
+              <span class="quick-picks-label">Top Starting Tracks:</span>
               <button class="quick-pick-pill" id="btn-hero-mysql" title="Open MySQL 25-Chapter Deep Dive">
                 <span class="pill-emoji">🐬</span>
-                <span>MySQL Relational DB (25 Ch)</span>
+                <span>MySQL DB (25 Ch)</span>
               </button>
               <a href="#python" class="quick-pick-pill" title="Python 3 Masterclass">
                 <span class="pill-emoji">🐍</span>
@@ -381,7 +385,11 @@
               </a>
               <a href="#machine-learning" class="quick-pick-pill" title="Machine Learning &amp; AI">
                 <span class="pill-emoji">🧠</span>
-                <span>ML &amp; AI</span>
+                <span>ML &amp; GenAI</span>
+              </a>
+              <a href="#java" class="quick-pick-pill" title="Enterprise Java 21">
+                <span class="pill-emoji">☕</span>
+                <span>Java 21 Enterprise</span>
               </a>
             </div>
 
@@ -400,13 +408,13 @@
                 <span>In-Browser Sandboxes</span>
               </div>
               <div class="hero-stat-pill">
-                <strong>Free</strong>
-                <span>Open Access Forever</span>
+                <strong>$0</strong>
+                <span>Free Open Access</span>
               </div>
             </div>
           </div>
 
-          <!-- Hero Right: Educational Lab Environment Preview -->
+          <!-- Hero Right: Interactive Multi-Tab Lab & Sandbox Window -->
           <div class="home-hero-visual">
             <div class="hero-ide-window">
               <div class="hero-ide-header">
@@ -415,17 +423,19 @@
                   <span class="control-dot dot-minimize"></span>
                   <span class="control-dot dot-expand"></span>
                 </div>
-                <div class="hero-ide-title">
-                  <span class="lang-tag-python">🐍 Python 3.14</span>
-                  <span>data_pipeline.py</span>
+                <!-- Interactive Tabs -->
+                <div class="hero-ide-tabs" role="tablist">
+                  <button type="button" class="hero-ide-tab active" id="hero-tab-py" onclick="window.codingForCareerApp?.switchHeroTab('py')">🐍 Python</button>
+                  <button type="button" class="hero-ide-tab" id="hero-tab-sql" onclick="window.codingForCareerApp?.switchHeroTab('sql')">⚡ SQL</button>
+                  <button type="button" class="hero-ide-tab" id="hero-tab-ats" onclick="window.codingForCareerApp?.switchHeroTab('ats')">🎯 ATS AI</button>
                 </div>
                 <button class="btn-hero-run-snippet" id="btn-hero-snippet-run" title="Run sample in sandbox">
                   <span>▶ Run Demo</span>
                 </button>
               </div>
 
-              <div class="hero-ide-body">
-                <pre class="hero-code-block"><code><span class="code-comment"># CodingForCareer: Zero-setup real-world execution</span>
+              <div class="hero-ide-body" id="hero-ide-body-content">
+                <pre class="hero-code-block" id="hero-code-display"><code><span class="code-comment"># CodingForCareer: Zero-setup real-world execution</span>
 <span class="code-keyword">from</span> dataclasses <span class="code-keyword">import</span> dataclass
 
 <span class="code-decorator">@dataclass</span>
@@ -445,7 +455,7 @@ lab = EngineeringTrack()
               <div class="hero-ide-terminal" id="hero-ide-terminal-output">
                 <div class="hero-term-header">
                   <span class="pulse-green"></span>
-                  <span>Interactive Cloud Sandbox • Exit 0</span>
+                  <span id="hero-term-status">Interactive Cloud Sandbox • Exit 0</span>
                   <span class="term-time" id="hero-term-ms">6ms</span>
                 </div>
                 <div class="hero-term-content" id="hero-term-text">
@@ -459,8 +469,22 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 2. Academic Standards & Methodology Trust Strip -->
+      <!-- 2. Employer & Academic Standards Trust Strip -->
       <section class="home-trust-strip">
+        <div class="home-alumni-headline">Curriculum Designed for Interviews at Tier-1 Tech Giants &amp; Fast-Growing Unicorns</div>
+        <div class="alumni-logos-wrap">
+          <div class="alumni-company-chip"><span class="alumni-company-icon">🌐</span> Google</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">💻</span> Microsoft</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">📦</span> Amazon</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">♾️</span> Meta</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">❄️</span> Snowflake</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">🧱</span> Databricks</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">🚗</span> Uber</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">🏦</span> Goldman Sachs</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">🍿</span> Netflix</div>
+          <div class="alumni-company-chip"><span class="alumni-company-icon">🎨</span> Adobe</div>
+        </div>
+
         <div class="trust-strip-grid">
           <div class="trust-pillar-card">
             <div class="pillar-icon-box">🏛️</div>
@@ -485,7 +509,212 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 3. AI Career Intelligence Teaser Section (Directs to Dedicated Studio) -->
+      <!-- 3. Dual-Audience Career Accelerator Showcase (Students & Professionals) -->
+      <section class="home-persona-section" id="home-persona-section">
+        <div class="home-section-header">
+          <div class="section-badge">🚀 TAILORED FOR YOUR JOURNEY</div>
+          <h2 class="section-main-heading">Designed for Every Stage of Your Tech Career</h2>
+          <p class="section-sub-heading">
+            Whether you are breaking into tech from university or aiming for a $200k+ Senior Engineering pivot, CodingForCareer provides structured end-to-end curriculums with zero fluff.
+          </p>
+        </div>
+
+        <div class="persona-grid">
+          <!-- Card 1: Students & Fresh Graduates -->
+          <div class="persona-card" id="persona-card-students">
+            <div>
+              <div class="persona-header">
+                <span class="persona-badge badge-student">🎓 COLLEGE STUDENTS &amp; FRESH GRADUATES</span>
+                <h3 class="persona-title">From College Syllabus to Tier-1 Product Company Offers</h3>
+                <p class="persona-desc">
+                  Ditch outdated university slides and generic copy-paste tutorials. Learn the exact engineering fundamentals, data structures, and production-grade architectures top tech recruiters test in technical interviews.
+                </p>
+              </div>
+
+              <div class="persona-perks-list">
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>Master Coding Interview Patterns:</strong> First-principles DSA, Arrays, Trees, Graphs, Dynamic Programming with visual step-by-step logic.</span>
+                </div>
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>Build Resume-Worthy Projects:</strong> Real relational databases, REST backend services, and pipelines you can confidently defend in interviews.</span>
+                </div>
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>ATS Resume Optimization:</strong> Stop getting automated rejection emails; optimize your resume for campus and entry-level screening.</span>
+                </div>
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>100% Free &amp; Open Access Forever:</strong> Equal-opportunity education with zero paywalls, subscriptions, or credit cards required.</span>
+                </div>
+              </div>
+
+              <div class="persona-flow">
+                <span class="persona-flow-label">Recommended Starting Pathway:</span>
+                <div class="persona-steps-row">
+                  <span class="persona-step-pill">Python 3 Core</span>
+                  <span class="path-sep">&rarr;</span>
+                  <span class="persona-step-pill">MySQL Database</span>
+                  <span class="path-sep">&rarr;</span>
+                  <span class="persona-step-pill">DSA &amp; Problem Solving</span>
+                  <span class="path-sep">&rarr;</span>
+                  <span class="persona-step-pill">Web Full Stack</span>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn-persona" onclick="document.getElementById('courses-section')?.scrollIntoView({behavior:'smooth'})">
+              <span>Explore Student Curriculum &darr;</span>
+            </button>
+          </div>
+
+          <!-- Card 2: Working Professionals & Career Switchers -->
+          <div class="persona-card persona-pro" id="persona-card-pros">
+            <div>
+              <div class="persona-header">
+                <span class="persona-badge badge-pro">💼 WORKING ENGINEERS &amp; CAREER SWITCHERS</span>
+                <h3 class="persona-title">Transition to High-Demand Cloud Data, AI &amp; Senior Roles</h3>
+                <p class="persona-desc">
+                  Stuck in maintenance, legacy stacks, or manual reporting? Upskill into the industry's highest-paying domains ($160k–$250k+) with production distributed computing, real-time streaming, and generative AI.
+                </p>
+              </div>
+
+              <div class="persona-perks-list">
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>High-Yield Specializations:</strong> Distributed PySpark, Apache Kafka, Vector DBs, and LLM RAG pipelines engineered for production.</span>
+                </div>
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>System Architecture at Scale:</strong> Microservices, database index optimization, distributed locking, and high-concurrency design.</span>
+                </div>
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>Real-Time Skill Gap Diagnostics:</strong> Benchmark your exact resume against 11 specialized career profiles and get direct links to bridge missing tools.</span>
+                </div>
+                <div class="persona-perk-item">
+                  <span class="persona-check">✓</span>
+                  <span><strong>Desktop Reference Blueprints:</strong> 21 comprehensive cheat sheets to accelerate your daily engineering velocity on the job.</span>
+                </div>
+              </div>
+
+              <div class="persona-flow">
+                <span class="persona-flow-label">Recommended Starting Pathway:</span>
+                <div class="persona-steps-row">
+                  <span class="persona-step-pill">PySpark Big Data</span>
+                  <span class="path-sep">&rarr;</span>
+                  <span class="persona-step-pill">Kafka Streaming</span>
+                  <span class="path-sep">&rarr;</span>
+                  <span class="persona-step-pill">Deep Learning &amp; RAG</span>
+                  <span class="path-sep">&rarr;</span>
+                  <span class="persona-step-pill">Java 21 Enterprise</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="#resume" class="btn-persona btn-persona-pro" onclick="return openResumeStudio(event);" style="text-decoration:none;">
+              <span>Benchmark Your Resume Free (AI) &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Active Learning vs Video Courses Comparison Section -->
+      <section class="home-comparison-section">
+        <div class="home-section-header">
+          <div class="section-badge">💡 THE ACTIVE LEARNING ADVANTAGE</div>
+          <h2 class="section-main-heading">Why Video Tutorials Fail vs. How You Learn on CodingForCareer</h2>
+          <p class="section-sub-heading">
+            Traditional video courses have an 8% completion rate and trap you in "tutorial hell". CodingForCareer replaces passive video watching with active browser engineering.
+          </p>
+        </div>
+
+        <div class="comparison-card-container">
+          <div class="comparison-header-row">
+            <span>Engineering Dimension</span>
+            <span>Traditional Video Courses</span>
+            <span>CodingForCareer Interactive Platform</span>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comp-feature">
+              <strong>Learning Model</strong>
+              <span>How concepts are absorbed and retained</span>
+            </div>
+            <div class="comp-bad">
+              <span class="comp-bad-icon">✕</span>
+              <span>40+ hours of passive video watching where you lose focus and forget 80% within 48 hours.</span>
+            </div>
+            <div class="comp-good">
+              <span class="comp-good-icon">✓</span>
+              <span>Bite-sized architectural blueprints with visual memory diagrams, trade-off analyses, and immediate concept checks.</span>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comp-feature">
+              <strong>Coding Practice</strong>
+              <span>How you write and test code</span>
+            </div>
+            <div class="comp-bad">
+              <span class="comp-bad-icon">✕</span>
+              <span>Copy-pasting code from a video player while troubleshooting broken local dependencies, package conflicts, and OS quirks.</span>
+            </div>
+            <div class="comp-good">
+              <span class="comp-good-icon">✓</span>
+              <span>Instant client-side browser execution sandboxes with pre-configured runtimes, instant outputs, and zero setup.</span>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comp-feature">
+              <strong>Career Diagnostic</strong>
+              <span>How your readiness is validated</span>
+            </div>
+            <div class="comp-bad">
+              <span class="comp-bad-icon">✕</span>
+              <span>Generic certificate of completion that hiring managers and ATS filters completely disregard.</span>
+            </div>
+            <div class="comp-good">
+              <span class="comp-good-icon">✓</span>
+              <span>Real-time AI ATS resume benchmark against 10,000+ job descriptions with verified skills and direct curriculum gap fixes.</span>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comp-feature">
+              <strong>Production Reference</strong>
+              <span>How you reference syntax on the job</span>
+            </div>
+            <div class="comp-bad">
+              <span class="comp-bad-icon">✕</span>
+              <span>Rewinding 2-hour video lectures to find a single syntax example or configuration flag.</span>
+            </div>
+            <div class="comp-good">
+              <span class="comp-good-icon">✓</span>
+              <span>21 searchable, high-density production cheat sheets with one-click code copy engineered for your daily work desk.</span>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="comp-feature">
+              <strong>Access &amp; Pricing</strong>
+              <span>Transparency and long-term cost</span>
+            </div>
+            <div class="comp-bad">
+              <span class="comp-bad-icon">✕</span>
+              <span>$29/mo subscriptions or $2,000+ bootcamps hidden behind aggressive paywalls and upsells.</span>
+            </div>
+            <div class="comp-good">
+              <span class="comp-good-icon">✓</span>
+              <span>100% Free and open access forever. Zero ads, no paywall, no credit card required.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. AI Career Intelligence Teaser Section (Directs to Dedicated Studio) -->
       <section class="home-resume-teaser-section" id="home-resume-teaser">
         <div class="home-section-header">
           <div class="section-badge">⚡ AI CAREER INTELLIGENCE • ATS BENCHMARKING</div>
@@ -560,7 +789,7 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <section class="home-courses-section" id="courses-section">
+<section class="home-courses-section" id="courses-section">
         <div class="home-section-header">
           <div class="section-badge">🚀 Explore All Tech Tracks</div>
           <h2 class="section-main-heading">Industry-Standard Course Curriculum</h2>
@@ -586,7 +815,7 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 4. Pedagogical Framework: How Learning Works -->
+      <!-- 7. Pedagogical Framework: How Learning Works -->
       <section class="home-pedagogy-section">
         <div class="home-section-header">
           <div class="section-badge">🎓 The CodingForCareer Pedagogy</div>
@@ -633,7 +862,7 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 5. Engineering Specialization Pathways -->
+      <!-- 8. Engineering Specialization Pathways -->
       <section class="home-pathways-section">
         <div class="home-section-header">
           <div class="section-badge">🚀 Career Roadmaps</div>
@@ -744,9 +973,7 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 6. Verified Learner Outcomes -->
-            <!-- 6. Verified Learner Outcomes (6 Profiles with Photos & LinkedIn) -->
-      <section class="home-outcomes-section">
+<section class="home-outcomes-section">
         <div class="home-section-header">
           <div class="section-badge">🌟 Engineering Impact</div>
           <h2 class="section-main-heading">From Core Fundamentals to Senior Engineering</h2>
@@ -918,23 +1145,21 @@ lab = EngineeringTrack()
         </div>
       </section>
 
-      <!-- 7. Educational Enrollment Call to Action -->
+      <!-- 10. Educational Enrollment Call to Action -->
       <section class="home-cta-banner">
         <div class="cta-inner">
           <div class="cta-badge">🌟 100% Free &amp; Open Access</div>
           <h2>Transform Your Engineering Career with Zero Cost</h2>
           <p>Join thousands of software engineers learning Data Engineering, AI, and Systems. Start with any track today — no installation, no paywall, no credit card required.</p>
           <div class="cta-actions">
-            <button class="btn-cta-primary" id="btn-cta-start-python">Start Python 3 Track 🐍</button>
-            <button class="btn-cta-primary" id="btn-cta-start-mysql" style="background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%); color: #ffffff;">Open MySQL Course (25 Ch) 🐬</button>
+            <button class="btn-cta-primary" id="btn-cta-start-python">Start Student Track (Python 3) 🐍</button>
+            <button class="btn-cta-primary" id="btn-cta-start-mysql" style="background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%); color: #ffffff;">Start Professional Track (MySQL 25 Ch) 🐬</button>
             <button class="btn-cta-secondary" id="btn-cta-browse-all">Browse All 20 Tracks</button>
           </div>
         </div>
       </section>
-</div>
 
-
-    
+    </div>
 
     <!-- VIEW 1: TUTORIALS & ARTICLE READER -->
     <div class="view-container view-tutorials" id="view-tutorials">

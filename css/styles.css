@@ -11446,3 +11446,488 @@ html, body {
     align-items: flex-start;
   }
 }
+
+/* --------------------------------------------------------------------------
+   E. Modern Educational & Professional Homepage Innovations
+   -------------------------------------------------------------------------- */
+
+/* 1. Hero Audience Switcher Pills */
+.hero-audience-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.audience-pill {
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 750;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.audience-pill:hover {
+  color: var(--text-main);
+  background: var(--bg-surface-alt);
+}
+
+.audience-pill.active {
+  background: var(--primary-600);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] .audience-pill.active {
+  background: var(--primary-500);
+  color: #ffffff;
+}
+
+/* Hero IDE Tabs in Visual Lab */
+.hero-ide-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px 6px;
+  border-radius: 8px;
+  margin: 0 8px;
+}
+
+.hero-ide-tab {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: #94A3B8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.hero-ide-tab:hover {
+  color: #E2E8F0;
+}
+
+.hero-ide-tab.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+
+/* 2. Top Companies / Alumni Strip */
+.home-alumni-headline {
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.alumni-logos-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  padding: 0 12px;
+}
+
+.alumni-company-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  font-size: 0.82rem;
+  font-weight: 750;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-xs);
+  transition: all 0.2s ease;
+}
+
+.alumni-company-chip:hover {
+  border-color: var(--primary-400);
+  color: var(--text-main);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.alumni-company-icon {
+  font-size: 0.95rem;
+}
+
+/* 3. Dual-Audience Persona Section */
+.home-persona-section {
+  padding: 72px 24px;
+  max-width: 1540px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.persona-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 24px;
+  padding: 38px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.persona-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3B82F6, #10B981);
+}
+
+.persona-card.persona-pro::before {
+  background: linear-gradient(90deg, #6366F1, #8B5CF6);
+}
+
+.persona-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-400);
+}
+
+.persona-header {
+  margin-bottom: 20px;
+}
+
+.persona-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 14px;
+}
+
+.badge-student {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="dark"] .badge-student {
+  color: #34D399;
+}
+
+.badge-pro {
+  background: rgba(99, 102, 241, 0.12);
+  color: #4F46E5;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+[data-theme="dark"] .badge-pro {
+  color: #A5B4FC;
+}
+
+.persona-title {
+  font-size: 1.55rem;
+  font-weight: 850;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.persona-desc {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.62;
+  margin-bottom: 24px;
+}
+
+.persona-perks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.persona-perk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.90rem;
+  line-height: 1.5;
+  color: var(--text-main);
+}
+
+.persona-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.persona-flow {
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+}
+
+.persona-flow-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-light);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.persona-steps-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.persona-step-pill {
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-persona {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--radius-md);
+  background: var(--primary-600);
+  color: #ffffff !important;
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-persona:hover {
+  background: var(--primary-700);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+}
+
+.btn-persona-pro {
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+}
+
+.btn-persona-pro:hover {
+  background: linear-gradient(135deg, #4F46E5, #7C3AED);
+}
+
+/* 4. Active Learning vs Video Courses Comparison Section */
+.home-comparison-section {
+  padding: 72px 24px;
+  max-width: 1540px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.comparison-card-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-top: 36px;
+}
+
+.comparison-header-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  padding: 18px 28px;
+  background: var(--bg-surface-alt);
+  border-bottom: 1px solid var(--border-default);
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--border-subtle);
+  align-items: center;
+  transition: background 0.15s ease;
+}
+
+.comparison-row:last-child {
+  border-bottom: none;
+}
+
+.comparison-row:hover {
+  background: var(--bg-surface-alt);
+}
+
+.comp-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 18px;
+}
+
+.comp-feature strong {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.comp-feature span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.comp-bad {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  padding-right: 14px;
+}
+
+.comp-bad-icon {
+  color: #EF4444;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.comp-good {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="dark"] .comp-good {
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.comp-good-icon {
+  color: #10B981;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Responsive updates for new sections */
+@media (max-width: 1080px) {
+  .persona-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-audience-pills {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 16px;
+  }
+  .audience-pill {
+    text-align: center;
+    justify-content: center;
+  }
+  .comparison-header-row {
+    display: none;
+  }
+  .comparison-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px 16px;
+  }
+  .comp-feature {
+    padding-right: 0;
+  }
+  .comp-bad {
+    padding-right: 0;
+    font-size: 0.84rem;
+  }
+  .comp-good {
+    font-size: 0.84rem;
+  }
+  .persona-card {
+    padding: 26px 20px;
+    border-radius: 20px;
+  }
+  .persona-title {
+    font-size: 1.35rem;
+  }
+}
