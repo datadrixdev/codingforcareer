@@ -13,4 +13,4 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://codingforcareer.com/sitemap.xml
-Host: https://codingforcareer.com
+Host: codingforcareer.com
